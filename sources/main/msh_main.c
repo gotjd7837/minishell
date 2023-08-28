@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/08/28 10:44:54 by jho              ###   ########.fr       */
+/*   Updated: 2023/08/28 16:27:00 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int	main(void)
 {
-	char	*prompt;
-	char	*line;
+	char	*input;
 
-	prompt = "$> ";
 	while (1)
 	{
-		line = readline(prompt);
-		free(line);
+		input = readline("$> ");
+		free(input);
 	}
 	return (0);
 }
