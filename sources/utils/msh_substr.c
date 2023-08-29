@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_substr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:08:37 by jho              ###   ########.fr       */
+/*   Created: 2023/08/29 20:30:58 by jho               #+#    #+#             */
+/*   Updated: 2023/08/29 21:13:55 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(void)
+char	*msh_substr(char *s, int start_idx, int end_idx)
 {
-	char	*input;
-	t_token	*tokens;
+	char	*substr;
 
-	while (1)
+	substr = malloc(sizeof(char) * end_idx - start_idx + 1);
+	if (substr == 0)
+		return (0);
+	while (start_idx < end_idx)
 	{
-		input = readline("$> ");
-		tokens = msh_lexical_analysis(input);
-		while (tokens != 0)
-		{
-			printf("%-15u%-15s\n", tokens->symbol, tokens->value);
-			tokens = tokens->next;
-		}
-		free(input);
+		substr[start_idx] = s[start_idx];
+		++start_idx;
 	}
-	return (0);
+	substr[start_idx] = '\0';
+	return (substr);
 }

@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:08:37 by jho              ###   ########.fr       */
+/*   Created: 2023/08/29 20:29:02 by jho               #+#    #+#             */
+/*   Updated: 2023/08/29 20:30:08 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(void)
+int	msh_append_token(t_token **tokens, t_token *token)
 {
-	char	*input;
-	t_token	*tokens;
+	t_token	*last;
 
-	while (1)
+	if (*tokens == 0)
+		*tokens = token;
+	else
 	{
-		input = readline("$> ");
-		tokens = msh_lexical_analysis(input);
-		while (tokens != 0)
-		{
-			printf("%-15u%-15s\n", tokens->symbol, tokens->value);
-			tokens = tokens->next;
-		}
-		free(input);
+		last = *tokens;
+		while (last->next != 0)
+			last = last->next;
+		last->next = token;
+	}
+	return (0);
+}
+
+t_token	*msh_free_tokens(t_token *tokens)
+{
+	t_token	*node;
+	t_token	*next;
+
+	if (tokens == 0)
+		return (0);
+	node = tokens;
+	while (node != 0)
+	{
+		next = node->next;
+		free(node);
+		node = next;
 	}
 	return (0);
 }

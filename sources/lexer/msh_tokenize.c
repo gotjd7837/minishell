@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_tokenize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:08:37 by jho              ###   ########.fr       */
+/*   Created: 2023/08/29 20:49:06 by jho               #+#    #+#             */
+/*   Updated: 2023/08/29 21:12:01 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(void)
+int	msh_tokenize(t_token **tokens, char *s)
 {
-	char	*input;
-	t_token	*tokens;
-
-	while (1)
-	{
-		input = readline("$> ");
-		tokens = msh_lexical_analysis(input);
-		while (tokens != 0)
-		{
-			printf("%-15u%-15s\n", tokens->symbol, tokens->value);
-			tokens = tokens->next;
-		}
-		free(input);
-	}
-	return (0);
+	if (*s == '<')
+		return (msh_tokenize_lredir(tokens, s));
+	else if (*s == '>')
+		return (msh_tokenize_rredir(tokens, s));
+	else if (*s == '|')
+		return (msh_tokenize_vbar(tokens, s));
+	else if (*s == '&')
+		return (msh_tokenize_amp(tokens, s));
+	else if (*s == '(' || *s == ')')
+		return (msh_tokenize_br(tokens, s));
+	else if (*s == ' ')
+		return (1);
+	else
+		return (msh_tokenize_word(tokens, s));
 }

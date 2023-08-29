@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_tokenize_rredir.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:08:37 by jho              ###   ########.fr       */
+/*   Created: 2023/08/29 20:44:24 by jho               #+#    #+#             */
+/*   Updated: 2023/08/29 20:44:42 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(void)
+int	msh_tokenize_rredir(t_token **tokens, char *str)
 {
-	char	*input;
-	t_token	*tokens;
+	t_token	*token;
+	char	*value;
 
-	while (1)
+	if (*(str + 1) == '>')
+		value = msh_substr(str, 0, 2);
+	else
+		value = msh_substr(str, 0, 1);
+	if (value == 0)
+		return (-1);
+	token = malloc(sizeof(t_token));
+	if (token == 0)
 	{
-		input = readline("$> ");
-		tokens = msh_lexical_analysis(input);
-		while (tokens != 0)
-		{
-			printf("%-15u%-15s\n", tokens->symbol, tokens->value);
-			tokens = tokens->next;
-		}
-		free(input);
+		free(value);
+		return (-1);
 	}
-	return (0);
+	token->symbol = REDIR;
+	token->value = value;
+	token->next = 0;
+	msh_append_token(tokens, token);
+	return (msh_strlen(value));
 }
