@@ -2,8 +2,8 @@
 This project is about creating a simple shell.
 
 # Contributor
-* jho
-* doukim
+* jho (Junseo Ho)
+* doukim (Doun Kim)
 
 # Coding conventions
 

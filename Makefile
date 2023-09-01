@@ -12,7 +12,7 @@
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -lreadline
+LDFLAGS = -lreadline -lncurses
 NAME = minishell
 HEADERS = includes/minishell.h
 MANDATORY_SRCS = $(wildcard sources/*/*.c)
