@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokenize_rredir.c                              :+:      :+:    :+:   */
+/*   msh_whitespace_len.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:44:24 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 20:44:42 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:24:43 by jho               #+#    #+#             */
+/*   Updated: 2023/09/12 17:02:23 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	msh_tokenize_rredir(t_token **tokens, char *str)
+int	msh_whitespace_len(char *s)
 {
-	t_token	*token;
-	char	*value;
+	int	len;
 
-	if (*(str + 1) == '>')
-		value = msh_substr(str, 0, 2);
-	else
-		value = msh_substr(str, 0, 1);
-	if (value == 0)
-		return (-1);
-	token = malloc(sizeof(t_token));
-	if (token == 0)
-	{
-		free(value);
-		return (-1);
-	}
-	token->symbol = REDIR;
-	token->value = value;
-	token->next = 0;
-	msh_append_token(tokens, token);
-	return (msh_strlen(value));
+	len = 0;
+	while (*(s + len) == ' ')
+		++len;
+	return (len);
 }

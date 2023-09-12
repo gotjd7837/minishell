@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokenize_br.c                                  :+:      :+:    :+:   */
+/*   msh_is_meta_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:45:15 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:11:45 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:18:39 by jho               #+#    #+#             */
+/*   Updated: 2023/09/12 16:55:45 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	msh_tokenize_br(t_token **tokens, char *str)
+int	msh_is_meta_char(char c)
 {
-	t_token	*token;
-	char	*value;
-
-	value = msh_substr(str, 0, 1);
-	if (value == 0)
-		return (-1);
-	token = malloc(sizeof(t_token));
-	if (token == 0)
-	{
-		free(value);
-		return (-1);
-	}
-	if (*str == '(')
-		token->symbol = L_BRACKET;
-	else
-		token->symbol = R_BRACKET;
-	token->value = value;
-	token->next = 0;
-	msh_append_token(tokens, token);
-	return (msh_strlen(value));
+	return (c == '<' || c == '>' || c == '|' || c == '&' || c == '(' || c == ')'
+		|| c == ' ' || c == '=' || c == '\0');
 }

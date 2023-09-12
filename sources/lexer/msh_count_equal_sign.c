@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokenize_br.c                                  :+:      :+:    :+:   */
+/*   msh_count_equal_sign.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:45:15 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:11:45 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:42:39 by jho               #+#    #+#             */
+/*   Updated: 2023/09/12 16:47:53 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	msh_tokenize_br(t_token **tokens, char *str)
+int	msh_count_equal_sign(char *s)
 {
-	t_token	*token;
-	char	*value;
+	int	index;
+	int	count;
 
-	value = msh_substr(str, 0, 1);
-	if (value == 0)
-		return (-1);
-	token = malloc(sizeof(t_token));
-	if (token == 0)
+	index = 0;
+	count = 0;
+	while (*(s + index) != '\0')
 	{
-		free(value);
-		return (-1);
+		if (*(s + index) == '=')
+			++count;
+		++index;
 	}
-	if (*str == '(')
-		token->symbol = L_BRACKET;
-	else
-		token->symbol = R_BRACKET;
-	token->value = value;
-	token->next = 0;
-	msh_append_token(tokens, token);
-	return (msh_strlen(value));
+	return (count);
 }
