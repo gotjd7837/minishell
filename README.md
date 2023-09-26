@@ -3,7 +3,7 @@ This project is about creating a simple shell.
 
 # Contributor
 * jho (Junseo Ho)
-* doukim (Doun Kim)
+* haekang (Haeseong Kang)
 
 # Coding conventions
 
