@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:13:49 by jho               #+#    #+#             */
-/*   Updated: 2023/10/09 16:52:44 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/09 18:32:25 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ char	*msh_strncpy(char *dest, char *src, size_t n)
 
 int	msh_is_sqoute(int c)
 {
-	return (c == ''');
+	return (c == '\'');
 }
 
 int	msh_is_dqoute(int c)
 {
-	return (c == '"');
+	return (c == '\"');
 }
 
 int	msh_is_dollar(int c)
@@ -86,10 +86,20 @@ int	msh_is_dollar(int c)
 	return (c == '$');
 }
 
+t_comp	*msh_last_comp(t_comp *comps)
+{
+	if (comps == 0)
+		return (0);
+	while (comps->next != NULL)
+		comps = comps->next;
+	return (comps);
+}
+
 int	msh_add_comp(t_comp **origin, char *input, int begin, int end)
 {
 	char	*value;
 	t_comp	*comp;
+	t_comp	*comps;
 
 	value = malloc(end - begin + 1);
 	msh_strncpy(value, input + begin, end - begin);
@@ -101,13 +111,36 @@ int	msh_add_comp(t_comp **origin, char *input, int begin, int end)
 		*origin = comp;
 	else
 	{
-		/*
-		while (comps->next != NULL)
-			comps = comps->next;
+		comps = msh_last_comp(*origin);
 		comps->next = comp;
-		*/
 	}
 	return (1);
+}
+
+int	msh_stack_sqoute(char *input, int index);
+
+int	msh_stack_dqoute(char *input, int index)
+{
+	while (!msh_is_dqoute(*(input + index)))
+	{
+		if (msh_is_sqoute(*(input + index)))
+			index = msh_stack_sqoute(input, index + 1) + 1;
+		else
+			++index;
+	}
+	return (index);
+}
+
+int	msh_stack_sqoute(char *input, int index)
+{
+	while (!msh_is_sqoute(*(input + index)))
+	{
+		if (msh_is_dqoute(*(input + index)))
+			index = msh_stack_dqoute(input, index + 1) + 1;
+		else
+			++index;
+	}
+	return (index);
 }
 
 t_comp	*msh_divide_comps(char *input)
@@ -115,22 +148,34 @@ t_comp	*msh_divide_comps(char *input)
 	int		left;
 	int		right;
 	t_comp	*comps;
-	// apple"banana'carrot'"die
+	
 	left = 0;
 	right = 0;
 	while (*(input + right) != '\0')
 	{
 		if (msh_is_sqoute(*(input + right)))
 		{
+			if (left != right)
+				msh_add_comp(&comps, input, left, right);
+			left = right;
+			right = msh_stack_sqoute(input, left + 1) + 1;
 			msh_add_comp(&comps, input, left, right);
-			left = right + 1;
-			right = left;
+			left = right;
+		}
+		else if (msh_is_dqoute(*(input + right)))
+		{
+			if (left != right)
+				msh_add_comp(&comps, input, left, right);
+			left = right;
+			right = msh_stack_dqoute(input, left + 1) + 1;
 			msh_add_comp(&comps, input, left, right);
+			left = right;
 		}
 		else
 			++right;
 	}
-	msh_add_comp(&comps, input, left, right);
+	if (left != right)
+		msh_add_comp(&comps, input, left, right);
 	return (comps);
 }
 
@@ -152,6 +197,10 @@ char	*msh_expand_input(char *input)
 
 int	main(int ac, char *av[])
 {
-	msh_expand_input(av[1]);
+	// a'"b''c'
+	// a'b"k'"''c'
+	// 'a"b"c'
+	// 'a"b"c' "d'ac'"
+	msh_expand_input("\'a\"b\"c\'\"d\'ac\'\"");
 	return (0);
 }
