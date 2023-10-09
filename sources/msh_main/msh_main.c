@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 17:03:12 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/09 11:10:01 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(void)
 	{
 		input = readline("minishell$ ");
 		tokens = msh_lexical_analysis(input);
-		msh_print_tokens(tokens);
 		free(input);
 	}
 	return (0);

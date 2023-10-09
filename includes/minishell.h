@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:41 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:59:17 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/09 12:42:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ typedef struct s_token
 
 typedef struct s_tree
 {
-	t_token	*token;
-	t_token	*children;
+	t_symbol		symbol;
+	char			*value;
+	struct s_tree	*children;
 }	t_tree;
 
+int			msh_validate_quotes(char *input);
+int			msh_accept(t_symbol symbol, t_token *tokens);
 int			msh_append_token(t_token **tokens, t_token *token);
 int			msh_count_equal_sign(char *s);
 t_token		*msh_free_tokens(t_token *tokens);

@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_parse.c                                        :+:      :+:    :+:   */
+/*   msh_validate_quotes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 22:32:39 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 22:50:04 by jho              ###   ########.fr       */
+/*   Created: 2023/10/09 10:42:27 by jho               #+#    #+#             */
+/*   Updated: 2023/10/09 12:45:32 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-t_tree	*msh_parse(t_token	*tokens)
+int	msh_is_squote(char c)
 {
-	t_tree	*tree;
-	t_token	next_token;
+	return (c == '\'');
+}
 
-	tree = 0;
-	next_token = *tokens;
-	return (tree);
+int	msh_is_dquote(char c)
+{
+	return (c == '\"');
+}
+
+int	msh_validate_quotes(char *input)
+{
+	while (*input != '\0')
+	{
+		if (msh_is_squote(*input))
+			while (!msh_is_squote(*(++input)))
+				if (*input == '\0')
+					return (0);
+		if (msh_is_dquote(*input))
+			while (!msh_is_dquote(*(++input)))
+				if (*input == '\0')
+					return (0);
+		++input;
+	}
+	return (1);
 }
