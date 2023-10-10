@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_lexical_analysis.c                             :+:      :+:    :+:   */
+/*   msh_strlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 10:40:49 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 13:53:55 by jho              ###   ########.fr       */
+/*   Created: 2023/08/29 20:31:32 by jho               #+#    #+#             */
+/*   Updated: 2023/10/10 12:07:20 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <stdlib.h>
 
-t_token	*msh_lexical_analysis(char *input)
+size_t	msh_strlen(char *s)
 {
-	if (!msh_expand_input(input))
-		return (0);
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (*(s + len) != '\0')
+		++len;
+	return (len);
 }
