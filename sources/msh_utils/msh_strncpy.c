@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_lexical_analysis.c                             :+:      :+:    :+:   */
+/*   msh_strncpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 10:40:49 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 13:53:55 by jho              ###   ########.fr       */
+/*   Created: 2023/10/10 12:08:58 by jho               #+#    #+#             */
+/*   Updated: 2023/10/10 12:09:21 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <stdlib.h>
 
-t_token	*msh_lexical_analysis(char *input)
+char	*msh_strncpy(char *dest, char *src, size_t n)
 {
-	if (!msh_expand_input(input))
-		return (0);
-	return (0);
+	size_t	index;
+
+	index = 0;
+	while (*(src + index) != '\0' && index < n)
+	{
+		*(dest + index) = *(src + index);
+		++index;
+	}
+	*(dest + index) = '\0';
+	return (dest);
 }

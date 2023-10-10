@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_strlen.c                                       :+:      :+:    :+:   */
+/*   msh_expand_input.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:31:32 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 20:32:14 by jho              ###   ########.fr       */
+/*   Created: 2023/10/10 12:11:28 by jho               #+#    #+#             */
+/*   Updated: 2023/10/10 13:52:38 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_strlen(char *s)
+char	*msh_expand_input(char *input)
 {
-	int	len;
+	t_comp	*comps;
+	char	*result;
 
-	len = 0;
-	while (*(s + len) != '\0')
-		++len;
-	return (len);
+	result = NULL;
+	comps = msh_divide_comps(input);
+	if (comps == NULL)
+		printf("Syntax Error\n");
+	else
+	{
+		while (comps != 0)
+		{
+			printf("%s\n", comps->value);
+			comps = comps->next;
+		}
+	}
+	return (result);
 }

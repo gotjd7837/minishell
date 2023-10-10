@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_substr.c                                       :+:      :+:    :+:   */
+/*   msh_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:30:58 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:13:55 by jho              ###   ########.fr       */
+/*   Created: 2023/08/28 13:14:59 by jho               #+#    #+#             */
+/*   Updated: 2023/10/10 12:07:27 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-char	*msh_substr(char *s, int start_idx, int end_idx)
+int	msh_strcmp(char *s1, char *s2)
 {
-	char	*substr;
-
-	substr = malloc(sizeof(char) * end_idx - start_idx + 1);
-	if (substr == 0)
-		return (0);
-	while (start_idx < end_idx)
+	while (*s1 == *(s2++))
 	{
-		substr[start_idx] = s[start_idx];
-		++start_idx;
+		if (*(s1++) == '\0')
+			return (0);
 	}
-	substr[start_idx] = '\0';
-	return (substr);
+	return (*s1 - *(s2 - 1));
 }
