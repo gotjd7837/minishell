@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/09 12:42:54 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/10 17:56:19 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ typedef enum e_symbol
 	ROOT
 }	t_symbol;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
 typedef struct s_token
 {
 	t_symbol		symbol;
@@ -77,4 +85,8 @@ int			msh_tokenize_vbar(t_token **tokens, char *str);
 int			msh_tokenize_word(t_token **tokens, char *str);
 char		*msh_substr(char *str, int startIdx, int endIdx);
 int			msh_whitespace_len(char *s);
+
+int			msh_envp_preprocess(char **envp, t_env **envp_list);
+t_env		*msh_new_env_node(char *key, char *value);
+char		*msh_envlst_return_value(t_env **envp_list, char *key);
 #endif

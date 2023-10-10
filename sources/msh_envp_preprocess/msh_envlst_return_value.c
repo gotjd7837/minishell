@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_substr.c                                       :+:      :+:    :+:   */
+/*   msh_envlst_return_value.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:30:58 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 17:50:39 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/10 17:47:35 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/10 17:59:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*msh_substr(char *s, int start_idx, int end_idx)
+char	*msh_envlst_return_value(t_env **envp_list, char *key)
 {
-	int		i;
-	char	*substr;
+	t_env	*node;
 
-	i = 0;
-	substr = malloc(sizeof(char) * (end_idx - start_idx + 1));
-	if (substr == 0)
-		return (0);
-	while (start_idx < end_idx)
+	node = *envp_list;
+	while (1)
 	{
-		substr[i] = s[start_idx];
-		++i;
-		++start_idx;
+		if (node->next == NULL)
+		{
+			if (msh_strcmp(node->key, key) == 0)
+				return (node->value);
+			break ;
+		}
+		else
+		{
+			if (msh_strcmp(node->key, key) == 0)
+				return (node->value);
+		}
+		node = node->next;
 	}
-	substr[i] = '\0';
-	return (substr);
+	return (NULL);
 }
+
+//key값 넣으면 return value, key가 없으면 NULL반환
