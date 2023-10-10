@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 17:58:47 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:47:48 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,23 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	if (msh_envp_preprocess(envp, &envp_list))
 		return (1);
-	tmp = envp_list;
-	while (1)
-	{
-		if (tmp->next == NULL)
-		{
-			printf("key = %s value = %s\n", tmp->key, tmp->value);
-			break ;
-		}
-		printf("key = %s value = %s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
-	}
-	printf("\nvalue = %s\n", msh_envlst_return_value(&envp_list, "TsERM"));
+	// tmp = envp_list;
+	// while (1)
+	// {
+	// 	if (tmp->next == NULL)
+	// 	{
+	// 		printf("key = %s value = %s\n", tmp->key, tmp->value);
+	// 		break ;
+	// 	}
+	// 	printf("key = %s value = %s\n", tmp->key, tmp->value);
+	// 	tmp = tmp->next;
+	// }
+	// printf("\nvalue = %s\n", msh_envlst_return_value(envp_list, "COLORTERM"));
+	msh_env(envp_list);
+	printf("\n\n\n");
+	msh_unset(envp_list, "test");
+	msh_unset(envp_list, "aaaaa");
+	msh_env(envp_list);
 
 	// while (1)
 	// {
@@ -47,4 +52,4 @@ int	main(int ac, char **av, char **envp)
 	return (0);
 }
 
-//gcc msh_main.c ../msh_envp_preprocess/*.c ../utils/*.c
+//gcc msh_main.c ../msh_envp_preprocess/*.c ../utils/*.c ../msh_builtin/*.c

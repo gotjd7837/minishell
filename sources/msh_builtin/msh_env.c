@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_envlst_return_value.c                          :+:      :+:    :+:   */
+/*   msh_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:47:35 by haekang           #+#    #+#             */
-/*   Updated: 2023/10/10 18:27:56 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/10 20:07:51 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/10 21:34:57 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*msh_envlst_return_value(t_env *envp_list, char *key)
+void	msh_env(t_env *envp_list)
 {
 	t_env	*node;
 
@@ -21,18 +21,18 @@ char	*msh_envlst_return_value(t_env *envp_list, char *key)
 	{
 		if (node->next == NULL)
 		{
-			if (msh_strcmp(node->key, key) == 0)
-				return (node->value);
+			if (node->value != NULL)
+				printf("%s=%s\n", node->key, node->value);
 			break ;
 		}
 		else
 		{
-			if (msh_strcmp(node->key, key) == 0)
-				return (node->value);
+			if (node->value != NULL)
+				printf("%s=%s\n", node->key, node->value);
 		}
 		node = node->next;
 	}
-	return (NULL);
 }
-
-//key값 넣으면 return value, key가 없으면 NULL반환
+//export로 '='없이 선언된 변수는 value=NULL로 만들어 구분한다.
+//env는 key=value 구조만 출력한다.
+//실제 zsh->bash에서도 key=value구조로 선언된 환경변수만을 가져온다.

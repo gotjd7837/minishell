@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 17:56:19 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:45:11 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ int			msh_whitespace_len(char *s);
 
 int			msh_envp_preprocess(char **envp, t_env **envp_list);
 t_env		*msh_new_env_node(char *key, char *value);
-char		*msh_envlst_return_value(t_env **envp_list, char *key);
+char		*msh_envlst_return_value(t_env *envp_list, char *key);
+void		msh_env(t_env *envp_list);
+void		msh_unset(t_env *envp_list, char *key);
 #endif
