@@ -6,17 +6,11 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:33:28 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 14:02:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/10 16:34:17 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-void	msh_add_comp_diff(t_comp **comps, char *input, int begin, int end)
-{
-	if (begin != end)
-		msh_add_comp(comps, input, begin, end);
-}
 
 t_comp	*msh_divide_comps(char *input)
 {

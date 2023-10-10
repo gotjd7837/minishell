@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 13:56:22 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/10 16:33:26 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ int			msh_is_sqoute(int c);
 int			msh_strcmp(char *s1, char *s2);
 size_t		msh_strlen(char *s);
 char		*msh_strncpy(char *dest, char *src, size_t n);
+void	msh_add_comp_diff(t_comp **comps, char *input, int begin, int end);
 #endif
