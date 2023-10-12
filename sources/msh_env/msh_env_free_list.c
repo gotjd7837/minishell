@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_new_env_node.c                                 :+:      :+:    :+:   */
+/*   msh_env_free_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:43:49 by haekang           #+#    #+#             */
-/*   Updated: 2023/10/10 17:50:38 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/12 16:10:43 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 16:11:01 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_env	*msh_new_env_node(char *key, char *value)
+t_env	*msh_env_free_list(t_env *list)
 {
 	t_env	*node;
+	t_env	*next;
 
-	node = (t_env *)malloc(sizeof(t_env));
-	if (node == NULL)
+	node = NULL;
+	next = NULL;
+	if (list == NULL)
 		return (NULL);
-	node->key = key;
-	node->value = value;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
+	node = list;
+	while (next != 0)
+	{
+		next = node->next;
+		free(node);
+	}
+	return (NULL);
 }

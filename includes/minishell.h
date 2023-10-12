@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 12:46:31 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/12 15:45:31 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ typedef struct s_tree
 	struct s_tree	*children;
 }	t_tree;
 
+// env
+t_env	*msh_env_new_list(char *envp[]);
+t_env	*msh_env_free_list(t_env *list);
+t_env	*msh_env_new_node(void);
+t_env	*msh_env_free_node(t_env *node);
+int		msh_env_add_node(t_env **list, char *envp);
+t_env	*msh_env_last_node(t_env *list);
+char	*msh_env_parse_key(char *envp);
+char	*msh_env_parse_value(char *envp);
 // lexical analysis
 t_token		*msh_lexical_analysis(char *input);
 // lexical analysis : expand input
@@ -82,12 +91,6 @@ int			msh_validate_dqoute(char *input, int index);
 int			msh_validate_sqoute(char *input, int index);
 int			(*msh_get_validator(char c))(char *input, int index);
 void	msh_add_comp_diff(t_comp **comps, char *input, int begin, int end);
-// env
-int			msh_envp_preprocess(char **envp, t_env **envp_list);
-t_env		*msh_new_env_node(char *key, char *value);
-char		*msh_envlst_return_value(t_env *envp_list, char *key);
-void		msh_env(t_env *envp_list);
-void		msh_unset(t_env *envp_list, char *key);
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);
