@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_new_env_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 12:03:27 by jho              ###   ########.fr       */
+/*   Created: 2023/10/10 17:43:49 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/10 17:50:38 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(void)
+t_env	*msh_new_env_node(char *key, char *value)
 {
-	char	*input;
-	t_token	*tokens;
+	t_env	*node;
 
-	while (1)
-	{
-		input = readline("msh$> ");
-		tokens = msh_lexical_analysis(input);
-		free(input);
-	}
-	return (0);
+	node = (t_env *)malloc(sizeof(t_env));
+	if (node == NULL)
+		return (NULL);
+	node->key = key;
+	node->value = value;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }

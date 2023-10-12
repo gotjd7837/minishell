@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 15:51:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 13:56:22 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 12:02:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ typedef enum e_symbol
 	ROOT
 }	t_symbol;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
 typedef struct s_comp
 {
 	char			*value;
@@ -73,11 +81,18 @@ int			msh_add_comp(t_comp **origin, char *input, int begin, int end);
 int			msh_validate_dqoute(char *input, int index);
 int			msh_validate_sqoute(char *input, int index);
 int			(*msh_get_validator(char c))(char *input, int index);
+// env
+int			msh_envp_preprocess(char **envp, t_env **envp_list);
+t_env		*msh_new_env_node(char *key, char *value);
+char		*msh_envlst_return_value(t_env *envp_list, char *key);
+void		msh_env(t_env *envp_list);
+void		msh_unset(t_env *envp_list, char *key);
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);
 int			msh_is_sqoute(int c);
 int			msh_strcmp(char *s1, char *s2);
+char		*msh_substr(char *str, int startIdx, int endIdx);
 size_t		msh_strlen(char *s);
 char		*msh_strncpy(char *dest, char *src, size_t n);
 #endif
