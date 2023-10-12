@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_comp_add_diff.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 16:24:56 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 16:51:25 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 18:10:44 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	msh_comp_add_node_diff(t_comp **comps, char *input, int begin, int end)
 {
-	t_env	*env;
-	char	*input;
-	t_token	*tokens;
-
-	(void) argc;
-	(void) argv;
-	env = msh_env_new_list(envp);
-	if (env == NULL)
-	{
-		write(2, "msh : failed to read environment.\n", 34);
-		return (1);
-	}
-	while (1)
-	{
-		input = readline("msh$> ");
-		tokens = msh_lexical_analysis(input, env);
-		free(input);
-	}
-	return (0);
+	if (begin != end)
+		msh_comp_add_node(comps, input, begin, end);
 }

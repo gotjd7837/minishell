@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_divide_comps.c                                 :+:      :+:    :+:   */
+/*   msh_comp_divide.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:33:28 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 12:46:44 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 18:00:27 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 18:11:35 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	msh_add_comp_diff(t_comp **comps, char *input, int begin, int end)
-{
-	if (begin != end)
-		msh_add_comp(comps, input, begin, end);
-}
-
-t_comp	*msh_divide_comps(char *input)
+t_comp	*msh_comp_divide(char *input)
 {
 	int		range[2];
 	t_comp	*comps;
@@ -32,17 +26,17 @@ t_comp	*msh_divide_comps(char *input)
 		validator = msh_get_validator(*(input + range[1]));
 		if (validator != NULL)
 		{
-			msh_add_comp_diff(&comps, input, range[0], range[1]);
+			msh_comp_add_node_diff(&comps, input, range[0], range[1]);
 			range[0] = range[1];
 			range[1] = validator(input, range[0] + 1) + 1;
 			if (range[1] == 0)
 				return (NULL);
-			msh_add_comp(&comps, input, range[0], range[1]);
+			msh_comp_add_node(&comps, input, range[0], range[1]);
 			range[0] = range[1];
 		}
 		else
 			++range[1];
 	}
-	msh_add_comp_diff(&comps, input, range[0], range[1]);
+	msh_comp_add_node_diff(&comps, input, range[0], range[1]);
 	return (comps);
 }

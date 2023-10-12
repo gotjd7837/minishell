@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 15:45:31 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/12 18:33:23 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,22 @@ int		msh_env_add_node(t_env **list, char *envp);
 t_env	*msh_env_last_node(t_env *list);
 char	*msh_env_parse_key(char *envp);
 char	*msh_env_parse_value(char *envp);
+char	*msh_env_get_value(t_env *env, char *key);
 // lexical analysis
-t_token		*msh_lexical_analysis(char *input);
+t_token		*msh_lexical_analysis(char *input, t_env *env);
 // lexical analysis : expand input
-char		*msh_expand_input(char *input);
-t_comp		*msh_divide_comps(char *input);
-t_comp		*msh_last_comp(t_comp *comps);
-int			msh_add_comp(t_comp **origin, char *input, int begin, int end);
+int			msh_comp_add_node(t_comp **origin, char *input, int begin, int end);
+void		msh_comp_add_node_diff(t_comp **comps, char *input, int begin, int end);
+t_comp		*msh_comp_divide(char *input);
+char		*msh_comp_env(char *input, t_env *env);
+char		*msh_comp_expand(t_comp *origin, t_env *env);
+t_comp		*msh_comp_free(t_comp *comps);
+t_comp		*msh_comp_last_node(t_comp *comps);
+char		*msh_comp_union(t_comp *origin);
+char		*msh_expand_input(char *input, t_env *env);
 int			msh_validate_dqoute(char *input, int index);
 int			msh_validate_sqoute(char *input, int index);
 int			(*msh_get_validator(char c))(char *input, int index);
-void	msh_add_comp_diff(t_comp **comps, char *input, int begin, int end);
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);
@@ -99,4 +104,6 @@ int			msh_strcmp(char *s1, char *s2);
 char		*msh_substr(char *str, int startIdx, int endIdx);
 size_t		msh_strlen(char *s);
 char		*msh_strncpy(char *dest, char *src, size_t n);
+void		msh_strtrim_bothends(char *str);
+int			msh_is_special_chr(char c);
 #endif

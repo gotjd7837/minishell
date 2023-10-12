@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_main.c                                         :+:      :+:    :+:   */
+/*   msh_env_get_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 16:24:56 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 18:29:48 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 18:35:24 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*msh_env_get_value(t_env *env, char *key)
 {
-	t_env	*env;
-	char	*input;
-	t_token	*tokens;
-
-	(void) argc;
-	(void) argv;
-	env = msh_env_new_list(envp);
-	if (env == NULL)
+	while (env != NULL)
 	{
-		write(2, "msh : failed to read environment.\n", 34);
-		return (1);
+		if (msh_strcmp(key, env->key) == 0)
+			return (env->value);
+		env = env->next;
 	}
-	while (1)
-	{
-		input = readline("msh$> ");
-		tokens = msh_lexical_analysis(input, env);
-		free(input);
-	}
-	return (0);
+	return (NULL);
 }
