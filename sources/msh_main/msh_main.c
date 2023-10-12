@@ -3,53 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:14:20 by jho               #+#    #+#             */
-/*   Updated: 2023/10/10 21:47:48 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
+/*   Updated: 2023/10/12 12:03:27 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(int ac, char **av, char **envp)
+int	main(void)
 {
-	// char	*input;
-	t_env	*envp_list;
-	// t_token	*tokens;
-	t_env	*tmp;
+	char	*input;
+	t_token	*tokens;
 
-	(void)ac;
-	(void)av;
-	if (msh_envp_preprocess(envp, &envp_list))
-		return (1);
-	// tmp = envp_list;
-	// while (1)
-	// {
-	// 	if (tmp->next == NULL)
-	// 	{
-	// 		printf("key = %s value = %s\n", tmp->key, tmp->value);
-	// 		break ;
-	// 	}
-	// 	printf("key = %s value = %s\n", tmp->key, tmp->value);
-	// 	tmp = tmp->next;
-	// }
-	// printf("\nvalue = %s\n", msh_envlst_return_value(envp_list, "COLORTERM"));
-	msh_env(envp_list);
-	printf("\n\n\n");
-	msh_unset(envp_list, "test");
-	msh_unset(envp_list, "aaaaa");
-	msh_env(envp_list);
-
-	// while (1)
-	// {
-	// 	input = readline("minishell$ ");
-	// 	tokens = msh_lexical_analysis(input);
-	// 	add_history(input);
-	// 	msh_print_tokens(tokens);
-	// 	free(input);
-	// }
+	while (1)
+	{
+		input = readline("msh$> ");
+		tokens = msh_lexical_analysis(input);
+		free(input);
+	}
 	return (0);
 }
-
-//gcc msh_main.c ../msh_envp_preprocess/*.c ../utils/*.c ../msh_builtin/*.c

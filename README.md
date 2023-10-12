@@ -1,7 +1,7 @@
 # Summary
 This project is about creating a simple shell.
 
-# Contributor
+# Team users
 * jho (Junseo Ho)
 * haekang (Haeseong Kang)
 
