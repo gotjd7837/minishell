@@ -3,43 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   msh_comp_expand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:01:19 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 16:00:22 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 18:25:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int msh_comp_expand(t_comp *origin, t_env *env)
+static int	msh_expand_and_process_comp(t_comp *comp, t_env *env)
 {
 	char	*value;
+
+	value = NULL;
+	if (msh_is_sqoute(*(comp->value)))
+		msh_strtrim_bothends(comp->value);
+	else if (msh_is_dqoute(*(comp->value)))
+	{
+		msh_strtrim_bothends(comp->value);
+		value = msh_comp_env(comp->value, env, NULL);
+		free(comp->value);
+		comp->value = value;
+		if (comp->value == NULL)
+			return ((int)msh_comp_free(comp));
+	}
+	else
+	{
+		value = msh_comp_env(comp->value, env, NULL);
+		free(comp->value);
+		comp->value = value;
+		if (comp->value == NULL)
+			return ((int)msh_comp_free(comp));
+	}
+	return (1);
+}
+
+int	msh_comp_expand(t_comp *origin, t_env *env)
+{
 	t_comp	*comps;
 
 	comps = origin;
-	value = NULL;
 	while (comps != NULL)
 	{
-		if (msh_is_sqoute(*(comps->value)))
-			msh_strtrim_bothends(comps->value);
-		else if (msh_is_dqoute(*(comps->value)))
-		{
-			msh_strtrim_bothends(comps->value);
-			value = msh_comp_env(comps->value, env);
-			free(comps->value);
-			comps->value = value;
-			if (comps->value == NULL)
-				return ((int)msh_comp_free(comps));
-		}
-		else
-		{
-			value = msh_comp_env(comps->value, env);
-			free(comps->value);
-			comps->value = value;
-			if (comps->value == NULL)
-				return ((int)msh_comp_free(comps));
-		}
+		if (!msh_expand_and_process_comp(comps, env))
+			return (0);
 		comps = comps->next;
 	}
 	return (1);

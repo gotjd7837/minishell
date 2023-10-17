@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_comps_union.c                                  :+:      :+:    :+:   */
+/*   msh_comp_union.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:47:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 16:01:30 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 18:35:04 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*msh_comp_union(t_comp *origin)
+static size_t	msh_comps_total_len(t_comp *origin)
 {
-	size_t	len;
-	size_t	total_len;
 	t_comp	*comps;
-	char	*unioned_str;
+	size_t	total_len;
 
 	total_len = 0;
 	comps = origin;
@@ -26,6 +24,18 @@ char	*msh_comp_union(t_comp *origin)
 		total_len += msh_strlen(comps->value);
 		comps = comps->next;
 	}
+	return (total_len);
+}
+
+char	*msh_comp_union(t_comp *origin)
+{
+	size_t	len;
+	size_t	total_len;
+	t_comp	*comps;
+	char	*unioned_str;
+
+	total_len = msh_comps_total_len(origin);
+	comps = origin;
 	unioned_str = malloc(total_len + 1);
 	if (unioned_str == NULL)
 	{

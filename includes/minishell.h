@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 14:35:40 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 17:50:19 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,23 @@ typedef struct s_tree
 }	t_tree;
 
 // env
-t_env	*msh_env_new_list(char *envp[]);
-t_env	*msh_env_free_list(t_env *list);
-int		msh_env_new_node(t_env **node);
-t_env	*msh_env_free_node(t_env *node);
-int		msh_env_add_node(t_env **list, char *envp);
-t_env	*msh_env_last_node(t_env *list);
-char	*msh_env_parse_key(char *envp);
-char	*msh_env_parse_value(char *envp);
-char	*msh_env_get_value(t_env *env, char *key);
+t_env		*msh_env_new_list(char *envp[]);
+t_env		*msh_env_free_list(t_env *list);
+int			msh_env_new_node(t_env **node);
+t_env		*msh_env_free_node(t_env *node);
+int			msh_env_add_node(t_env **list, char *envp);
+t_env		*msh_env_last_node(t_env *list);
+char		*msh_env_parse_key(char *envp);
+char		*msh_env_parse_value(char *envp);
+char		*msh_env_get_value(t_env *env, char *key);
 // lexical analysis
 t_token		*msh_lexical_analysis(char *input, t_env *env);
 // lexical analysis : expand input
 int			msh_comp_add_node(t_comp **origin, char *input, int begin, int end);
-int			msh_comp_add_node_diff(t_comp **comps, char *input, int begin, int end);
+int			msh_comp_add_node_diff(t_comp **comps,
+				char *input, int begin, int end);
 t_comp		*msh_comp_divide(char *input);
-char		*msh_comp_env(char *input, t_env *env);
+char		*msh_comp_env(char *input, t_env *env, t_comp *origin);
 int			msh_comp_expand(t_comp *origin, t_env *env);
 t_comp		*msh_comp_free(t_comp *comps);
 t_comp		*msh_comp_last_node(t_comp *comps);
@@ -107,4 +108,5 @@ char		*msh_strncpy(char *dest, char *src, size_t n);
 void		msh_strtrim_bothends(char *str);
 int			msh_is_special_chr(char c);
 char		*msh_strchr(char *s, int c);
+void		*msh_memset(void *b, int c, size_t len);
 #endif

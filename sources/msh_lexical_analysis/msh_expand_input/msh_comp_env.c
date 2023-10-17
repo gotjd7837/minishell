@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_comp_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:59:16 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 16:00:00 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 17:50:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@ void	msh_comp_env_substitute(t_comp *comps, t_env *env)
 	}
 }
 
-char	*msh_comp_env(char *input, t_env *env)
+char	*msh_comp_env(char *input, t_env *env, t_comp *origin)
 {
 	char	*str;
 	int		range[2];
-	t_comp	*origin;
 
-	range[0] = 0;
-	range[1] = 0;
-	origin = NULL;
+	msh_memset(range, 0, sizeof(int) * 2);
 	while (*(input + range[1]) != '\0')
 	{
 		if (msh_is_dollar(*(input + range[1])))
