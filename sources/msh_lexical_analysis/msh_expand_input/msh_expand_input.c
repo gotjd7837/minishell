@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:10:26 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 18:23:47 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 14:49:52 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	*msh_expand_input(char *input, t_env *env)
 	expanded_input = msh_comp_union(comps);
 	if (expanded_input == NULL)
 		return ((char *)msh_comp_free(comps));
+	msh_comp_free(comps);
 	return (expanded_input);
 }

@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 11:48:08 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 14:35:40 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ char	*msh_env_get_value(t_env *env, char *key);
 t_token		*msh_lexical_analysis(char *input, t_env *env);
 // lexical analysis : expand input
 int			msh_comp_add_node(t_comp **origin, char *input, int begin, int end);
-void		msh_comp_add_node_diff(t_comp **comps, char *input, int begin, int end);
+int			msh_comp_add_node_diff(t_comp **comps, char *input, int begin, int end);
 t_comp		*msh_comp_divide(char *input);
 char		*msh_comp_env(char *input, t_env *env);
-char		*msh_comp_expand(t_comp *origin, t_env *env);
+int			msh_comp_expand(t_comp *origin, t_env *env);
 t_comp		*msh_comp_free(t_comp *comps);
 t_comp		*msh_comp_last_node(t_comp *comps);
 char		*msh_comp_union(t_comp *origin);

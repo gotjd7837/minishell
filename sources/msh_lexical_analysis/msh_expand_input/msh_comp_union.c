@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:47:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 18:26:14 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 16:01:30 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ char	*msh_comp_union(t_comp *origin)
 	}
 	unioned_str = malloc(total_len + 1);
 	if (unioned_str == NULL)
+	{
+		msh_comp_free(origin);
 		return (NULL);
+	}
 	total_len = 0;
 	while (origin != NULL)
 	{
