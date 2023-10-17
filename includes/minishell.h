@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 18:33:23 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/17 11:48:08 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_tree
 // env
 t_env	*msh_env_new_list(char *envp[]);
 t_env	*msh_env_free_list(t_env *list);
-t_env	*msh_env_new_node(void);
+int		msh_env_new_node(t_env **node);
 t_env	*msh_env_free_node(t_env *node);
 int		msh_env_add_node(t_env **list, char *envp);
 t_env	*msh_env_last_node(t_env *list);
@@ -106,4 +106,5 @@ size_t		msh_strlen(char *s);
 char		*msh_strncpy(char *dest, char *src, size_t n);
 void		msh_strtrim_bothends(char *str);
 int			msh_is_special_chr(char c);
+char		*msh_strchr(char *s, int c);
 #endif

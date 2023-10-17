@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_new_list.c                                 :+:      :+:    :+:   */
+/*   msh_strchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 13:42:27 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 12:44:15 by jho              ###   ########.fr       */
+/*   Created: 2023/10/17 11:41:27 by jho               #+#    #+#             */
+/*   Updated: 2023/10/17 11:45:07 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_env	*msh_env_new_list(char *envp[])
+char	*msh_strchr(char *s, int c)
 {
-	int		index;
-	t_env	*env;
+	size_t	index;
+	size_t	len;
 
 	index = 0;
-	env = NULL;
-	while (*(envp + index) != NULL)
+	len = msh_strlen(s);
+	while (index <= len)
 	{
-		if (!msh_env_add_node(&env, *(envp + index)))
-			return (msh_env_free_list(env));
+		if (*(s + index) == (char)c)
+			return ((char *)(s + index));
 		++index;
 	}
-	return (env);
+	return (0);
 }
