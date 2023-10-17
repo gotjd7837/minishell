@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_get_value.c                                :+:      :+:    :+:   */
+/*   msh_strdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 18:29:48 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 19:31:03 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/17 19:18:44 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/17 19:32:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*msh_env_get_value(t_env *env, char *key)
+char	*msh_strdup(char *s1)
 {
-	char	*value;
+	size_t	i;
+	char	*str;
 
-	value = NULL;
-	while (env != NULL)
+	i = msh_strlen(s1);
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		if (!msh_strcmp(key, env->key))
-		{
-			value = msh_strdup(env->value);
-			return (value);
-		}
-		env = env->next;
+		str[i] = s1[i];
+		i++;
 	}
-	return (value);
+	str[i] = '\0';
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 17:50:19 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:32:26 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ void		msh_strtrim_bothends(char *str);
 int			msh_is_special_chr(char c);
 char		*msh_strchr(char *s, int c);
 void		*msh_memset(void *b, int c, size_t len);
+char		*msh_strdup(char *s1);
 #endif
