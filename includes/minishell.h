@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/20 14:13:12 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:23:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,20 @@ char		*msh_expand_input(char *input, t_env *env);
 int			msh_validate_dqoute(char *input, int index);
 int			msh_validate_sqoute(char *input, int index);
 int			(*msh_get_validator(char c))(char *input, int index);
+// lexical analysis : tokenize
+int			msh_count_equal_sign(char *s);
+int			msh_input_tokenize(t_token **tokens, char *s);
+int			msh_is_meta_char(char c);
+int			msh_append_token(t_token **tokens, t_token *token);
+t_token		*msh_free_tokens(t_token *tokens);
+int			msh_tokenize_amp(t_token **tokens, char *str);
+int			msh_tokenize_br(t_token **tokens, char *str);
+int			msh_tokenize_equal_sign(t_token **tokens, char *str);
+int			msh_tokenize_redir(t_token **tokens, char *str);
+int			msh_tokenize_vbar(t_token **tokens, char *str);
+int			msh_tokenize_word(t_token **tokens, char *str);
+int			msh_whitespace_len(char *s);
+
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);

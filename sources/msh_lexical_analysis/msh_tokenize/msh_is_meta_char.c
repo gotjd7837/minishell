@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_whitespace_len.c                               :+:      :+:    :+:   */
+/*   msh_is_meta_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 16:24:43 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 17:02:23 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:18:39 by jho               #+#    #+#             */
+/*   Updated: 2023/10/20 15:15:27 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_whitespace_len(char *s)
+int	msh_is_meta_char(char c)
 {
-	int	len;
-
-	len = 0;
-	while (*(s + len) == ' ')
-		++len;
-	return (len);
+	return (c == '<' || c == '>' || c == '|' || c == '&' || c == '(' || c == ')'
+		|| c == ' ' || c == '=' || c == '\0');
 }

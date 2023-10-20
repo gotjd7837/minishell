@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_is_meta_char.c                                 :+:      :+:    :+:   */
+/*   msh_count_equal_sign.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 16:18:39 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:55:45 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:42:39 by jho               #+#    #+#             */
+/*   Updated: 2023/10/20 15:15:01 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_is_meta_char(char c)
+int	msh_count_equal_sign(char *s)
 {
-	return (c == '<' || c == '>' || c == '|' || c == '&' || c == '(' || c == ')'
-		|| c == ' ' || c == '=' || c == '\0');
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (*(s + index) != '\0')
+	{
+		if (*(s + index) == '=')
+			++count;
+		++index;
+	}
+	return (count);
 }

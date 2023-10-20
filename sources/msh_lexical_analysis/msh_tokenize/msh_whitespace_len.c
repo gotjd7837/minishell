@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_count_equal_sign.c                             :+:      :+:    :+:   */
+/*   msh_whitespace_len.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 16:42:39 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:47:53 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:24:43 by jho               #+#    #+#             */
+/*   Updated: 2023/10/20 15:15:54 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_count_equal_sign(char *s)
+int	msh_whitespace_len(char *s)
 {
-	int	index;
-	int	count;
+	int	len;
 
-	index = 0;
-	count = 0;
-	while (*(s + index) != '\0')
-	{
-		if (*(s + index) == '=')
-			++count;
-		++index;
-	}
-	return (count);
+	len = 0;
+	while (*(s + len) == ' ')
+		++len;
+	return (len);
 }

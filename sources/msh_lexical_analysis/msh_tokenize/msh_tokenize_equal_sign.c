@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokenize_br.c                                  :+:      :+:    :+:   */
+/*   msh_tokenize_equal_sign.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:45:15 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:11:45 by jho              ###   ########.fr       */
+/*   Created: 2023/09/12 16:54:10 by jho               #+#    #+#             */
+/*   Updated: 2023/10/20 15:15:37 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_tokenize_br(t_token **tokens, char *str)
+int	msh_tokenize_equal_sign(t_token **tokens, char *str)
 {
 	t_token	*token;
 	char	*value;
@@ -26,10 +26,7 @@ int	msh_tokenize_br(t_token **tokens, char *str)
 		free(value);
 		return (-1);
 	}
-	if (*str == '(')
-		token->symbol = L_BRACKET;
-	else
-		token->symbol = R_BRACKET;
+	token->symbol = EQUAL_SIGN;
 	token->value = value;
 	token->next = 0;
 	msh_append_token(tokens, token);

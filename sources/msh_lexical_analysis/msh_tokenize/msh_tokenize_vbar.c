@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tokenize_vbar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:44:51 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 21:02:13 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/20 16:11:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	msh_tokenize_vbar(t_token **tokens, char *str)
 {

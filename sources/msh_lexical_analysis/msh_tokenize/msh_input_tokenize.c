@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokenize.c                                     :+:      :+:    :+:   */
+/*   msh_input_tokenize.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:49:06 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 17:01:48 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/20 15:21:03 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	msh_tokenize(t_token **tokens, char *s)
+int	msh_input_tokenize(t_token **tokens, char *s)
 {
 	if (*s == '<' | *s == '>')
 		return (msh_tokenize_redir(tokens, s));
