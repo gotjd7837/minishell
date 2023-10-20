@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tokenize_redir.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:13:38 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:31:36 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/20 17:40:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
+
+static int	msh_get_end_idx(char *str)
+{
+	int	end_idx;
+
+	end_idx = 0;
+	if (*(str + 1) == '<' || *(str + 1) == '>')
+		end_idx = 2;
+	else
+		end_idx = 1;
+	end_idx += msh_whitespace_len(str + end_idx);
+	return (end_idx);
+}
 
 int	msh_tokenize_redir(t_token **tokens, char *str)
 {
@@ -18,11 +31,7 @@ int	msh_tokenize_redir(t_token **tokens, char *str)
 	t_token	*token;
 	char	*value;
 
-	if (*(str + 1) == '<' || *(str + 1) == '>')
-		end_idx = 2;
-	else
-		end_idx = 1;
-	end_idx += msh_whitespace_len(str + end_idx);
+	end_idx = msh_get_end_idx(str);
 	if (msh_is_meta_char(*(str + end_idx)))
 		return (-1);
 	while (!msh_is_meta_char(*(str + end_idx)))

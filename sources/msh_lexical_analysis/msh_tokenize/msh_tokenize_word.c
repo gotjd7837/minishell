@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tokenize_word.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:50:05 by jho               #+#    #+#             */
-/*   Updated: 2023/09/12 16:49:49 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/20 17:42:49 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
+
+static int	msh_get_end_idx(char *str)
+{
+	int	end_idx;
+
+	end_idx = 1;
+	while (!msh_is_meta_char(*(str + end_idx)))
+		++end_idx;
+	return (end_idx);
+}
 
 int	msh_tokenize_word(t_token **tokens, char *str)
 {
@@ -18,9 +28,7 @@ int	msh_tokenize_word(t_token **tokens, char *str)
 	char	*value;
 	t_token	*token;
 
-	end_idx = 1;
-	while (!msh_is_meta_char(*(str + end_idx)))
-		++end_idx;
+	end_idx = msh_get_end_idx(str);
 	value = msh_substr(str, 0, end_idx);
 	if (value == 0)
 		return (-1);

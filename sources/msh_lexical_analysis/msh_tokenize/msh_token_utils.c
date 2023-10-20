@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tokens.c                                       :+:      :+:    :+:   */
+/*   msh_token_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:29:02 by jho               #+#    #+#             */
-/*   Updated: 2023/08/29 20:30:08 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/20 17:08:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	msh_append_token(t_token **tokens, t_token *token)
 {
@@ -39,6 +39,7 @@ t_token	*msh_free_tokens(t_token *tokens)
 	while (node != 0)
 	{
 		next = node->next;
+		free(node->value);
 		free(node);
 		node = next;
 	}
