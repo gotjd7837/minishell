@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_get_value.c                                :+:      :+:    :+:   */
+/*   msh_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 18:29:48 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 19:31:03 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/14 19:54:31 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/14 21:30:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*msh_env_get_value(t_env *env, char *key)
+void	msh_pwd(void)
 {
-	char	*value;
+	char	*pwd;
 
-	value = NULL;
-	while (env != NULL)
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
 	{
-		if (!msh_strcmp(key, env->key))
-		{
-			value = msh_strdup(env->value);
-			return (value);
-		}
-		env = env->next;
+		printf("getcwd error\n");
+		return ;
 	}
-	return (value);
+	printf("%s\n", pwd);
+	free(pwd);
 }
