@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:21:56 by haeseong          #+#    #+#             */
-/*   Updated: 2023/10/24 04:21:46 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/24 05:53:43 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,4 @@ t_tree	*msh_create_parse_tree(t_token **tokens)
 		//error
 	return (root);
 }
+//트리의 형제 노드 add를 위해 구조체 수정 필요할듯
