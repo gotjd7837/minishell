@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/23 20:41:31 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/24 04:10:11 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_tree
 {
 	t_symbol		symbol;
 	char			*value;
-	struct s_tree	*children;
+	struct s_tree	*children;//자식 노드의 연결리스트
 }	t_tree;
 
 // env

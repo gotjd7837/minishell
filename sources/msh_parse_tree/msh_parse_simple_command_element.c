@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_parse_list.c                                   :+:      :+:    :+:   */
+/*   msh_parse_simple_command_element.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 21:43:24 by haeseong          #+#    #+#             */
-/*   Updated: 2023/10/24 05:20:01 by haeseong         ###   ########.fr       */
+/*   Created: 2023/10/24 05:20:26 by haeseong          #+#    #+#             */
+/*   Updated: 2023/10/24 05:28:25 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	msh_parse_list(t_token **tokens, t_tree *parent)
+int	msh_parse_simple_command_element(t_token **tokens, t_tree *parent)
 {
 	t_tree	*node;
 
-	node = msh_parse_new_node(PIPELINE);
-	if (node == NULL)
-		return (0);
-	msh_parse_add_child(parent, node);
-	if (!msh_parse_pipeline(tokens, node))
-		return (0);
-	if (msh_accept(tokens, AND_IF) || msh_accept(tokens, OR_IF))
+	if (msh_accept(tokens, WORD) || msh_accept(tokens, ASSIGNMENT_WORD)
+		|| msh_accept(tokens, REDIRECTION))
 	{
-		//AND_IF가 있다는 거니까 노드 생성하고 토큰 pop해버리기?
-		//list 재귀 호출
-		//헤드 토큰 팝하는 함수 구현하기
+		node = msh_parse_new_node();//현재 헤드 토큰 심볼
+		//헤드 토큰 팝 하기
+		//자식 add
 	}
+	else
+		//error
 	return (1);
 }
