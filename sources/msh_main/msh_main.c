@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/20 17:45:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/23 20:45:16 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_env	*env;
 	char	*input;
 	t_token	*tokens;
+	t_tree	*tree;
 
 	(void) argc;
 	(void) argv;
@@ -56,6 +57,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		input = readline("msh$> ");
 		tokens = msh_lexical_analysis(input, env);
+		tree = msh_create_parse_tree(&tokens);
 		msh_print_tokens(tokens);
 		msh_free_tokens(tokens);
 		free(input);
