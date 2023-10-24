@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:37:43 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 14:34:13 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/24 16:46:26 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	msh_add_child(t_token *tokens, t_token *child)
 
 	if (tokens == NULL || child == NULL)
 		return ;
+	child->child = NULL;
 	if (tokens->child == NULL)
 		tokens->child = child;
 	else

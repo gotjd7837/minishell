@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_dequeue.c                                      :+:      :+:    :+:   */
+/*   msh_new_token_by_sym.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 12:18:35 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 16:48:38 by jho              ###   ########.fr       */
+/*   Created: 2023/10/24 16:13:17 by jho               #+#    #+#             */
+/*   Updated: 2023/10/24 16:46:41 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token	*msh_dequeue(t_token **tokens)
+t_token	*msh_new_token_by_sym(t_symbol sym)
 {
 	t_token	*token;
 
-	if (tokens == NULL || *tokens == NULL)
+	token = malloc(sizeof(t_token));
+	if (token == NULL)
 		return (NULL);
-	token = *tokens;
-	*tokens = token->next;
-	token->next = 0;
-	token->child = 0;
+	token->symbol = sym;
+	token->value = NULL;
+	token->next = NULL;
+	token->child = NULL;
 	return (token);
 }

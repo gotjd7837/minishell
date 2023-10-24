@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:00:53 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 14:22:00 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/24 16:08:14 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@ int	msh_parse_command(t_token *root, t_token **tokens)
 
 	if (msh_accept(L_BRACKET, *tokens))
 	{
-
+		token = msh_new_token_by_sym(SUBSHELL);
+		msh_add_child(root, token);
+		if (msh_parse_subshell(token, tokens) == 0)
+			return (0);
+		if (msh_accept(REDIRECTION, *tokens))
+		{
+			token = msh_new_token_by_sym(REDIRECTION_LIST);
+			msh_add_child(root, token);
+			if (msh_parse_redirection_list(token, tokens) == 0)
+				return (0);
+		}
 	}
 	else
 	{

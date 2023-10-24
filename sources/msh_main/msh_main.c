@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 14:19:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/24 16:45:53 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,10 @@ int	main(int argc, char *argv[], char *envp[])
 		tree = msh_parse(&tokens);
 		printf("\n\n");
 		printf("[Parse tree]\n");
-		msh_print_tree(tree, 0);
+		if (tree != NULL)
+			msh_print_tree(tree, 0);
+		else
+			printf("Parse error\n");
 		msh_free_tokens(tokens);
 		free(input);
 		system("leaks minishell");
