@@ -6,18 +6,18 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:21:56 by haeseong          #+#    #+#             */
-/*   Updated: 2023/10/24 05:53:43 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:09:09 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_tree	*msh_create_parse_tree(t_token **tokens)
+t_tree	*msh_parse(t_token *tokens)
 {
-	t_tree	*root;
-	t_tree	*node;
+	t_token	*root;
+	t_token	*node;
 
-	if (*tokens == NULL)
+	if (tokens == NULL)
 		return (NULL);
 	root = msh_parse_new_node(ROOT);
 	if (root == NULL)
@@ -45,4 +45,3 @@ t_tree	*msh_create_parse_tree(t_token **tokens)
 		//error
 	return (root);
 }
-//트리의 형제 노드 add를 위해 구조체 수정 필요할듯

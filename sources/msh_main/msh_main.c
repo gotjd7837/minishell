@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/23 20:45:16 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:19:01 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,69 @@ void	msh_print_tokens(t_token *tokens)
 	}
 }
 
+void	msh_print_symbol(t_token *token)
+{
+	if (token->symbol == WORD)
+		printf("%s", "WORD");
+	else if (token->symbol == ASSIGNMENT_WORD)
+		printf("%s", "ASSIGNMENT_WORD");
+	else if (token->symbol == REDIRECTION)
+		printf("%s", "REDIRECTION");
+	else if (token->symbol == PIPE)
+		printf("%s", "PIPE");
+	else if (token->symbol == AND_IF)
+		printf("%s", "AND_IF");
+	else if (token->symbol == OR_IF)
+		printf("%s", "OR_IF");
+	else if (token->symbol == L_BRACKET)
+		printf("%s", "L_BRACKET");
+	else if (token->symbol == R_BRACKET)
+		printf("%s", "R_BRACKET");
+	else if (token->symbol == EQUAL_SIGN)
+		printf("%s", "EQUAL_SIGN");
+	else if (token->symbol == ROOT)
+		printf("%s", "ROOT");
+	else if (token->symbol == LIST)
+		printf("%s", "LIST");
+	else if (token->symbol == SUBSHELL)
+		printf("%s", "SUBSHELL");
+	else if (token->symbol == PIPELINE)
+		printf("%s", "PIPELINE");
+	else if (token->symbol == COMMAND)
+		printf("%s", "COMMAND");
+	else if (token->symbol == SIMPLE_COMMAND)
+		printf("%s", "SIMPLE_COMMAND");
+	else if (token->symbol == SIMPLE_COMMAND_ELEMENT)
+		printf("%s", "SIMPLE_COMMAND_ELEMENT");
+	if (token->value != NULL)
+	{
+		printf(" (%s)", token->value);
+	}
+	printf("\n");
+}
+
+void	msh_print_tree(t_token *tree, int depth)
+{
+	if (tree == NULL)
+		return ;
+	for (int idx = 0; idx < depth; idx++)
+		printf("\t");
+	msh_print_symbol(tree);
+	tree = tree->child;
+	while (tree != NULL)
+	{
+		msh_print_tree(tree, depth + 1);
+		tree = tree->next;
+	}
+}
+
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_env	*env;
 	char	*input;
 	t_token	*tokens;
-	t_tree	*tree;
+	t_token	*tree;
 
 	(void) argc;
 	(void) argv;
@@ -57,8 +114,12 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		input = readline("msh$> ");
 		tokens = msh_lexical_analysis(input, env);
-		tree = msh_create_parse_tree(&tokens);
+		printf("[Symbol table]\n");
 		msh_print_tokens(tokens);
+		tree = msh_parse(&tokens);
+		printf("\n\n");
+		printf("[Parse tree]\n");
+		msh_print_tree(tree, 0);
 		msh_free_tokens(tokens);
 		free(input);
 		system("leaks minishell");

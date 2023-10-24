@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 04:10:11 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:07:13 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ typedef enum e_symbol
 	PIPE,
 	AND_IF,
 	OR_IF,
+	EQUAL_SIGN,
 	L_BRACKET,
 	R_BRACKET,
-	EQUAL_SIGN,
 	SIMPLE_COMMAND_ELEMENT,
 	SIMPLE_COMMAND,
 	COMMAND,
-	PILELINE,
+	PIPELINE,
 	SUBSHELL,
 	LIST,
 	ROOT
@@ -62,14 +62,8 @@ typedef struct s_token
 	t_symbol		symbol;
 	char			*value;
 	struct s_token	*next;
+	struct s_token	*child;
 }	t_token;
-
-typedef struct s_tree
-{
-	t_symbol		symbol;
-	char			*value;
-	struct s_tree	*children;//자식 노드의 연결리스트
-}	t_tree;
 
 // env
 t_env		*msh_env_new_list(char *envp[]);
@@ -117,7 +111,17 @@ int			msh_tokenize_redir(t_token **tokens, char *str);
 int			msh_tokenize_vbar(t_token **tokens, char *str);
 int			msh_tokenize_word(t_token **tokens, char *str);
 int			msh_whitespace_len(char *s);
-
+// parse
+t_token		*msh_parse(t_token **tokens);
+t_token		*msh_dequeue(t_token **tokens);
+t_token		*msh_new_token_by_sym(t_symbol sym);
+int			msh_accept(t_symbol sym, t_token *tokens);
+void		msh_add_child(t_token *tokens, t_token *child);
+int			msh_parse_list(t_token *root, t_token **tokens);
+int			msh_parse_pipeline(t_token *root, t_token **tokens);
+int			msh_parse_command(t_token *root, t_token **tokens);
+int	msh_parse_simple_command(t_token *root, t_token **tokens);
+int	msh_parse_simple_command_element(t_token *root, t_token **tokens);
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);
