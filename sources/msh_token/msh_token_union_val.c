@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:11:24 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:09:22 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:25:44 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*msh_token_union_val(t_token *token)
 {
-	size_t	len;
+	int		len;
 	char	*unioned;
 
 	if (token == NULL)

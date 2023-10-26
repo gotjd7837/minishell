@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:09:15 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:29 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:24:41 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*msh_token_malloc(void)
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
-	token->sym = NULL;
+	token->sym = UNDEFINED;
 	token->val = NULL;
 	token->next = NULL;
 	token->child = NULL;

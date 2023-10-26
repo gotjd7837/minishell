@@ -6,16 +6,16 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:18:36 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:19 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:25:37 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_token.h"
 #include "../../includes/msh_util.h"
 
-size_t	msh_token_len_val(t_token *token)
+int	msh_token_len_val(t_token *token)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	while (token != NULL)

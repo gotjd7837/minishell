@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_val.c                             :+:      :+:    :+:   */
+/*   msh_vqoutes_num.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:59:39 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:24:59 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 15:36:40 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 15:37:04 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
-
-t_token	*msh_token_malloc_val(char *val)
+int	msh_vqoutes_num(char *s)
 {
-	t_token	*token;
+	int	num;
+	int	sqoute_open;
+	int	dqoute_open;
 
-	token = malloc(sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
-	token->sym = UNDEFINED;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
+	num = 0;
+	sqoute_open = 0;
+	dqoute_open = 0;
+	while (*s != '\0')
+	{
+		if (*s == '\'' && dqoute_open == 0)
+		{
+			sqoute_open = !sqoute_open;
+			++num;
+		}
+		else if (*s == '\"' && sqoute_open == 0)
+		{
+			dqoute_open = !dqoute_open;
+			++num;
+		}
+		++s;
+	}
+	if (sqoute_open != 0 || dqoute_open != 0)
+		return (-1);
+	return (num);
 }

@@ -6,12 +6,13 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:02:37 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:48:59 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh.h"
 
+/*
 void	msh_print_tokens(t_token *tokens)
 {
 	while (tokens != 0)
@@ -93,27 +94,21 @@ void	msh_print_tree(t_token *tree, int depth)
 		tree = tree->next;
 	}
 }
+*/
 
 
-int	main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[])
 {
-	t_env	*env;
 	char	*input;
 
 	(void) argc;
 	(void) argv;
-	env = msh_env_new_list(envp);
-	if (env == NULL)
-	{
-		write(2, "msh : failed to read environment.\n", 34);
-		return (1);
-	}
 	while (1)
 	{
 		input = readline("msh$> ");
 		msh_expand(input);
-		system("leaks minishell");
+		free(input);
+		system("leaks minishell | grep leaked");
 	}
-	msh_env_free_list(env);
 	return (0);
 }
