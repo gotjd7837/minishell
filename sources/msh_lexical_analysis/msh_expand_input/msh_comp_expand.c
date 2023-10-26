@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:01:19 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 18:25:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/26 08:28:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,15 @@ static int	msh_expand_and_process_comp(t_comp *comp, t_env *env)
 	char	*value;
 
 	value = NULL;
-	if (msh_is_sqoute(*(comp->value)))
-		msh_strtrim_bothends(comp->value);
-	else if (msh_is_dqoute(*(comp->value)))
+	if (msh_is_dqoute(*(comp->value)))
 	{
-		msh_strtrim_bothends(comp->value);
 		value = msh_comp_env(comp->value, env, NULL);
 		free(comp->value);
 		comp->value = value;
 		if (comp->value == NULL)
 			return ((int)msh_comp_free(comp));
 	}
-	else
+	else if (!msh_is_sqoute(*(comp->value)))
 	{
 		value = msh_comp_env(comp->value, env, NULL);
 		free(comp->value);
