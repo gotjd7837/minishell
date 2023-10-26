@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:02:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/24 16:09:45 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 08:38:36 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	msh_parse_simple_command(t_token *root, t_token **tokens);
 int	msh_parse_simple_command_element(t_token *root, t_token **tokens);
 int	msh_parse_subshell(t_token *root, t_token **tokens);
 int	msh_parse_redirection_list(t_token *root, t_token **tokens);
+t_token	*msh_token_free(t_token *token);
 // utils
 int			msh_is_dollar(int c);
 int			msh_is_dqoute(int c);
