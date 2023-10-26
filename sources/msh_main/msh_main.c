@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 08:39:03 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:02:37 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_env	*env;
 	char	*input;
-	t_token	*tokens;
-	t_token	*tree;
 
 	(void) argc;
 	(void) argv;
@@ -113,19 +111,7 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		input = readline("msh$> ");
-		tokens = msh_lexical_analysis(input, env);
-		printf("[Symbol table]\n");
-		msh_print_tokens(tokens);
-		tree = msh_parse(&tokens);
-		printf("\n\n");
-		printf("[Parse tree]\n");
-		if (tree != NULL)
-			msh_print_tree(tree, 0);
-		else
-			printf("Parse error\n");
-		msh_free_tokens(tokens);
-		msh_token_free(tree);
-		free(input);
+		msh_expand(input);
 		system("leaks minishell");
 	}
 	msh_env_free_list(env);

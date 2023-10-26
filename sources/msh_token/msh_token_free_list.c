@@ -6,22 +6,22 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 08:54:21 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 09:02:05 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:07:41 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_token.h"
+#include "../../includes/msh_token.h"
 
-void	msh_token_free_list(t_token *token)
+void	msh_token_free_list(t_token *list)
 {
 	t_token	*next;
 
-	if (token == NULL)
+	if (list == NULL)
 		return ;
-	while (token != NULL)
+	while (list != NULL)
 	{
-		next = token->next;
+		next = list->next;
 		msh_token_free(token);
-		token = next;
+		list = next;
 	}
 }

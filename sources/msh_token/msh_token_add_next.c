@@ -6,16 +6,20 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:11:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 09:14:33 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:07:22 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_token.h"
+#include "../../includes/msh_token.h"
 
-void	msh_token_add_next(t_token *head, t_token *token)
+void	msh_token_add_next(t_token **head, t_token *token)
 {
+	t_token	*last;
+
 	if (head == NULL || token == NULL)
 		return ;
-	head = msh_token_last(head);
-	head->next = token;
+	if (*head == NULL)
+		*head = token;
+	last = msh_token_last(*head);
+	last->next = token;
 }

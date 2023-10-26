@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_symval.c                          :+:      :+:    :+:   */
+/*   msh_token_len_val.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:09:40 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:42 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 10:18:36 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 12:08:19 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_token.h"
+#include "../../includes/msh_util.h"
 
-t_token	*msh_token_malloc_symval(t_sym sym, char *val)
+size_t	msh_token_len_val(t_token *token)
 {
-	t_token	*token;
+	size_t	len;
 
-	token = malloc(sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
-	token->sym = sym;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
+	len = 0;
+	while (token != NULL)
+	{
+		if (token->val == NULL)
+			return (-1);
+		len += msh_strlen(token->val);
+		token = token->next;
+	}
+	return (len);
 }

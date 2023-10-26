@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_symval.c                          :+:      :+:    :+:   */
+/*   msh_lexer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:09:40 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:42 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 08:43:17 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 09:30:32 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#ifndef MSH_LEXER_H
+# define MSH_LEXER_H
 
-t_token	*msh_token_malloc_symval(t_sym sym, char *val)
+typedef enum e_symbol
 {
-	t_token	*token;
+	WORD,
+	ASSIGNMENT_WORD,
+	REDIRECTION,
+	REDIRECTION_LIST,
+	PIPE,
+	AND_IF,
+	OR_IF,
+	EQUAL_SIGN,
+	L_BRACKET,
+	R_BRACKET,
+	SIMPLE_COMMAND_ELEMENT,
+	SIMPLE_COMMAND,
+	COMMAND,
+	PIPELINE,
+	SUBSHELL,
+	LIST,
+	ROOT
+}	t_symbol;
 
-	token = malloc(sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
-	token->sym = sym;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
-}
+#endif

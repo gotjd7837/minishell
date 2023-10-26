@@ -6,13 +6,13 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:09:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 09:09:36 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:08:35 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_token.h"
+#include "../../includes/msh_token.h"
 
-t_token	*msh_token_malloc_sym(t_symbol sym)
+t_token	*msh_token_malloc_sym(t_sym sym)
 {
 	t_token	*token;
 

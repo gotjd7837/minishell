@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_lexer.h                                        :+:      :+:    :+:   */
+/*   msh_token_print_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 08:43:17 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 08:44:20 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 11:40:12 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 12:08:58 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_LEXER_H
-# define MSH_LEXER_H
+#include "../../includes/msh_token.h"
+#include <stdio.h>
 
-typedef enum e_symbol
+void	msh_token_print_list(t_token *list)
 {
-	WORD,
-	ASSIGNMENT_WORD,
-	REDIRECTION,
-	REDIRECTION_LIST,
-	PIPE,
-	AND_IF,
-	OR_IF,
-	EQUAL_SIGN,
-	L_BRACKET,
-	R_BRACKET,
-	SIMPLE_COMMAND_ELEMENT,
-	SIMPLE_COMMAND,
-	COMMAND,
-	PIPELINE,
-	SUBSHELL,
-	LIST,
-	ROOT
-}	t_symbol;
+	printf("Token list : ");
+	while (list != NULL)
+	{
+		printf("%s -> ", list->val);
+		list = list->next;
+	}
+	printf("NULL\n");
+}
 
-#endif

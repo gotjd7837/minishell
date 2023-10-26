@@ -1,27 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_symval.c                          :+:      :+:    :+:   */
+/*   msh_expander.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:09:40 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:42 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 09:57:30 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 12:06:44 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
-
-t_token	*msh_token_malloc_symval(t_sym sym, char *val)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
-	token->sym = sym;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
-}
+#ifndef MSH_EXPANDER_H
+# define MSH_EXPANDER_H
+# include "msh_token.h"
+# include "msh_util.h"
+#endif

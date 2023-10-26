@@ -6,27 +6,27 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:30:58 by jho               #+#    #+#             */
-/*   Updated: 2023/10/12 12:23:59 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 11:56:25 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*msh_substr(char *s, int start_idx, int end_idx)
+char	*msh_substr(char *str, int begin, int end)
 {
-	int		i;
+	int		index;
 	char	*substr;
 
-	i = 0;
-	substr = malloc(sizeof(char) * (end_idx - start_idx + 1));
-	if (substr == 0)
-		return (0);
-	while (start_idx < end_idx)
+	index = 0;
+	substr = malloc(sizeof(char) * (end - begin + 1));
+	if (substr == NULL)
+		return (NULL);
+	while (begin < end)
 	{
-		substr[i] = s[start_idx];
-		++i;
-		++start_idx;
+		*(substr + index) = *(str + begin);
+		++index;
+		++begin;
 	}
-	substr[i] = '\0';
+	substr[index] = '\0';
 	return (substr);
 }

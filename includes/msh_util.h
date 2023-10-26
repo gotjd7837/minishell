@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_symval.c                          :+:      :+:    :+:   */
+/*   msh_util.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:09:40 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:42 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 11:51:03 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 11:57:57 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#ifndef MSH_UTIL_H
+# define MSH_UTIL_H
+# include <stdlib.h>
 
-t_token	*msh_token_malloc_symval(t_sym sym, char *val)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
-	token->sym = sym;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
-}
+char	*msh_substr(char *str, int begin, int end);
+#endif

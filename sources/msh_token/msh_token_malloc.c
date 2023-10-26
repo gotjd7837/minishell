@@ -6,11 +6,11 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:09:15 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 09:09:22 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/26 12:08:29 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_token.h"
+#include "../../includes/msh_token.h"
 
 t_token	*msh_token_malloc(void)
 {

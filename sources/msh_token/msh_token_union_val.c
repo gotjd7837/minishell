@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_malloc_symval.c                          :+:      :+:    :+:   */
+/*   msh_token_union_val.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:09:40 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:42 by jho              ###   ########.fr       */
+/*   Created: 2023/10/26 10:11:24 by jho               #+#    #+#             */
+/*   Updated: 2023/10/26 12:09:22 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_token.h"
+#include "../../includes/msh_util.h"
 
-t_token	*msh_token_malloc_symval(t_sym sym, char *val)
+char	*msh_token_union_val(t_token *token)
 {
-	t_token	*token;
+	size_t	len;
+	char	*unioned;
 
-	token = malloc(sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
-	token->sym = sym;
-	token->val = val;
-	token->next = NULL;
-	token->child = NULL;
-	return (token);
+	len = msh_token_len_val(token);
+	if (len == -1)
+		return (NULL);
+	unioned = malloc(sizeof(char) * (len + 1));
+	if (unioned == NULL)
+		return (NULL);
+	len = 0;
+	while (token != NULL)
+	{
+		msh_strcpy(unioned + len, token->val);
+		len += msh_strlen(token->val);
+		token = token->next;
+	}
+	*(unioned + len) = '\0';
+	return (unioned);
 }
