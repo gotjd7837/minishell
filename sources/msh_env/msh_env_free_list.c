@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_parse_value.c                              :+:      :+:    :+:   */
+/*   msh_env_free_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 16:07:58 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 12:46:29 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 16:10:43 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:03:19 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh_env.h"
 
-char	*msh_env_parse_value(char *envp)
+t_env	*msh_env_free_list(t_env *list)
 {
-	int		index;
-	size_t	len;
-	char	*value;
+	t_env	*node;
+	t_env	*next;
 
-	index = 0;
-	if (!msh_strchr(envp, '='))
+	node = NULL;
+	next = NULL;
+	if (list == NULL)
 		return (NULL);
-	while (*(envp + index) != '=')
-		++index;
-	++index;
-	len = msh_strlen(envp + index);
-	value = malloc(len + 1);
-	if (value == NULL)
-		return (NULL);
-	msh_strncpy(value, envp + index, len);
-	return (value);
+	node = list;
+	while (next != NULL)
+	{
+		next = node->next;
+		msh_env_free_node(node);
+	}
+	return (NULL);
 }

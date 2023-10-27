@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_free_node.c                                :+:      :+:    :+:   */
+/*   msh_strncpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 16:08:59 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 11:50:00 by jho              ###   ########.fr       */
+/*   Created: 2023/10/27 20:16:06 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:16:48 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh_util.h"
 
-t_env	*msh_env_free_node(t_env *node)
+char	*msh_strncpy(char *dest, char *src, size_t n)
 {
-	if (node->key != NULL)
-		free(node->key);
-	if (node->value != NULL)
-		free(node->value);
-	free(node);
-	return (NULL);
+	size_t	index;
+
+	index = 0;
+	while (*(src + index) != '\0' && index < n)
+	{
+		*(dest + index) = *(src + index);
+		++index;
+	}
+	*(dest + index) = '\0';
+	return (dest);
 }

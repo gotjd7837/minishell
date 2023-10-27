@@ -6,7 +6,7 @@
 #    By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/25 15:50:06 by jho               #+#    #+#              #
-#    Updated: 2023/10/26 12:35:03 by jho              ###   ########.fr        #
+#    Updated: 2023/10/27 18:01:07 by jho              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lreadline -lncurses
 NAME = minishell
-HEADERS = ./includes/msh.h
-MANDATORY_SRCS = $(wildcard sources/*/*.c)\
-				 $(wildcard sources/*/*/*.c)
+HEADERS = ./includes
+MANDATORY_SRCS = $(wildcard sources/*/*.c)
 MANDATORY_OBJS = $(MANDATORY_SRCS:%.c=%.o)
 
 %.o : %.c

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_expander.h                                     :+:      :+:    :+:   */
+/*   msh_env_parse_key.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:57:30 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:05:19 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 16:07:28 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:02:44 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_EXPANDER_H
-# define MSH_EXPANDER_H
-# include "msh_token.h"
-# include "msh_env.h"
-# include "msh_util.h"
+#include "../../includes/msh_env.h"
 
-char		*msh_expand(char *s, t_env *env);
-int			msh_replace_env(t_token **tokens, t_env *env);
-t_token		*msh_vqoutes(char *s);
-void		msh_vqoutes_idx(char *s, int **v_idx);
-int			msh_vqoutes_num(char *s);
-t_token		*msh_vqoutes_tokenize(char *s, int *idx, int num);
-#endif
+char	*msh_env_parse_key(char *envp)
+{
+	int		index;
+	char	*key;
+
+	index = 0;
+	if (!msh_strchr(envp, '='))
+		return (NULL);
+	while (*(envp + index) != '=')
+		++index;
+	key = malloc(index + 1);
+	if (key == NULL)
+		return (NULL);
+	msh_strncpy(key, envp, index);
+	return (key);
+}

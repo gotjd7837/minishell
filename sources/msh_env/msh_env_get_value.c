@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:29:48 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 08:27:17 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/27 20:43:58 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh_env.h"
 
 char	*msh_env_get_value(t_env *env, char *key)
 {
@@ -26,5 +26,5 @@ char	*msh_env_get_value(t_env *env, char *key)
 		}
 		env = env->next;
 	}
-	return (value);
+	return (msh_strdup("\0"));
 }

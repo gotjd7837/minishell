@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_vqoutes_add_token.c                            :+:      :+:    :+:   */
+/*   msh_env_free_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 15:37:52 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 15:41:56 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 16:08:59 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:03:14 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh_env.h"
 
-t_token	*msh_vqoutes_add_token(t_token **tokens, char *s, int begin, int end)
+t_env	*msh_env_free_node(t_env *node)
 {
-	char	*val;
-	t_token	*token;
-
-	val = msh_substr(s, begin, end);
-	if (val == NULL)
-		return (NULL);
-	token = msh_token_malloc_val(val);
-	if (token == NULL)
-	{
-		free(val);
-		return (NULL);
-	}
-	msh_token_add_next(tokens, token);
-	return (token);
+	if (node->key != NULL)
+		free(node->key);
+	if (node->value != NULL)
+		free(node->value);
+	free(node);
+	return (NULL);
 }

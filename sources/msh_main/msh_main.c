@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:48:59 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/27 20:23:07 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,21 @@ void	msh_print_tree(t_token *tree, int depth)
 */
 
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	char	*input;
+	t_env	*env;
+	char	*expanded;
 
 	(void) argc;
 	(void) argv;
+	env = msh_env_new_list(envp);
 	while (1)
 	{
 		input = readline("msh$> ");
-		msh_expand(input);
+		expanded = msh_expand(input, env);
+		printf("%s\n", expanded);
+		free(expanded);
 		free(input);
 		system("leaks minishell | grep leaked");
 	}

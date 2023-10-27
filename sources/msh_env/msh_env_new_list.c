@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env_parse_key.c                                :+:      :+:    :+:   */
+/*   msh_env_new_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 16:07:28 by jho               #+#    #+#             */
-/*   Updated: 2023/10/17 12:47:24 by jho              ###   ########.fr       */
+/*   Created: 2023/10/12 13:42:27 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:02:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh_env.h"
 
-char	*msh_env_parse_key(char *envp)
+t_env	*msh_env_new_list(char *envp[])
 {
 	int		index;
-	char	*key;
+	t_env	*env;
 
 	index = 0;
-	if (!msh_strchr(envp, '='))
-		return (NULL);
-	while (*(envp + index) != '=')
+	env = NULL;
+	while (*(envp + index) != NULL)
+	{
+		if (!msh_env_add_node(&env, *(envp + index)))
+			return (msh_env_free_list(env));
 		++index;
-	key = malloc(index + 1);
-	if (key == NULL)
-		return (NULL);
-	msh_strncpy(key, envp, index);
-	return (key);
+	}
+	return (env);
 }

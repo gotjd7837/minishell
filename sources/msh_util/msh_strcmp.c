@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_expander.h                                     :+:      :+:    :+:   */
+/*   msh_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:57:30 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:05:19 by jho              ###   ########.fr       */
+/*   Created: 2023/10/27 20:10:59 by jho               #+#    #+#             */
+/*   Updated: 2023/10/27 20:12:17 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_EXPANDER_H
-# define MSH_EXPANDER_H
-# include "msh_token.h"
-# include "msh_env.h"
-# include "msh_util.h"
-
-char		*msh_expand(char *s, t_env *env);
-int			msh_replace_env(t_token **tokens, t_env *env);
-t_token		*msh_vqoutes(char *s);
-void		msh_vqoutes_idx(char *s, int **v_idx);
-int			msh_vqoutes_num(char *s);
-t_token		*msh_vqoutes_tokenize(char *s, int *idx, int num);
-#endif
+int	msh_strcmp(char *s1, char *s2)
+{
+	while (*s1 == *(s2++))
+	{
+		if (*(s1++) == '\0')
+			return (0);
+	}
+	return (*s1 - *(s2 - 1));
+}

@@ -6,11 +6,11 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 08:23:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 08:23:53 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/27 20:03:09 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/msh_env.h"
 
 t_env	*msh_env_get_node(t_env *env, char *key)
 {
