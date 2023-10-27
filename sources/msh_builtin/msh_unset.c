@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:27:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/10/18 17:49:18 by haeseong         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:51:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	msh_unset(t_env *env, char *key)
 	if (key[0] <= '9' && key[0] >= '0')
 	{
 		printf("minishell: unset: '%s': not a valid identifier\n", key);
+		g_exit_status = 1;
 		return ;
 	}
 	while (node != NULL)

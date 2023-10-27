@@ -6,13 +6,56 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/10/24 18:38:12 by haekang          ###   ########.fr       */
+/*   Updated: 2023/10/27 22:23:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-#include "../../includes/minishell.h"
+static int	msh_check_overflow(char *str)
+{
+	const char	*llong_min = "-9223372036854775808";
+	const char	*llong_max = "9223372036854775807";
+	int			str_len;
+
+	str_len = msh_strlen(str);
+	if (str[0] == '-')
+	{
+		if (str_len >= 20)
+		{
+			if (str_len > 20 || msh_strcmp(str, (char *)llong_min) > 0)
+				return (0);
+		}
+	}
+	else
+	{
+		if (str_len >= 19)
+		{
+			if (str_len > 19 || msh_strcmp(str, (char *)llong_max) > 0)
+				return (0);
+		}
+	}
+	return (1);
+}
+
+static int	msh_num_format_exception(char *str)
+{
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str != '\0')
+	{
+		if (*str >= '0' && *str <= '9')
+			str++;
+		else
+		{
+			printf("문자 드감\n");
+			return (0);
+		}
+	}
+	return (1);
+}
 
 static long long	msh_atol(char *str)
 {
@@ -36,24 +79,38 @@ static long long	msh_atol(char *str)
 
 void	msh_exit(char **cmd)
 {
-	int	i;
-
-	printf("exit\n");
 	if (cmd[1] == NULL)
-	{
-		g_exit_status = 0;
 		exit(0);
-	}
-	else if (cmd[1] != NULL && cmd[2] == NULL)
+	else if (cmd[1] != NULL)
 	{
-		g_exit_status = (unsigned char)msh_atol(cmd[1]);
-		exit(g_exit_status);
-	}
-	else
-	{
-		exit(1);
+		if (!msh_num_format_exception(cmd[1]))
+			exit(255);
+		if (cmd[2] != NULL)
+		{
+			printf("ㅇㅣㄴ자 3개\n");
+			g_exit_status = 1;
+			return ;
+		}
+		if (!msh_check_overflow(cmd[1]))
+		{
+			printf("long long 넘어감\n");
+			exit(255);
+		}
+		else
+			exit((unsigned char)msh_atol(cmd[1]));
 	}
 }
-//숫자일때 long long이상이 되면 에러 출력 및, unsigned char로 타입 캐스팅한 값이 반환값, exit함
+
+int main()
+{
+	char *str[3];
+
+	str[0] = "exit";
+	str[1] = "9223372036854775808";
+	str[2] = NULL;
+
+	msh_exit(str);
+}
 //문자일때 255반환하고 exit함 -> 얘가 인자 세개보다 더 우선순위 높음
+//숫자일때 long long이상이 되면 에러 출력 및, unsigned char로 타입 캐스팅한 값이 반환값, exit함
 //인자 세개면 1반환하고 exit 안함

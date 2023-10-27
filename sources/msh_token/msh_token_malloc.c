@@ -19,7 +19,7 @@ t_token	*msh_token_malloc(void)
 	token = malloc(sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
-	token->sym = NULL;
+	token->sym = 0;
 	token->val = NULL;
 	token->next = NULL;
 	token->child = NULL;

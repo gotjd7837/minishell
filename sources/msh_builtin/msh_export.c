@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_free.c                                   :+:      :+:    :+:   */
+/*   msh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 08:53:27 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 08:57:25 by jho              ###   ########.fr       */
+/*   Created: 2023/10/27 21:49:34 by haekang           #+#    #+#             */
+/*   Updated: 2023/10/27 21:49:55 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_token.h"
+#include "../../includes/minishell.h"
 
-void	msh_token_free(t_token *token)
-{
-	if (token == NULL)
-		return ;
-	if (token->val != NULL)
-		free(token->val);
-	free(token);
-	return ;
-}

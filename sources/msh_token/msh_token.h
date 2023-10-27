@@ -13,7 +13,7 @@
 #ifndef MSH_TOKEN_H
 # define MSH_TOKEN_H
 # include <stdlib.h>
-# include "../msh_lexer/msh_lexer.h"
+# include "../msh_lexical_analysis/msh_lexer.h"
 
 typedef struct s_token
 {
