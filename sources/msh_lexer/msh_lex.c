@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh.h                                              :+:      :+:    :+:   */
+/*   msh_lex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:30:52 by jho              ###   ########.fr       */
+/*   Created: 2023/10/27 21:32:25 by jho               #+#    #+#             */
+/*   Updated: 2023/10/28 08:50:51 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_H
-# define MSH_H
-# include "msh_expander.h"
-# include "msh_lexer.h"
-# include "msh_token.h"
-# include "msh_util.h"
-# include <dirent.h>
-# include <term.h>
-# include <sys/ioctl.h>
-# include <sys/wait.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-#endif
+#include "../../includes/msh_lexer.h"
+
+t_token	*msh_lex(char *s)
+{
+	int		idx;
+	int		token_len;
+	t_token	*sym_table;
+
+	idx = 0;
+	sym_table = NULL;
+	while (*(s + idx) != '\0')
+	{
+		token_len = msh_lex_tokenize(&sym_table, s + idx);
+		if (token_len == 0)
+			return (msh_token_free_list(sym_table));
+		idx += token_len;
+	}
+	return (sym_table);
+}

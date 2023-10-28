@@ -6,39 +6,37 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:23:07 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/28 08:33:48 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
 
-/*
+
 void	msh_print_tokens(t_token *tokens)
 {
 	while (tokens != 0)
 	{
-		if (tokens->symbol == WORD)
-			printf("%-18s%-15s\n", "WORD", tokens->value);
-		else if (tokens->symbol == ASSIGNMENT_WORD)
-			printf("%-18s%-15s\n", "ASSIGNMENT_WORD", tokens->value);
-		else if (tokens->symbol == REDIRECTION)
-			printf("%-18s%-15s\n", "REDIRECTION", tokens->value);
-		else if (tokens->symbol == PIPE)
-			printf("%-18s%-15s\n", "PIPE", tokens->value);
-		else if (tokens->symbol == AND_IF)
-			printf("%-18s%-15s\n", "AND_IF", tokens->value);
-		else if (tokens->symbol == OR_IF)
-			printf("%-18s%-15s\n", "OR_IF", tokens->value);
-		else if (tokens->symbol == L_BRACKET)
-			printf("%-18s%-15s\n", "L_BRACKET", tokens->value);
-		else if (tokens->symbol == R_BRACKET)
-			printf("%-18s%-15s\n", "R_BRACKET", tokens->value);
-		else if (tokens->symbol == EQUAL_SIGN)
-			printf("%-18s%-15s\n", "EQUAL_SIGN", tokens->value);
+		if (tokens->sym == WORD)
+			printf("%-18s%-15s\n", "WORD", tokens->val);
+		else if (tokens->sym == ASSIGN_WORD)
+			printf("%-18s%-15s\n", "ASSIGNMENT_WORD", tokens->val);
+		else if (tokens->sym == REDIR)
+			printf("%-18s%-15s\n", "REDIR", tokens->val);
+		else if (tokens->sym == PIPE)
+			printf("%-18s%-15s\n", "PIPE", tokens->val);
+		else if (tokens->sym == AND_IF)
+			printf("%-18s%-15s\n", "AND_IF", tokens->val);
+		else if (tokens->sym == OR_IF)
+			printf("%-18s%-15s\n", "OR_IF", tokens->val);
+		else if (tokens->sym == L_BRA)
+			printf("%-18s%-15s\n", "L_BRA", tokens->val);
+		else if (tokens->sym == R_BRA)
+			printf("%-18s%-15s\n", "R_BRA", tokens->val);
 		tokens = tokens->next;
 	}
 }
-
+/*
 void	msh_print_symbol(t_token *token)
 {
 	if (token->symbol == WORD)
@@ -102,6 +100,7 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*input;
 	t_env	*env;
 	char	*expanded;
+	t_token	*sym_table;
 
 	(void) argc;
 	(void) argv;
@@ -111,6 +110,14 @@ int	main(int argc, char *argv[], char *envp[])
 		input = readline("msh$> ");
 		expanded = msh_expand(input, env);
 		printf("%s\n", expanded);
+		sym_table = msh_lex(expanded);
+		if (sym_table == NULL)
+		{
+			printf("Lex error\n");
+		}
+		else
+			msh_print_tokens(sym_table);
+		msh_token_free_list(sym_table);
 		free(expanded);
 		free(input);
 		system("leaks minishell | grep leaked");

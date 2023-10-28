@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_expand.c                                       :+:      :+:    :+:   */
+/*   msh_lex_tokenize_bra.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:58:12 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 21:10:52 by jho              ###   ########.fr       */
+/*   Created: 2023/10/28 08:48:09 by jho               #+#    #+#             */
+/*   Updated: 2023/10/28 08:48:16 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh_lexer.h"
 
-char	*msh_expand(char *s, t_env *env)
+int	msh_lex_tokenize_bra(t_token **sym_table, char *s)
 {
-	t_token	*tokens;
-	char	*expanded;
+	t_token	*token;
 
-	tokens = msh_vqoutes(s);
-	msh_replace_env(&tokens, env);
-	expanded = msh_token_union_val(tokens);
-	msh_token_free_list(tokens);
-	return (expanded);
+	if (*s == '(')
+		token = msh_token_malloc_sym(L_BRA);
+	else
+		token = msh_token_malloc_sym(R_BRA);
+	if (token == NULL)
+		return (0);
+	token->val = msh_substr(s, 0, 1);
+	if (token->val == NULL)
+	{
+		msh_token_free(token);
+		return (0);
+	}
+	msh_token_add_next(sym_table, token);
+	return (1);
 }
