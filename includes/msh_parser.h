@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh.h                                              :+:      :+:    :+:   */
+/*   msh_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 17:50:50 by jho              ###   ########.fr       */
+/*   Created: 2023/10/30 16:41:47 by jho               #+#    #+#             */
+/*   Updated: 2023/10/30 17:50:17 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_H
-# define MSH_H
-# include "msh_expander.h"
-# include "msh_lexer.h"
-# include "msh_parser.h"
+#ifndef MSH_PARSER_H
+# define MSH_PARSER_H
 # include "msh_token.h"
-# include "msh_util.h"
-# include <dirent.h>
-# include <term.h>
-# include <sys/ioctl.h>
-# include <sys/wait.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+
+int			msh_accept(t_token *sym_table, t_sym sym);
+t_token		*msh_parse(t_token *sym_table);
 #endif

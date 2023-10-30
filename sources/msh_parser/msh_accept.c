@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_add_child.c                              :+:      :+:    :+:   */
+/*   msh_accept.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:14:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 18:31:57 by jho              ###   ########.fr       */
+/*   Created: 2023/10/30 16:56:14 by jho               #+#    #+#             */
+/*   Updated: 2023/10/30 16:57:43 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh_parser.h"
 
-void	msh_token_add_child(t_token **parent, t_token *child)
+int	msh_accept(t_token *sym_table, t_sym sym)
 {
-	t_token	*parent_cpy;
-
-	if (parent == NULL || *parent == NULL || child == NULL)
-		return ;
-	parent_cpy = *parent;
-	if (parent_cpy->child == NULL)
-		parent_cpy->child = child;
-	else
-	{
-		parent_cpy = parent_cpy->child;
-		while (parent_cpy->next != NULL)
-			parent_cpy = parent_cpy->next;
-		parent_cpy = child;
-	}
+	if (sym_table == NULL)
+		return (0);
+	return (sym_table->sym == sym);
 }
