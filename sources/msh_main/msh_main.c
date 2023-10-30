@@ -6,7 +6,7 @@
 /*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 18:04:55 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/30 21:54:56 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		else
 			msh_print_tokens(sym_table);
-		parse_tree = msh_parse(sym_table);
+		parse_tree = msh_parse(&sym_table);
 		if (parse_tree == NULL)
 			printf("Parse error\n");
 		else

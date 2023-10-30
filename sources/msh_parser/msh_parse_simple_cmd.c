@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_parse.c                                        :+:      :+:    :+:   */
+/*   msh_parse_simple_cmd.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 16:40:09 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 21:59:29 by jho              ###   ########.fr       */
+/*   Created: 2023/10/30 21:56:44 by jho               #+#    #+#             */
+/*   Updated: 2023/10/30 21:56:57 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_parser.h"
 
-t_token	*msh_parse(t_token **sym_table)
+int	msh_parse_simple_cmd(t_token **parse_tree, t_token **sym_table)
 {
-	t_token	*parse_tree;
+	t_token	*parent;
+	t_token	*child;
 
-	parse_tree = msh_token_malloc_sym(ROOT);
-	if (parse_tree == NULL)
-		return (NULL);
+	parent = msh_token_malloc_sym(SIMPLE_CMD);
+	if (parent == NULL)
+		return (0);
+	msh_token_add_child(parse_tree, parent);
 	while (msh_accept(*sym_table, WORD) || msh_accept(*sym_table, ASSIGN_WORD)
-		|| msh_accept(*sym_table, REDIR) || msh_accept(*sym_table, L_BRA))
+		|| msh_accept(*sym_table, REDIR))
 	{
-		if (!msh_parse_list(&parse_tree, sym_table))
-			return (msh_token_free_tree(parse_tree));
+		child = msh_token_dequeue(sym_table);
+		if (child == NULL)
+			return (0);
+		child->next = NULL;
+		msh_token_add_child(&parent, child);
 	}
-	if (*sym_table == NULL)
-		return (parse_tree);
-	return (NULL);
+	return (1);
 }
