@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:09:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 18:16:44 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/31 00:14:20 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_token	*msh_token_dequeue(t_token **tokens)
 		return (0);
 	top_token = *tokens;
 	*tokens = (*tokens)->next;
+	top_token->next = NULL;
 	return (top_token);
 }

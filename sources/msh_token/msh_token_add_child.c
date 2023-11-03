@@ -6,12 +6,12 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:14:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 21:29:46 by jho              ###   ########.fr       */
+/*   Updated: 2023/10/31 00:13:53 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_token.h"
-#include <stdio.h>
+
 void	msh_token_add_child(t_token **parent, t_token *child)
 {
 	t_token	*parent_cpy;
