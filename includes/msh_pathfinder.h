@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pathfind.c                                     :+:      :+:    :+:   */
+/*   msh_pathfinder.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 15:44:27 by jho               #+#    #+#             */
-/*   Updated: 2023/11/03 17:24:30 by haekang          ###   ########.fr       */
+/*   Created: 2023/11/03 15:49:38 by haekang           #+#    #+#             */
+/*   Updated: 2023/11/03 17:54:08 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
+#ifndef MSH_PATHFINDER_H
+# define MSH_PATHFINDER_H
+# include "msh_env.h"
 
-char	*msh_pathfind(char *cmd, t_env *env)
-{
-	char	**path;
-	char	*cmd_path;
+char	*msh_pathfind(char *cmd, t_env *env);
+char	**msh_find_env_path(t_env *env);
+char	*msh_find_cmd_abspath(char **path, char *cmd);
+int		msh_is_path(char *cmd);
+char	*msh_check_cmd_exist(char *cmd);
 
-	path = msh_find_env_path(env);
-	if (path == NULL)
-		return (NULL);
-	cmd_path = msh_find_cmd_abspath(path, cmd);
-	if (cmd_path == NULL)
-		return (NULL);
-	return (cmd_path);
-}
+#endif

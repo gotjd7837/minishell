@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pathfind.c                                     :+:      :+:    :+:   */
+/*   msh_strlcpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 15:44:27 by jho               #+#    #+#             */
-/*   Updated: 2023/11/03 17:24:30 by haekang          ###   ########.fr       */
+/*   Created: 2023/11/03 16:27:02 by haekang           #+#    #+#             */
+/*   Updated: 2023/11/03 17:12:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
+#include "../../includes/msh_util.h"
 
-char	*msh_pathfind(char *cmd, t_env *env)
+size_t	msh_strlcpy(char *dst, char *src, size_t dstsize)
 {
-	char	**path;
-	char	*cmd_path;
+	size_t	i;
 
-	path = msh_find_env_path(env);
-	if (path == NULL)
-		return (NULL);
-	cmd_path = msh_find_cmd_abspath(path, cmd);
-	if (cmd_path == NULL)
-		return (NULL);
-	return (cmd_path);
+	i = 0;
+	if (dstsize == 0)
+		return (msh_strlen(src));
+	while (src[i] && (i + 1 < dstsize))
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (msh_strlen(src));
 }

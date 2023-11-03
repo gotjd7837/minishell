@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 17:50:50 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/03 16:55:23 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "msh_parser.h"
 # include "msh_token.h"
 # include "msh_util.h"
+# include "msh_pathfinder.h"
 # include <dirent.h>
 # include <term.h>
 # include <sys/ioctl.h>

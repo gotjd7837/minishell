@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:58:03 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:09:53 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/03 19:52:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSH_ENV_H
 # define MSH_ENV_H
-# include <stdlib.h>
 # include "msh_util.h"
 
 typedef struct s_env
