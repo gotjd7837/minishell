@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/03 20:05:52 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/07 18:39:44 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(int argc, char *argv[], char *envp[])
 			printf("Lex error\n");
 			free(input);
 			free(expanded);
-			continue;
+			continue ;
 		}
 		else
 			msh_print_tokens(sym_table);
