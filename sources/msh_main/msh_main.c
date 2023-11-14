@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:43:19 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 14:44:43 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ int	main(int argc, char *argv[], char *envp[])
 	pipeline0->next = pipeline1;
 
 	msh_execute(pipeline0);
-	
 	return (0);
 }
