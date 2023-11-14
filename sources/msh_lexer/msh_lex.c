@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:32:25 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:50:51 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 20:32:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_token	*msh_lex(char *s)
 {
-	int		idx;
-	int		token_len;
-	t_token	*sym_table;
+	int			idx;
+	int			token_len;
+	t_token		*sym_table;
+	// t_pipeline	*pipelines;
 
 	idx = 0;
 	sym_table = NULL;
@@ -27,5 +28,7 @@ t_token	*msh_lex(char *s)
 			return (msh_token_free_list(sym_table));
 		idx += token_len;
 	}
+	// pipelines = msh_divide_pipeline(&sym_table);
+	// return (pipelines);
 	return (sym_table);
 }

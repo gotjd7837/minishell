@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lexer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:31:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 18:33:52 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MSH_LEXER_H
 # include "msh_token.h"
 # include "msh_util.h"
+# include "msh_pipeline.h"
 
 t_token		*msh_lex(char *s);
 int			msh_lex_tokenize(t_token **sym_table, char *s);
