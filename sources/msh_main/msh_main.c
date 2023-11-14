@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:35 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 15:34:00 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	main(int argc, char *argv[], char *envp[])
 	t_env *env = msh_env_new_list(envp);
 	char *infile = "infile";
 	char *ls = "ls";
+	char *l = "-l";
 	char *cat = "cat";
+	char *e = "-e";
 	char *outfile = "outfile";
 	
 	t_pipeline *pipeline0 = malloc(sizeof(t_pipeline));
@@ -28,12 +30,16 @@ int	main(int argc, char *argv[], char *envp[])
 
 	t_token *token_infile = msh_token_malloc_symval(REDIR, infile);
 	t_token *token_ls = msh_token_malloc_symval(WORD, ls);
+	t_token *token_l = msh_token_malloc_symval(WORD, l);
 	t_token *token_cat = msh_token_malloc_symval(WORD, cat);
+	t_token *token_e = msh_token_malloc_symval(WORD, e);
 	t_token *token_outfile = msh_token_malloc_symval(REDIR, outfile);
 
 	msh_pipeline_add_token(pipeline0, token_infile);
 	msh_pipeline_add_token(pipeline0, token_ls);
+	msh_pipeline_add_token(pipeline0, token_l);
 	msh_pipeline_add_token(pipeline1, token_cat);
+	msh_pipeline_add_token(pipeline1, token_e);
 	msh_pipeline_add_token(pipeline1, token_outfile);
 
 	pipeline0->next = pipeline1;

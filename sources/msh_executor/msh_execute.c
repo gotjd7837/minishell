@@ -6,11 +6,12 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:14:08 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 16:27:35 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include <stdio.h>
 
 int	msh_execute_count_sym(t_token *tokens, t_sym sym)
 {
@@ -82,34 +83,33 @@ void	msh_execute_cmd(char **params, int rfd, int wfd, t_env *env)
 	char	*path;
 	char	**envp;
 
-	dup2(rfd, 0);
-	dup2(wfd, 1);
 	path = msh_pathfind(*params, env);
+	if (rfd != 0)
+		dup2(rfd, 0);
+	if (wfd != 1)
+		dup2(wfd, 1);
+	if (rfd != 0)
+		close(rfd);
+	if (wfd != 1)
+		close(wfd);	
 	//envp = msh_env_convert_char(env);
 	execve(path, params, envp);
 }
 
 int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd, t_env *env)
 {
-	pid_t	pid;
 	char	**params;
-	char	**redirs;
+	//char	**redirs;
 
 	params = msh_execute_get_syms(pipeline->tokens, WORD);
-	redirs = msh_execute_get_syms(pipeline->tokens, REDIR);
-	pid = fork();
-	if (pid == 0)
-	{
-		msh_execute_redir(redirs, &rfd, &wfd);
-		msh_execute_cmd(params, rfd, wfd, env);
-	}
+	//redirs = msh_execute_get_syms(pipeline->tokens, REDIR);
+	//msh_execute_redir(redirs, &rfd, &wfd);
+	msh_execute_cmd(params, rfd, wfd, env);
 	return (0);
 }
 
 void	msh_execute_shift_pipe(int *fd)
 {
-	close(fd[0]);
-	close(fd[1]);
 	dup2(fd[2], fd[0]);
 	dup2(fd[3], fd[1]);
 	close(fd[2]);
@@ -118,20 +118,24 @@ void	msh_execute_shift_pipe(int *fd)
 
 int	msh_execute(t_pipeline *pipelines, t_env *env)
 {
-	int fd[4];
+	pid_t	pid;
+	int		fd[2];
 
-	fd[0] = 0;
-	fd[1] = 1;
-	while (pipelines != NULL)
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
 	{
-		if (pipelines->next != NULL)
-			pipe(fd + 2);
-		else
-			fd[3] = 1;
-		msh_execute_pipeline(pipelines, fd[0], fd[3], env);
-		msh_execute_shift_pipe(fd);
-		pipelines = pipelines->next;
+		close(fd[0]);
+		msh_execute_pipeline(pipelines, 0, fd[1], env);
 	}
+	pid = fork();
+	if (pid == 0)
+	{
+		close(fd[1]);
+		msh_execute_pipeline(pipelines->next, fd[0], 1, env);
+	}
+	close(fd[0]);
+	close(fd[1]);
 	return (1);
 }
 
