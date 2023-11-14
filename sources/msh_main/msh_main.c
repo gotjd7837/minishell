@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/07 18:39:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/14 14:44:43 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 	env = msh_env_new_list(envp);
+	input = readline("msh$> ");
+	expanded = msh_expand(input, env);
 	while (1)
 	{
 		input = readline("msh$> ");
