@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_add_next.c                               :+:      :+:    :+:   */
+/*   msh_pipeline_malloc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:11:22 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:38:07 by jho              ###   ########.fr       */
+/*   Created: 2023/11/14 14:26:38 by jho               #+#    #+#             */
+/*   Updated: 2023/11/14 14:47:05 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh_pipeline.h"
 
-void	msh_token_add_next(t_token **head, t_token *token)
+t_pipeline	*msh_pipeline_malloc(void)
 {
-	t_token	*last;
+	t_pipeline	*pipeline;
 
-	if (head == NULL || token == NULL)
-		return ;
-	if (*head == NULL)
-		*head = token;
-	else
-	{
-		last = msh_token_last(*head);
-		last->next = token;
-	}
+	pipeline = (t_pipeline *)malloc(sizeof(pipeline));
+	if (pipeline == NULL)
+		return (NULL);
+	pipeline->tokens = NULL;
+	piprline->next = NULL;
+	return (pipeline);
 }

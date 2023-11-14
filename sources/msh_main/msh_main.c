@@ -12,125 +12,28 @@
 
 #include "../../includes/msh.h"
 
-void	msh_print_tokens(t_token *tokens)
-{
-	while (tokens != 0)
-	{
-		if (tokens->sym == WORD)
-			printf("%-18s%-15s\n", "WORD", tokens->val);
-		else if (tokens->sym == ASSIGN_WORD)
-			printf("%-18s%-15s\n", "ASSIGNMENT_WORD", tokens->val);
-		else if (tokens->sym == REDIR)
-			printf("%-18s%-15s\n", "REDIR", tokens->val);
-		else if (tokens->sym == PIPE)
-			printf("%-18s%-15s\n", "PIPE", tokens->val);
-		else if (tokens->sym == AND_IF)
-			printf("%-18s%-15s\n", "AND_IF", tokens->val);
-		else if (tokens->sym == OR_IF)
-			printf("%-18s%-15s\n", "OR_IF", tokens->val);
-		else if (tokens->sym == L_BRA)
-			printf("%-18s%-15s\n", "L_BRA", tokens->val);
-		else if (tokens->sym == R_BRA)
-			printf("%-18s%-15s\n", "R_BRA", tokens->val);
-		tokens = tokens->next;
-	}
-}
-/*
-void	msh_print_symbol(t_token *token)
-{
-	if (token->symbol == WORD)
-		printf("%s", "WORD");
-	else if (token->symbol == ASSIGNMENT_WORD)
-		printf("%s", "ASSIGNMENT_WORD");
-	else if (token->symbol == REDIRECTION)
-		printf("%s", "REDIRECTION");
-	else if (token->symbol == PIPE)
-		printf("%s", "PIPE");
-	else if (token->symbol == AND_IF)
-		printf("%s", "AND_IF");
-	else if (token->symbol == OR_IF)
-		printf("%s", "OR_IF");
-	else if (token->symbol == L_BRACKET)
-		printf("%s", "L_BRACKET");
-	else if (token->symbol == R_BRACKET)
-		printf("%s", "R_BRACKET");
-	else if (token->symbol == EQUAL_SIGN)
-		printf("%s", "EQUAL_SIGN");
-	else if (token->symbol == ROOT)
-		printf("%s", "ROOT");
-	else if (token->symbol == LIST)
-		printf("%s", "LIST");
-	else if (token->symbol == SUBSHELL)
-		printf("%s", "SUBSHELL");
-	else if (token->symbol == PIPELINE)
-		printf("%s", "PIPELINE");
-	else if (token->symbol == COMMAND)
-		printf("%s", "COMMAND");
-	else if (token->symbol == SIMPLE_COMMAND)
-		printf("%s", "SIMPLE_COMMAND");
-	else if (token->symbol == SIMPLE_COMMAND_ELEMENT)
-		printf("%s", "SIMPLE_COMMAND_ELEMENT");
-	if (token->value != NULL)
-	{
-		printf(" (%s)", token->value);
-	}
-	printf("\n");
-}
-
-void	msh_print_tree(t_token *tree, int depth)
-{
-	if (tree == NULL)
-		return ;
-	for (int idx = 0; idx < depth; idx++)
-		printf("\t");
-	msh_print_symbol(tree);
-	tree = tree->child;
-	while (tree != NULL)
-	{
-		msh_print_tree(tree, depth + 1);
-		tree = tree->next;
-	}
-}
-*/
-
-
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*input;
-	t_env	*env;
-	char	*expanded;
-	t_token	*sym_table;
-	t_token	*parse_tree;
+	char *infile = "infile";
+	char *ls = "ls";
+	char *cat = "cat";
+	char *outfile = "outfile";
+	
+	t_pipeline *pipeline0 = malloc(sizeof(t_pipeline));
+	t_pipeline *pipeline1 = malloc(sizeof(t_pipeline));
 
-	(void) argc;
-	(void) argv;
-	env = msh_env_new_list(envp);
-	input = readline("msh$> ");
-	expanded = msh_expand(input, env);
-	while (1)
-	{
-		input = readline("msh$> ");
-		expanded = msh_expand(input, env);
-		sym_table = msh_lex(expanded);
-		if (sym_table == NULL)
-		{
-			printf("Lex error\n");
-			free(input);
-			free(expanded);
-			continue ;
-		}
-		else
-			msh_print_tokens(sym_table);
-		parse_tree = msh_parse(&sym_table);
-		if (parse_tree == NULL)
-			printf("Parse error\n");
-		else
-			msh_token_print_tree(parse_tree, 0);
-		msh_token_free_list(sym_table);
-		msh_token_free_tree(parse_tree);
-		free(expanded);
-		free(input);
-		system("leaks minishell | grep leaked");
-	}
+	t_token *token_infile = msh_token_malloc_symval(REDIR, infile);
+	t_token *token_ls = msh_token_malloc_symval(WORD, ls);
+	t_token *token_cat = msh_token_malloc_symval(WORD, cat);
+	t_token *token_outfile = msh_token_malloc_symval(REDIR, outfile);
+
+	msh_pipeline_add_token(pipeline0, token_infile);
+	msh_pipeline_add_token(pipeline0, token_ls);
+	msh_pipeline_add_token(pipeline1, token_cat);
+	msh_pipeline_add_token(pipeline1, token_outfile);
+
+	pipeline0->next = pipeline1;
+
+	msh_execute(pipeline0);
 	return (0);
 }

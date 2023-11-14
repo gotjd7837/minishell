@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_token_add_next.c                               :+:      :+:    :+:   */
+/*   msh_pipeline_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 09:11:22 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:38:07 by jho              ###   ########.fr       */
+/*   Created: 2023/11/14 14:28:20 by jho               #+#    #+#             */
+/*   Updated: 2023/11/14 14:31:03 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh_pipeline.h"
 
-void	msh_token_add_next(t_token **head, t_token *token)
+t_pipeline	*msh_pipeline_free(t_pipeline *pipeline)
 {
-	t_token	*last;
+	t_pipeline	next;
 
-	if (head == NULL || token == NULL)
-		return ;
-	if (*head == NULL)
-		*head = token;
-	else
-	{
-		last = msh_token_last(*head);
-		last->next = token;
-	}
+	if (pipeline == NULL)
+		return (NULL);
+	next = pipeline->next;
+	if (pipeline->tokens != NULL)
+		msh_token_free_list(pipeline->tokens);
+	free(pipeline);
+	return (msh_pipeline_free(next));
 }
