@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline_free.c                                :+:      :+:    :+:   */
+/*   msh_executor.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:28:20 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:17:20 by jho              ###   ########.fr       */
+/*   Created: 2023/11/14 15:00:43 by jho               #+#    #+#             */
+/*   Updated: 2023/11/14 15:12:16 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pipeline.h"
+#ifndef MSH_EXECUTOR_H
+# define MSH_EXECUTOR_H
+# include "msh_token.h"
+# include "msh_pipeline.h"
+# include "msh_env.h"
+# include "msh_pathfinder.h"
 
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline)
-{
-	t_pipeline	*next;
-
-	if (pipeline == NULL)
-		return (NULL);
-	next = pipeline->next;
-	if (pipeline->tokens != NULL)
-		msh_token_free_list(pipeline->tokens);
-	free(pipeline);
-	return (msh_pipeline_free(next));
-}
+int	msh_execute(t_pipeline *pipeline, t_env *env);
+#endif

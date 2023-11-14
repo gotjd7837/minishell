@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:45:00 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 15:14:08 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**msh_execute_get_syms(t_token *tokens, t_sym sym)
 	{
 		if (tokens->sym == sym)
 		{
-			*(params + index) = msh_strdup(tokens->value);
+			*(params + index) = msh_strdup(tokens->val);
 			++index;
 		}
 		tokens = tokens->next;
@@ -47,9 +47,10 @@ char	**msh_execute_get_syms(t_token *tokens, t_sym sym)
 	return (params);
 }
 
-void	msh_execute_heredoc(char *limiter)
+int	msh_execute_heredoc(char *limiter)
 {
-
+	limiter = 0;
+	return (1);
 }
 
 void	msh_execute_redir(char **redirs, int *rfd, int *wfd)
@@ -58,6 +59,10 @@ void	msh_execute_redir(char **redirs, int *rfd, int *wfd)
 
 	while (*redirs != NULL)
 	{
+		redir = NULL;
+		*rfd = 0;
+		*wfd = 1;
+		/*
 		redir = *redirs;
 		if (*redir == '<' && *(redir + 1) == '<')
 			*rfd = msh_execute_heredoc(redir);
@@ -67,6 +72,7 @@ void	msh_execute_redir(char **redirs, int *rfd, int *wfd)
 			*wfd = msh_execute_append(redir);
 		else if (*redir == '>')
 			*wfd = msh_execute_out_redir(redir);
+		*/
 		++redirs;
 	}
 }
@@ -78,12 +84,12 @@ void	msh_execute_cmd(char **params, int rfd, int wfd, t_env *env)
 
 	dup2(rfd, 0);
 	dup2(wfd, 1);
-	path = msh_pathfind(*params);
-	envp = msh_env_convert_char(env);
+	path = msh_pathfind(*params, env);
+	//envp = msh_env_convert_char(env);
 	execve(path, params, envp);
 }
 
-int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd)
+int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd, t_env *env)
 {
 	pid_t	pid;
 	char	**params;
@@ -95,12 +101,12 @@ int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd)
 	if (pid == 0)
 	{
 		msh_execute_redir(redirs, &rfd, &wfd);
-		msh_execute_cmd(params, rfd, wfd);
+		msh_execute_cmd(params, rfd, wfd, env);
 	}
 	return (0);
 }
 
-int	msh_execute_shift_pipe(int *fd)
+void	msh_execute_shift_pipe(int *fd)
 {
 	close(fd[0]);
 	close(fd[1]);
@@ -110,7 +116,7 @@ int	msh_execute_shift_pipe(int *fd)
 	close(fd[3]);
 }
 
-int	msh_execute(t_pipeline *pipelines)
+int	msh_execute(t_pipeline *pipelines, t_env *env)
 {
 	int fd[4];
 
@@ -122,10 +128,11 @@ int	msh_execute(t_pipeline *pipelines)
 			pipe(fd + 2);
 		else
 			fd[3] = 1;
-		msh_execute_pipeline(pipeline, fd[0], fd[3]);
+		msh_execute_pipeline(pipelines, fd[0], fd[3], env);
 		msh_execute_shift_pipe(fd);
 		pipelines = pipelines->next;
 	}
+	return (1);
 }
 
 

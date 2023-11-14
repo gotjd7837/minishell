@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/11/07 18:29:36 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/14 15:14:37 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "msh_pathfinder.h"
 # include "msh_builtin.h"
 # include "msh_util.h"
+# include "msh_pipeline.h"
+# include "msh_executor.h"
 # include <dirent.h>
 # include <term.h>
 # include <sys/ioctl.h>

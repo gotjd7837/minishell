@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:44:43 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/14 15:16:35 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	(void) argc;
+	(void) argv;
+
+	t_env *env = msh_env_new_list(envp);
 	char *infile = "infile";
 	char *ls = "ls";
 	char *cat = "cat";
@@ -34,6 +38,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	pipeline0->next = pipeline1;
 
-	msh_execute(pipeline0);
+	msh_execute(pipeline0, env);
 	return (0);
 }
