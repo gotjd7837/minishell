@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:31:00 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:52:32 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/14 11:51:36 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define MSH_LEXER_H
 # include "msh_token.h"
 # include "msh_util.h"
+
+typedef struct s_pipeline
+{
+	t_token				*tokens;
+	struct s_pipeline	*next;
+}	t_pipeline;
 
 t_token		*msh_lex(char *s);
 int			msh_lex_tokenize(t_token **sym_table, char *s);
