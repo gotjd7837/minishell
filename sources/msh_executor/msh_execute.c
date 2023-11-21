@@ -6,12 +6,13 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 16:27:35 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/21 14:58:29 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
 #include <stdio.h>
+#include <errno.h>
 
 int	msh_execute_count_sym(t_token *tokens, t_sym sym)
 {
@@ -48,81 +49,133 @@ char	**msh_execute_get_syms(t_token *tokens, t_sym sym)
 	return (params);
 }
 
-int	msh_execute_heredoc(char *limiter)
+void	pipex_filter(int in, int out, char **param, t_env *env)
 {
-	limiter = 0;
-	return (1);
+	if (in != 0)
+		dup2(in, 0);
+	if (out != 1)
+		dup2(out, 1);
+	if (in != 0)
+		close(in);
+	if (out != 1)
+		close(out);
+	execve(msh_pathfind(param[0], env), param, NULL);
 }
 
-void	msh_execute_redir(char **redirs, int *rfd, int *wfd)
+void	pipex_shift(int *fd)
 {
-	char	*redir;
+	if (close(fd[0]) == -1
+		|| close(fd[1]) == -1
+		|| dup2(fd[2], fd[0]) == -1
+		|| dup2(fd[3], fd[1]) == -1
+		|| close(fd[2]) == -1
+		|| close(fd[3]) == -1)
+		exit(0);
+}
 
-	while (*redirs != NULL)
+void	pipex_filter_f2p(t_pipeline *pipeline, int *fd, t_env *env)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		exit(0);
+	if (pid == 0)
 	{
-		redir = NULL;
-		*rfd = 0;
-		*wfd = 1;
-		/*
-		redir = *redirs;
-		if (*redir == '<' && *(redir + 1) == '<')
-			*rfd = msh_execute_heredoc(redir);
-		else if (*redir == '<')
-			*rfd = msh_execute_in_redir(redir);
-		else if(*redir == '>' && *(redir + 1) == '>')
-			*wfd = msh_execute_append(redir);
-		else if (*redir == '>')
-			*wfd = msh_execute_out_redir(redir);
-		*/
-		++redirs;
+		if (fd[0] != 0)
+			close(fd[0]);
+		pipex_filter(0, fd[1], msh_execute_get_syms(pipeline->tokens, WORD), env);
 	}
+}
+
+void	pipex_filter_p2p(t_pipeline *pipeline, int *fd, t_env *env)
+{
+	pid_t	pid;
+	while (pipeline->next != NULL)
+	{
+		if (pipe(fd + 2) == -1)
+			exit(errno);
+		pid = fork();
+		if (pid == -1)
+			exit(errno);
+		if (pid == 0)
+		{
+			close(fd[1]);
+			close(fd[2]);
+			pipex_filter(fd[0], fd[3], msh_execute_get_syms(pipeline->tokens, WORD), env);
+		}
+		pipex_shift(fd);
+		pipeline = pipeline->next;
+	}
+}
+
+void	pipex_filter_p2f(t_pipeline *pipeline, int *fd, t_env *env)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		exit(errno);
+	else if (pid == 0)
+	{
+		if (fd[1] != 1)
+			close(fd[1]);
+		pipex_filter(fd[0], 1, msh_execute_get_syms(pipeline->tokens, WORD), env);
+	}
+	close(fd[1]);
+	close(fd[0]);
 }
 
 void	msh_execute_cmd(char **params, int rfd, int wfd, t_env *env)
 {
 	char	*path;
-	char	**envp;
+	char	**envp = NULL;
 
 	path = msh_pathfind(*params, env);
 	if (rfd != 0)
 		dup2(rfd, 0);
 	if (wfd != 1)
 		dup2(wfd, 1);
-	if (rfd != 0)
-		close(rfd);
-	if (wfd != 1)
-		close(wfd);	
-	//envp = msh_env_convert_char(env);
 	execve(path, params, envp);
 }
 
 int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd, t_env *env)
 {
 	char	**params;
-	//char	**redirs;
 
 	params = msh_execute_get_syms(pipeline->tokens, WORD);
-	//redirs = msh_execute_get_syms(pipeline->tokens, REDIR);
-	//msh_execute_redir(redirs, &rfd, &wfd);
 	msh_execute_cmd(params, rfd, wfd, env);
 	return (0);
 }
 
-void	msh_execute_shift_pipe(int *fd)
-{
-	dup2(fd[2], fd[0]);
-	dup2(fd[3], fd[1]);
-	close(fd[2]);
-	close(fd[3]);
-}
-
 int	msh_execute(t_pipeline *pipelines, t_env *env)
 {
-	pid_t	pid;
-	int		fd[2];
+	int fd[4];
 
-	pipe(fd);
-	pid = fork();
+	if (pipelines->next == NULL)
+	{
+		fd[1] = 1;
+		pipex_filter_f2p(pipelines, fd, env);
+	}
+	else
+	{
+		pipe(fd);
+		pipex_filter_f2p(pipelines, fd, env);
+		pipelines = pipelines->next;
+		if (pipelines->next == NULL)
+			pipex_filter_p2f(pipelines, fd, env);
+		else
+		{
+			pipex_filter_p2p(pipelines, fd, env);
+			while (pipelines->next != NULL)
+				pipelines = pipelines->next;
+			pipex_filter_p2f(pipelines, fd, env);
+		}
+	}
+	wait(0);
+	wait(0);
+	wait(0);
+	/*
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -133,9 +186,28 @@ int	msh_execute(t_pipeline *pipelines, t_env *env)
 	{
 		close(fd[1]);
 		msh_execute_pipeline(pipelines->next, fd[0], 1, env);
+	}*/
+	/*
+	pipelines = NULL;
+	env = NULL;
+	if (pid == 0)
+	{
+		char *s[] = {"ls", "-l", NULL};
+		close(fd[0]);
+		dup2(fd[1], 1);
+		execve("/bin/ls", s, NULL);
+		printf("Failed\n");
 	}
-	close(fd[0]);
-	close(fd[1]);
+	pid = fork();
+	if (pid == 0)
+	{
+		char *s[] = {"cat", "-e", NULL};
+		close(fd[1]);
+		dup2(fd[0], 0);
+		execve("/bin/cat", s, NULL);
+		printf("Failed\n");
+	}
+	*/
 	return (1);
 }
 
