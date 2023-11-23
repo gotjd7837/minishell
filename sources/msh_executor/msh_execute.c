@@ -6,11 +6,12 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:36:00 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 18:07:00 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include <stdio.h>
 
 int	msh_execute(t_pipeline *pipelines, t_env *env)
 {
@@ -20,6 +21,7 @@ int	msh_execute(t_pipeline *pipelines, t_env *env)
 	children_num = 0;
 	if (pipelines->next == NULL)
 	{
+		fd[0] = 0;
 		fd[1] = 1;
 		children_num += msh_execute_first(pipelines, fd, env);
 	}
