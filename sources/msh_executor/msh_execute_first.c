@@ -6,11 +6,12 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 15:33:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 18:06:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include <stdio.h>
 
 int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env)
 {
