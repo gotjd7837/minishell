@@ -6,133 +6,34 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:14:08 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 14:36:00 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
 
-int	msh_execute_count_sym(t_token *tokens, t_sym sym)
-{
-	int	count;
-
-	count = 0;
-	while (tokens != NULL)
-	{
-		count += tokens->sym == sym;
-		tokens = tokens->next;
-	}
-	return (count);
-}
-
-char	**msh_execute_get_syms(t_token *tokens, t_sym sym)
-{
-	char	**params;
-	int		index;
-
-	params = malloc(sizeof(char *) * msh_execute_count_sym(tokens, sym) + 1);
-	if (params == NULL)
-		return (NULL);
-	index = 0;
-	while (tokens != NULL)
-	{
-		if (tokens->sym == sym)
-		{
-			*(params + index) = msh_strdup(tokens->val);
-			++index;
-		}
-		tokens = tokens->next;
-	}
-	*(params + index) = NULL;
-	return (params);
-}
-
-int	msh_execute_heredoc(char *limiter)
-{
-	limiter = 0;
-	return (1);
-}
-
-void	msh_execute_redir(char **redirs, int *rfd, int *wfd)
-{
-	char	*redir;
-
-	while (*redirs != NULL)
-	{
-		redir = NULL;
-		*rfd = 0;
-		*wfd = 1;
-		/*
-		redir = *redirs;
-		if (*redir == '<' && *(redir + 1) == '<')
-			*rfd = msh_execute_heredoc(redir);
-		else if (*redir == '<')
-			*rfd = msh_execute_in_redir(redir);
-		else if(*redir == '>' && *(redir + 1) == '>')
-			*wfd = msh_execute_append(redir);
-		else if (*redir == '>')
-			*wfd = msh_execute_out_redir(redir);
-		*/
-		++redirs;
-	}
-}
-
-void	msh_execute_cmd(char **params, int rfd, int wfd, t_env *env)
-{
-	char	*path;
-	char	**envp;
-
-	dup2(rfd, 0);
-	dup2(wfd, 1);
-	path = msh_pathfind(*params, env);
-	//envp = msh_env_convert_char(env);
-	execve(path, params, envp);
-}
-
-int	msh_execute_pipeline(t_pipeline *pipeline, int rfd, int wfd, t_env *env)
-{
-	pid_t	pid;
-	char	**params;
-	char	**redirs;
-
-	params = msh_execute_get_syms(pipeline->tokens, WORD);
-	redirs = msh_execute_get_syms(pipeline->tokens, REDIR);
-	pid = fork();
-	if (pid == 0)
-	{
-		msh_execute_redir(redirs, &rfd, &wfd);
-		msh_execute_cmd(params, rfd, wfd, env);
-	}
-	return (0);
-}
-
-void	msh_execute_shift_pipe(int *fd)
-{
-	close(fd[0]);
-	close(fd[1]);
-	dup2(fd[2], fd[0]);
-	dup2(fd[3], fd[1]);
-	close(fd[2]);
-	close(fd[3]);
-}
-
 int	msh_execute(t_pipeline *pipelines, t_env *env)
 {
-	int fd[4];
+	int		children_num;
+	int		fd[4];
 
-	fd[0] = 0;
-	fd[1] = 1;
-	while (pipelines != NULL)
+	children_num = 0;
+	if (pipelines->next == NULL)
 	{
-		if (pipelines->next != NULL)
-			pipe(fd + 2);
-		else
-			fd[3] = 1;
-		msh_execute_pipeline(pipelines, fd[0], fd[3], env);
-		msh_execute_shift_pipe(fd);
-		pipelines = pipelines->next;
+		fd[1] = 1;
+		children_num += msh_execute_first(pipelines, fd, env);
 	}
+	else
+	{
+		if (pipe(fd) == -1)
+			return (0);
+		children_num += msh_execute_first(pipelines, fd, env);
+		if (pipelines->next->next != NULL)
+			children_num += msh_execute_middle(pipelines->next, fd, env);
+		children_num += msh_execute_last(msh_pipeline_last(pipelines), fd, env);
+	}
+	while (--children_num > -1)
+		if (wait(0) == -1)
+			return (0);
 	return (1);
 }
-
-
