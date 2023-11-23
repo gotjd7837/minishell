@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline.h                                     :+:      :+:    :+:   */
+/*   msh_token_count_sym.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:44:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:27:13 by jho              ###   ########.fr       */
+/*   Created: 2023/11/23 14:32:26 by jho               #+#    #+#             */
+/*   Updated: 2023/11/23 14:33:31 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_PIPELINE_H
-# define MSH_PIPELINE_H
-# include "msh_token.h"
+#include "../../includes/msh_token.h"
 
-typedef struct s_pipeline
+int	msh_token_count_sym(t_token *tokens, t_sym sym)
 {
-	t_token				*tokens;
-	struct s_pipeline	*next;
-}	t_pipeline;
+	int	count;
 
-void		msh_pipeline_add_token(t_pipeline *pipeline, t_token *token);
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline);
-t_pipeline	*msh_pipeline_last(t_pipeline *pipelines);
-t_pipeline	*msh_pipeline_malloc(void);
-#endif
+	count = 0;
+	while (tokens != NULL)
+	{
+		count += tokens->sym == sym;
+		tokens = tokens->next;
+	}
+	return (count);
+}
