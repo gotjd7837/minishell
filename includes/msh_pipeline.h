@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pipeline.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:44:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:27:13 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 15:59:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_pipeline
 	struct s_pipeline	*next;
 }	t_pipeline;
 
-void		msh_pipeline_add_token(t_pipeline *pipeline, t_token *token);
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline);
+int			msh_pipeline_add_node(t_pipeline **head, t_pipeline *pipeline);
 t_pipeline	*msh_pipeline_last(t_pipeline *pipelines);
+t_pipeline	*msh_pipeline_free_list(t_pipeline *pipeline);
 t_pipeline	*msh_pipeline_malloc(void);
 #endif

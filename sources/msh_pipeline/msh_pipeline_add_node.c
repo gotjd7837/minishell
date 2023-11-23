@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline_free.c                                :+:      :+:    :+:   */
+/*   msh_pipeline_add_node.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:28:20 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 15:17:20 by jho              ###   ########.fr       */
+/*   Created: 2023/11/23 13:56:13 by haekang           #+#    #+#             */
+/*   Updated: 2023/11/23 15:58:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_pipeline.h"
 
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline)
+int	msh_pipeline_add_node(t_pipeline **head, t_pipeline *pipeline)
 {
-	t_pipeline	*next;
+	t_pipeline	*last;
 
-	if (pipeline == NULL)
-		return (NULL);
-	next = pipeline->next;
-	if (pipeline->tokens != NULL)
-		msh_token_free_list(pipeline->tokens);
-	free(pipeline);
-	return (msh_pipeline_free(next));
+	if (head == NULL || pipeline == NULL)
+		return (0);
+	if (*head == NULL)
+		*head = pipeline;
+	else
+	{
+		last = msh_pipeline_last(*head);
+		last->next = pipeline;
+	}
+	return (1);
 }

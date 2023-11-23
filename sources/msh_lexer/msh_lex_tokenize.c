@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_tokenize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 08:50:31 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:50:54 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 15:34:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	msh_lex_tokenize(t_token **sym_table, char *s)
 {
 	if (*s == '&' && *(s + 1) == '&')
 		return (msh_lex_tokenize_and_if(sym_table, s));
-	else if (*s == '|' && *(s + 1) == '|')
-		return (msh_lex_tokenize_or_if(sym_table, s));
-	else if (*s == '|')
-		return (msh_lex_tokenize_pipe(sym_table, s));
+	// else if (*s == '|' && *(s + 1) == '|')
+	// 	return (msh_lex_tokenize_or_if(sym_table, s));
+	// else if (*s == '|')
+	// 	return (msh_lex_tokenize_pipe(sym_table, s));
 	else if (*s == '(' || *s == ')')
 		return (msh_lex_tokenize_bra(sym_table, s));
 	else if (msh_is_whitespace(*s))
