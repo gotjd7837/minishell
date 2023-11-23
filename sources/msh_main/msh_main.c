@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 16:38:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:54:40 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,31 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	char		*input;
+	t_env		*env;
+	char		*expanded;
+	t_pipeline	*pipelines;
+
 	(void) argc;
 	(void) argv;
-
-	t_env *env = msh_env_new_list(envp);
-	char *infile = "<infile";
-	char *ls = "cat";
-	char *l = "-e";
-	char *cat = "cat";
-	char *e = "-e";
-	char *cat_2 = "cat";
-	char *e_2 = "-e";
-	char *outfile = ">>outfile";
-	
-	t_pipeline *pipeline0 = malloc(sizeof(t_pipeline));
-	t_pipeline *pipeline1 = malloc(sizeof(t_pipeline));
-	t_pipeline *pipeline2 = malloc(sizeof(t_pipeline));
-
-	t_token *token_infile = msh_token_malloc_symval(REDIR, infile);
-	t_token *token_ls = msh_token_malloc_symval(WORD, ls);
-	t_token *token_l = msh_token_malloc_symval(WORD, l);
-	t_token *token_cat = msh_token_malloc_symval(WORD, cat);
-	t_token *token_e = msh_token_malloc_symval(WORD, e);
-	t_token *token_cat_2 = msh_token_malloc_symval(WORD, cat_2);
-	t_token *token_e_2 = msh_token_malloc_symval(WORD, e_2);
-	t_token *token_outfile = msh_token_malloc_symval(REDIR, outfile);
-
-	msh_pipeline_add_token(pipeline0, token_infile);
-	msh_pipeline_add_token(pipeline0, token_ls);
-	msh_pipeline_add_token(pipeline0, token_l);
-	msh_pipeline_add_token(pipeline1, token_cat);
-	msh_pipeline_add_token(pipeline1, token_e);
-	msh_pipeline_add_token(pipeline2, token_cat_2);
-	msh_pipeline_add_token(pipeline2, token_e_2);
-	msh_pipeline_add_token(pipeline2, token_outfile);
-
-	pipeline0->next = pipeline1;
-	pipeline1->next = pipeline2;
-	pipeline2->next = NULL;
-
-	msh_execute(pipeline0, env);
+	env = msh_env_new_list(envp);
+	while (1)
+	{
+		input = readline("msh$> ");
+		expanded = msh_expand(input, env);
+		pipelines = msh_lex(expanded);
+		if (pipelines == NULL)
+		{
+			printf("Lex error\n");
+			free(input);
+			free(expanded);
+			continue ;
+		}
+		msh_execute(pipelines, env);
+		msh_pipeline_free_list(pipelines);
+		free(expanded);
+		free(input);
+		system("leaks minishell | grep leaked");
+	}
 	return (0);
 }
