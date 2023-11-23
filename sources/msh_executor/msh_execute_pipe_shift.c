@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline.h                                     :+:      :+:    :+:   */
+/*   msh_execute_pipe_shift.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:44:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:27:13 by jho              ###   ########.fr       */
+/*   Created: 2023/11/23 14:23:35 by jho               #+#    #+#             */
+/*   Updated: 2023/11/23 14:23:50 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_PIPELINE_H
-# define MSH_PIPELINE_H
-# include "msh_token.h"
+#include "../../includes/msh_executor.h"
 
-typedef struct s_pipeline
+int	msh_execute_pipe_shift(int *fd)
 {
-	t_token				*tokens;
-	struct s_pipeline	*next;
-}	t_pipeline;
-
-void		msh_pipeline_add_token(t_pipeline *pipeline, t_token *token);
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline);
-t_pipeline	*msh_pipeline_last(t_pipeline *pipelines);
-t_pipeline	*msh_pipeline_malloc(void);
-#endif
+	if (close(fd[0]) == -1
+		|| close(fd[1]) == -1
+		|| dup2(fd[2], fd[0]) == -1
+		|| dup2(fd[3], fd[1]) == -1
+		|| close(fd[2]) == -1
+		|| close(fd[3]) == -1)
+		return (0);
+	return (1);
+}

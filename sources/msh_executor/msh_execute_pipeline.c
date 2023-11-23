@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline.h                                     :+:      :+:    :+:   */
+/*   msh_execute_pipeline.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:44:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:27:13 by jho              ###   ########.fr       */
+/*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
+/*   Updated: 2023/11/23 15:05:51 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_PIPELINE_H
-# define MSH_PIPELINE_H
-# include "msh_token.h"
+#include "../../includes/msh_executor.h"
+#include <stdio.h>
 
-typedef struct s_pipeline
+void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 {
-	t_token				*tokens;
-	struct s_pipeline	*next;
-}	t_pipeline;
-
-void		msh_pipeline_add_token(t_pipeline *pipeline, t_token *token);
-t_pipeline	*msh_pipeline_free(t_pipeline *pipeline);
-t_pipeline	*msh_pipeline_last(t_pipeline *pipelines);
-t_pipeline	*msh_pipeline_malloc(void);
-#endif
+	if (in != 0 && dup2(in, 0) == -1)
+		exit(errno);
+	if (out != 1 && dup2(out, 1) == -1)
+		exit(errno);
+	if (in != 0 && close(in) == -1)
+		exit(errno);
+	if (out != 1 && close(out) == -1)
+		exit(errno);
+	execve(msh_pathfind(param[0], env), param, NULL);
+}

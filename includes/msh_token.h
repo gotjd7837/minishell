@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 08:40:21 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:43:55 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 14:33:48 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct s_token
 void	msh_token_add_child(t_token **parent, t_token *child);
 void	msh_token_add_next(t_token **head, t_token *token);
 t_token	*msh_token_add_substr(t_token **tokens, char *s, int begin, int end);
+int		msh_token_count_sym(t_token *tokens, t_sym sym);
 t_token	*msh_token_dequeue(t_token **tokens);
+char	**msh_token_filter_sym(t_token *tokens, t_sym sym);
 t_token	*msh_token_free(t_token *token);
 t_token	*msh_token_free_list(t_token *token);
 t_token	*msh_token_free_tree(t_token *root);
