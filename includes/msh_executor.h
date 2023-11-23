@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:00:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 15:09:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/23 18:16:04 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MSH_EXECUTOR_H
 # include <errno.h>
 # include <fcntl.h>
+# include "msh.h"
 # include "msh_token.h"
 # include "msh_pipeline.h"
 # include "msh_env.h"
