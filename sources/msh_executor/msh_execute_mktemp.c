@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute_pipeline.c                             :+:      :+:    :+:   */
+/*   msh_execute_mktemp.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 04:55:49 by jho              ###   ########.fr       */
+/*   Created: 2023/11/25 02:23:26 by jho               #+#    #+#             */
+/*   Updated: 2023/11/25 03:11:17 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
 
-void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
+char	*msh_execute_mktemp(void)
 {
-	if (in != 0 && dup2(in, 0) == -1)
-		exit(errno);
-	if (out != 1 && dup2(out, 1) == -1)
-		exit(errno);
-	if (in != 0 && close(in) == -1)
-		exit(errno);
-	if (out != 1 && close(out) == -1)
-		exit(errno);
-	execve(msh_pathfind(param[0], env), param, NULL);
-	exit(errno);
+	char	*temp;
+
+	temp = malloc(sizeof(char) * 9);
+	if (temp == NULL)
+		return (NULL);
+	temp[0] = 'H';
+	temp[1] = 'E';
+	temp[2] = 'R';
+	temp[3] = 'E';
+	temp[4] = 'D';
+	temp[5] = 'O';
+	temp[6] = 'C';
+	temp[7] = ' ';
+	temp[8] = '\0';
+	while (access(temp, 0) == 0)
+	{
+		if (temp[7] == 126)
+		{
+			free(temp);
+			return (NULL);
+		}
+		++temp[7];
+	}
+	return (temp);
 }
