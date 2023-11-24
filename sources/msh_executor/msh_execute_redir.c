@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/24 13:52:57 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 00:35:19 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ int	msh_execute_redir(t_token *tokens, int *fd)
 	{
 		if (tokens->sym == REDIR)
 		{
-			if (*(tokens->val) == '<')
+			if (*(tokens->val) == '<' && *(tokens->val + 1) == '<')
+			{
+				if (!msh_execute_redir_heredoc(tokens->val, fd))
+					return (0);
+			}
+			else if (*(tokens->val) == '<')
 			{
 				if (!msh_execute_redir_read(tokens->val, fd))
 					return (0);
