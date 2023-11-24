@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/11/24 13:51:27 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 01:20:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	msh_execute_last_builtin(t_pipeline *pl, int *fd, t_env *env)
 {
-	int	result;
+	int		result;
+	char	**param;
 
 	if (fd[1] != 1 && close(fd[1]) == -1)
 		return (0);

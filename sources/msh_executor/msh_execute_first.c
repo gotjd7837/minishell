@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/24 13:51:45 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 01:58:11 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	msh_execute_first_builtin(t_pipeline *pl, int *fd, t_env *env)
 {
+	char **param;
+
 	if (fd[0] != 0 && close(fd[0]) == -1)
 		return (0);
 	fd[0] = 0;
