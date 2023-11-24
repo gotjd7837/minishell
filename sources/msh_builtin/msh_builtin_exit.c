@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_exit.c                                         :+:      :+:    :+:   */
+/*   msh_builtin_exit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 20:01:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 01:13:15 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,11 @@ static long long	msh_atol(char *str)
 	return (result * flag);
 }
 
-void	msh_exit(char **cmd)
+int	msh_builtin_exit(int in, int out, char **cmd, t_env *env)
 {
+	(void)in;
+	(void)out;
+	(void)env;
 	if (cmd[1] == NULL)
 		exit(0);
 	else if (cmd[1] != NULL)
@@ -89,7 +92,7 @@ void	msh_exit(char **cmd)
 		{
 			printf("ㅇㅣㄴ자 3개\n");
 			g_exit_status = 1;
-			return ;
+			return (1);
 		}
 		if (!msh_check_overflow(cmd[1]))
 		{
@@ -99,6 +102,7 @@ void	msh_exit(char **cmd)
 		else
 			exit((unsigned char)msh_atol(cmd[1]));
 	}
+	return (0);
 }
 
 //문자일때 255반환하고 exit함 -> 얘가 인자 세개보다 더 우선순위 높음
