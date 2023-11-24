@@ -6,12 +6,11 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 16:08:15 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/24 13:52:57 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
-#include <stdio.h>
 
 int	msh_execute_redir_read(char *val, int *fd)
 {
@@ -36,7 +35,6 @@ int	msh_execute_redir_write(char *val, int *fd)
 	name = msh_substr(val, 1, msh_strlen(val));
 	if (name == NULL)
 		return (0);
-	printf("called\n");
 	open_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (open_fd == -1 || close(fd[1]) == -1)
 		return (0);
