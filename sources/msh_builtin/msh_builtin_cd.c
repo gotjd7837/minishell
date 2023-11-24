@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_cd.c                                           :+:      :+:    :+:   */
+/*   msh_builtin_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 20:01:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 01:11:48 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,16 @@ static void	msh_cd_env(t_env *env, char *key, char *old_pwd)
 }
 //cd "" 와 같이 빈문자열이 인자로 들어오면 아무런 동작도 하지않음
 
-void	msh_cd(char **cmd, t_env *env)
+int	msh_builtin_cd(int in, int out, char **cmd, t_env *env)
 {
 	char	*path;
 	char	*old_pwd;
 
+	(void)in;
+	(void)out;
 	old_pwd = msh_get_pwd();
 	if (old_pwd == NULL)
-		return ;
+		return (1);
 	if (msh_strcmp(cmd[1], "~") == 0 || cmd[1] == NULL)
 		msh_cd_env(env, "HOME", old_pwd);
 	else if (cmd[1][0] == '$' && cmd[1][1] != '\0')
@@ -95,10 +97,11 @@ void	msh_cd(char **cmd, t_env *env)
 			free(old_pwd);
 			printf("minishell: cd: %s: No such file or directory\n", path);
 			g_exit_status = 1;
-			return ;
+			return (1);
 		}
 		msh_fix_pwd_oldpwd(env, old_pwd);
 	}
+	return (0);
 }
 //없는 경로가 들어올 경우 에러 처리 해줘야함, 명령어 반환값 구현해야함
 //환경변수에 홈 삭제됐을때 에러처리 해야함

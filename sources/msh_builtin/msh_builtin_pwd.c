@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env.c                                          :+:      :+:    :+:   */
+/*   msh_builtin_pwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 20:07:51 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 20:01:34 by haekang          ###   ########.fr       */
+/*   Created: 2023/10/14 19:54:31 by haekang           #+#    #+#             */
+/*   Updated: 2023/11/25 01:13:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-void	msh_env(t_env *env)
+int	msh_builtin_pwd(int in, int out, char **cmd, t_env *env)
 {
-	t_env	*node;
+	char	*pwd;
 
-	node = env;
-	while (node != NULL)
+	(void)in;
+	(void)out;
+	(void)env;
+	(void)cmd;
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
 	{
-		if (node->value != NULL)
-			printf("%s=%s\n", node->key, node->value);
-		node = node->next;
+		printf("getcwd error\n");
+		return (1);
 	}
+	printf("%s\n", pwd);
+	free(pwd);
+	return (0);
 }
-//export로 '='없이 선언된 변수는 value=NULL로 만들어 구분한다.
-//env는 key=value 구조만 출력한다.
-//실제 zsh->bash에서도 key=value구조로 선언된 환경변수만을 가져온다.
