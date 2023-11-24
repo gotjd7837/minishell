@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:35 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:23:50 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 04:10:04 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	msh_execute_pipe_shift(int *fd)
 {
-	if (close(fd[0]) == -1
-		|| close(fd[1]) == -1
-		|| dup2(fd[2], fd[0]) == -1
-		|| dup2(fd[3], fd[1]) == -1
-		|| close(fd[2]) == -1
-		|| close(fd[3]) == -1)
-		return (0);
+	close(fd[0]);
+	close(fd[1]);
+	dup2(fd[2], fd[0]);
+	dup2(fd[3], fd[1]);
+	close(fd[2]);
+	close(fd[3]);
 	return (1);
 }
