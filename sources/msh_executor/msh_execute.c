@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/11/24 13:28:32 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 00:56:26 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ int	msh_execute(t_pipeline *pipelines, t_env *env)
 			children_num += msh_execute_middle(pipelines->next, fd, env);
 		children_num += msh_execute_last(msh_pipeline_last(pipelines), fd, env);
 	}
+	if (access("HEREDOC", 0) == 0)
+		unlink("HEREDOC");
 	return (msh_execute_wait_children(children_num));
 }
