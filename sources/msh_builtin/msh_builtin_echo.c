@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:25:22 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 09:58:31 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ static void	msh_get_start_idx(char **cmd, int *start_idx, int i)
 	}
 	if (cmd[i] == NULL)
 		*start_idx = i;
+}
+
+static void	msh_mapping_exit_status(char **cmd)
+{
+	char	*tmp;
+	int		i;
+
+	i = 1;
+	while (cmd[i] != NULL)
+	{
+		if (msh_strcmp(cmd[i], "$?") == 0)
+		{
+			tmp = cmd[i];
+			cmd[i] = msh_itoa(g_exit_status);
+			free(tmp);
+		}
+		i++;
+	}
 }
 
 static void	msh_check_option(char **cmd, int *n_flag)
@@ -75,6 +93,7 @@ int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
 	n_flag = 0;
 	start_idx = 1;
 	msh_check_option(cmd, &n_flag);
+	msh_mapping_exit_status(cmd);
 	msh_get_start_idx(cmd, &start_idx, 1);
 	while (cmd[start_idx] != NULL)
 	{
@@ -87,4 +106,3 @@ int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
 	g_exit_status = 0;
 	return (0);
 }
-//출력 out fd로

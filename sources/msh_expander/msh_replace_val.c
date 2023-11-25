@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_replace_val.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:04:58 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 21:05:13 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 10:04:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	msh_replace_val(t_token *tokens, t_env *env)
 
 	while (tokens != NULL)
 	{
+		if (msh_strcmp(tokens->val, "$?") == 0)
+		{
+			tokens = tokens->next;
+			continue ;
+		}
 		if (*(tokens->val) == '$' && *(tokens->val + 1) != '\0')
 		{
 			key_env = msh_substr(tokens->val, 1, msh_strlen(tokens->val) + 1);
