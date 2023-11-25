@@ -6,11 +6,28 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 01:11:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 09:09:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
+
+static char	*msh_cd_env_get_value(t_env *env, char *key)
+{
+	char	*value;
+
+	value = NULL;
+	while (env != NULL)
+	{
+		if (!msh_strcmp(key, env->key))
+		{
+			value = env->value;
+			return (value);
+		}
+		env = env->next;
+	}
+	return (NULL);
+}
 
 static char	*msh_get_pwd(void)
 {
@@ -33,13 +50,13 @@ static void	msh_fix_pwd_oldpwd(t_env *env, char *old_pwd)
 
 	pwd_node = msh_env_get_node(env, "PWD");
 	oldpwd_node = msh_env_get_node(env, "OLDPWD");
-	if (oldpwd_node != NULL)
+	if (oldpwd_node == NULL)
+		free(old_pwd);
+	else
 	{
 		free(oldpwd_node->value);
 		oldpwd_node->value = old_pwd;
 	}
-	else
-		free(old_pwd);
 	if (pwd_node != NULL)
 	{
 		free(pwd_node->value);
@@ -49,31 +66,32 @@ static void	msh_fix_pwd_oldpwd(t_env *env, char *old_pwd)
 	}
 }
 
-static void	msh_cd_env(t_env *env, char *key, char *old_pwd)
+static int	msh_cd_env(t_env *env, char *key, char *old_pwd)
 {
 	char	*path;
 
-	path = msh_env_get_value(env, key);
+	path = msh_cd_env_get_value(env, key);
 	if (path == NULL)
 	{
-		path = msh_env_get_value(env, "HOME");
+		path = msh_cd_env_get_value(env, "HOME");
 		if (path == NULL)
 		{
+			free(old_pwd);
 			printf("minishell: cd: HOME not set\n");
 			g_exit_status = 1;
-			return ;
+			return (1);
 		}
 	}
 	if (chdir(path))
 	{
 		free(old_pwd);
-		printf("minishell: cd: %s: No such file or directory\n", key);
+		printf("minishell: cd: %s: No such file or directory\n", path);
 		g_exit_status = 1;
-		return ;
+		return (1);
 	}
 	msh_fix_pwd_oldpwd(env, old_pwd);
+	return (0);
 }
-//cd "" 와 같이 빈문자열이 인자로 들어오면 아무런 동작도 하지않음
 
 int	msh_builtin_cd(int in, int out, char **cmd, t_env *env)
 {
@@ -82,27 +100,22 @@ int	msh_builtin_cd(int in, int out, char **cmd, t_env *env)
 
 	(void)in;
 	(void)out;
+	g_exit_status = 0;
 	old_pwd = msh_get_pwd();
 	if (old_pwd == NULL)
 		return (1);
-	if (msh_strcmp(cmd[1], "~") == 0 || cmd[1] == NULL)
-		msh_cd_env(env, "HOME", old_pwd);
+	if (cmd[1] == NULL || msh_strcmp(cmd[1], "~") == 0)
+		return (msh_cd_env(env, "HOME", old_pwd));
 	else if (cmd[1][0] == '$' && cmd[1][1] != '\0')
-		msh_cd_env(env, &(cmd[1][1]), old_pwd);
-	else
+		return (msh_cd_env(env, &(cmd[1][1]), old_pwd));
+	path = cmd[1];
+	if (chdir(path))
 	{
-		path = cmd[1];
-		if (chdir(path))
-		{
-			free(old_pwd);
-			printf("minishell: cd: %s: No such file or directory\n", path);
-			g_exit_status = 1;
-			return (1);
-		}
-		msh_fix_pwd_oldpwd(env, old_pwd);
+		free(old_pwd);
+		printf("minishell: cd: %s: No such file or directory\n", path);
+		g_exit_status = 1;
+		return (1);
 	}
+	msh_fix_pwd_oldpwd(env, old_pwd);
 	return (0);
 }
-//없는 경로가 들어올 경우 에러 처리 해줘야함, 명령어 반환값 구현해야함
-//환경변수에 홈 삭제됐을때 에러처리 해야함
-//PWD나 OLDPWD가 없는 경우나, 둘중 하나만 있는 경우에도 잘 작동하도록

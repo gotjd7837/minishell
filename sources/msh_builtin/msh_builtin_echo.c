@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 01:12:40 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 05:25:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	msh_check_option(char **cmd, int *n_flag)
 	int	j;
 
 	i = 1;
+	if (cmd[i] == NULL || !(cmd[i][0] == '-' && cmd[i][1] == 'n'))
+		return ;
 	while (cmd[i] != NULL)
 	{
 		if (cmd[i][0] == '-' && cmd[i][1] == 'n')
@@ -68,7 +70,6 @@ int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
 	int		i;
 
 	(void)in;
-	(void)out;
 	(void)env;
 	i = 1;
 	n_flag = 0;
@@ -77,12 +78,13 @@ int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
 	msh_get_start_idx(cmd, &start_idx, 1);
 	while (cmd[start_idx] != NULL)
 	{
-		printf("%s", cmd[start_idx]);
+		write(out, cmd[start_idx], msh_strlen(cmd[start_idx]));
 		if (cmd[++start_idx] != NULL)
-			printf(" ");
+			write(out, " ", 2);
 	}
 	if (n_flag == 0)
-		printf("\n");
+		write(out, "\n", 2);
+	g_exit_status = 0;
 	return (0);
 }
 //출력 out fd로

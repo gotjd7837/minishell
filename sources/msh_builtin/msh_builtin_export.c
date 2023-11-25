@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:49:34 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 01:10:23 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 05:17:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@ int	msh_builtin_export(int in, int out, char **cmd, t_env *env)
 	int	argc;
 
 	(void)in;
-	(void)out;
 	i = 1;
 	argc = 0;
+	g_exit_status = 0;
 	while (cmd[argc] != NULL)
 		argc++;
 	if (argc == 1)
-		msh_export_print(env);
+		msh_export_print(env, out);
 	while (i < argc)
-		msh_export_create(cmd[i++], env);
+	{
+		if (!msh_export_create(cmd[i++], env))
+			g_exit_status = 1;
+	}
 	return (0);
 }
 //= 없이 key값만 입력받은 경우에는 value가 null, export 시 =없이 출력시킴
