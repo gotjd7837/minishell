@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 00:35:19 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/25 05:27:39 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	msh_execute_redir_read(char *val, int *fd)
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_RDONLY);
-	if (open_fd == -1 || close(fd[0]) == -1)
+	if (open_fd == -1)
 		return (0);
 	fd[0] = open_fd;
 	return (1);
@@ -57,7 +57,7 @@ int	msh_execute_redir_append(char *val, int *fd)
 	return (1);
 }
 
-int	msh_execute_redir(t_token *tokens, int *fd)
+int	msh_execute_redir(t_token *tokens, int *fd, char *heredoc_list)
 {
 	while (tokens != NULL)
 	{
@@ -65,7 +65,7 @@ int	msh_execute_redir(t_token *tokens, int *fd)
 		{
 			if (*(tokens->val) == '<' && *(tokens->val + 1) == '<')
 			{
-				if (!msh_execute_redir_heredoc(tokens->val, fd))
+				if (!msh_execute_redir_heredoc(tokens->val, fd, heredoc_list))
 					return (0);
 			}
 			else if (*(tokens->val) == '<')
