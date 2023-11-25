@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 19:58:18 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 01:07:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 04:06:23 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		msh_builtin_pwd(int in, int out, char **cmd, t_env *env);
 int		msh_builtin_unset(int in, int out, char **cmd, t_env *env);
 
 int		msh_builtin_export(int in, int out, char **cmd, t_env *env);
-int		msh_export_print(t_env *env);
+int	    msh_export_print(t_env *env, int out);
 int		msh_export_create(char *cmd_arg, t_env *env);
 int		msh_is_valid_identifier(char *cmd_arg);
 int		msh_check_key(char *cmd_arg);

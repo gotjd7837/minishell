@@ -6,11 +6,19 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 01:13:15 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/25 07:09:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
+
+static int	msh_exit_and_print(int exit_status, char *s)
+{
+	printf("exit\n");
+	if (s != NULL)
+		printf("minishell: exit: %s: numeric argument required\n", s);
+	exit(exit_status);
+}
 
 static int	msh_check_overflow(char *str)
 {
@@ -49,10 +57,7 @@ static int	msh_num_format_exception(char *str)
 		if (*str >= '0' && *str <= '9')
 			str++;
 		else
-		{
-			printf("문자 드감\n");
 			return (0);
-		}
 	}
 	return (1);
 }
@@ -83,24 +88,21 @@ int	msh_builtin_exit(int in, int out, char **cmd, t_env *env)
 	(void)out;
 	(void)env;
 	if (cmd[1] == NULL)
-		exit(0);
+		msh_exit_and_print(g_exit_status, NULL);
 	else if (cmd[1] != NULL)
 	{
 		if (!msh_num_format_exception(cmd[1]))
-			exit(g_exit_status);
+			msh_exit_and_print(255, cmd[1]);
 		if (cmd[2] != NULL)
 		{
-			printf("ㅇㅣㄴ자 3개\n");
+			printf("exit\nminishell: exit: too many arguments\n");
 			g_exit_status = 1;
 			return (1);
 		}
 		if (!msh_check_overflow(cmd[1]))
-		{
-			printf("long long 넘어감\n");
-			exit(255);
-		}
+			msh_exit_and_print(255, cmd[1]);
 		else
-			exit((unsigned char)msh_atol(cmd[1]));
+			msh_exit_and_print((unsigned char)msh_atol(cmd[1]), NULL);
 	}
 	return (0);
 }
