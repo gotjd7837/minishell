@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expander.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:57:30 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 21:08:17 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/27 17:30:09 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "msh_token.h"
 # include "msh_env.h"
 # include "msh_util.h"
+# include "msh.h"
 
 char		*msh_expand(char *s, t_env *env);
 int			msh_replace_env(t_token **tokens, t_env *env);
