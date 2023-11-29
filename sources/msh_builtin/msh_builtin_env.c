@@ -6,18 +6,20 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:07:51 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:25:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:41:19 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-int	msh_builtin_env(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_env(int *fd, char **cmd, t_env *env, int forked)
 {
 	t_env	*node;
+	int		out;
 
-	(void)in;
+	out = fd[1];
 	(void)cmd;
+	(void)forked;
 	node = env;
 	while (node != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:27:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 07:44:27 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:43:11 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ static int	msh_unset_check_key(char *key)
 	return (1);
 }
 
-int	msh_builtin_unset(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_unset(int *fd, char **cmd, t_env *env, int forked)
 {
 	char	**key;
 	int		i;
 
-	(void)in;
-	(void)out;
+	fd = NULL;
 	(void)env;
+	(void)forked;
 	g_exit_status = 0;
 	key = cmd;
 	i = 1;
