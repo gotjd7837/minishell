@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 17:03:12 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 19:24:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	msh_execute_last_builtin(t_pipeline *pl, int *fd, t_env *env)
 	char	**param;
 
 	fd_cp[0] = fd[0];
-	if (close(fd[1]))
-		return (0);
 	fd_cp[1] = 1;
 	if (!msh_execute_redir(pl, fd_cp))
 		exit(errno);
@@ -28,10 +26,7 @@ int	msh_execute_last_builtin(t_pipeline *pl, int *fd, t_env *env)
 	if (param == NULL)
 		exit(errno);
 	result = msh_execute_builtin(fd_cp, param, env, 1);
-	if (close(fd[1]) == -1 || close(fd[2]) == -1 || close(fd_cp[0]) == -1)
-		exit(errno);
-	if (fd_cp[1] != 1 && close(fd_cp[1]) == -1)
-		exit(errno);
+	exit(g_exit_status);
 	return (result);
 }
 

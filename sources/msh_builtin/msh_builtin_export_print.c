@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:10:18 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:00:34 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:51:59 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	msh_export_print(t_env *env, int out)
 			msh_print_key_value(out, node->key, node->value);
 		node = node->next;
 	}
-	g_exit_status = 0;
 	return (1);
 }
