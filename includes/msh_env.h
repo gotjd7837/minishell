@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:58:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/03 19:52:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:17:39 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_env	*msh_env_new_list(char *envp[]);
 int		msh_env_new_node(t_env **node);
 char	*msh_env_parse_key(char *envp);
 char	*msh_env_parse_value(char *envp);
+char	**msh_env_convert_arr(t_env *env);
 
 #endif

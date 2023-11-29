@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_last.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 05:08:38 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 14:59:03 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	msh_execute_last_builtin(t_pipeline *pl, int *fd, t_env *env, char *heredoc_
 	param = msh_token_filter_sym(pl->tokens, WORD);
 	if (param == NULL)
 		return (0);
-	result = msh_execute_builtin(fd[0], fd[1], param, env);
+	result = msh_execute_builtin(fd_cp[0], fd_cp[1], param, env);
 	close(fd[1]);
 	close(fd[2]);
 	close(fd_cp[0]);
