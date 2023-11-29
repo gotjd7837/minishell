@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:35:18 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 19:47:27 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *limiter, int *fd)
 			break ;
 		}
 		if (msh_execute_redir_heredoc_strcmp(line, limiter) == 0)
+		{
+			free(line);
 			break ;
+		}
 		write(fd[0], line, msh_strlen(line));
 		free(line);
 	}

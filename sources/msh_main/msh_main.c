@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 18:59:41 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 19:41:13 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[], char *envp[])
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		system("leaks minishell | grep leaked");
+		system("leaks minishell");
 	}
 	return (0);
 }
