@@ -6,15 +6,15 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 16:41:46 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 19:02:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-static int	msh_exit_and_print(int exit_status, char *s)
+static int	msh_exit_and_print(int exit_status, char *s, int out)
 {
-	printf("exit\n");
+	write (out, "exit\n", 6);
 	if (s != NULL)
 		printf("minishell: exit: %s: numeric argument required\n", s);
 	exit(exit_status);
@@ -82,31 +82,29 @@ static long long	msh_atol(char *str)
 	return (result * flag);
 }
 
-int	msh_builtin_exit(int *fd, char **cmd, t_env *env, int forked)
+int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 {
-	fd = NULL;
-	(void)forked;
 	(void)env;
+	(void)pipe;
 	if (cmd[1] == NULL)
-		msh_exit_and_print(g_exit_status, NULL);
+		msh_exit_and_print(g_exit_status, NULL, fd[1]);
 	else if (cmd[1] != NULL)
 	{
 		if (!msh_num_format_exception(cmd[1]))
-			msh_exit_and_print(255, cmd[1]);
+			msh_exit_and_print(255, cmd[1], fd[1]);
 		if (cmd[2] != NULL)
 		{
-			printf("exit\nminishell: exit: too many arguments\n");
+			write (fd[1], "exit\n", 6);
+			printf("minishell: exit: too many arguments\n");
 			g_exit_status = 1;
+			if (pipe == 1)
+				exit(g_exit_status);
 			return (1);
 		}
 		if (!msh_check_overflow(cmd[1]))
-			msh_exit_and_print(255, cmd[1]);
+			msh_exit_and_print(255, cmd[1], fd[1]);
 		else
-			msh_exit_and_print((unsigned char)msh_atol(cmd[1]), NULL);
+			msh_exit_and_print((unsigned char)msh_atol(cmd[1]), NULL, fd[1]);
 	}
 	return (0);
 }
-
-//문자일때 255반환하고 exit함 -> 얘가 인자 세개보다 더 우선순위 높음
-//숫자일때 long long이상이 되면 에러 출력 및, unsigned char로 타입 캐스팅한 값이 반환값, exit함
-//인자 세개면 1반환하고 exit 안함
