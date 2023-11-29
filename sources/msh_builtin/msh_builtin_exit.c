@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 15:58:06 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:36:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 {
 	(void)fd;
 	(void)env;
+	(void)pipe;
 	if (cmd[1] == NULL)
 		msh_exit_and_print(g_exit_status, NULL);
 	else if (cmd[1] != NULL)
