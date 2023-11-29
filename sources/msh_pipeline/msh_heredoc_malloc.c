@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pipeline_malloc.c                              :+:      :+:    :+:   */
+/*   msh_heredoc_malloc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:26:38 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 15:26:58 by jho              ###   ########.fr       */
+/*   Created: 2023/11/29 15:21:13 by jho               #+#    #+#             */
+/*   Updated: 2023/11/29 16:31:11 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_pipeline.h"
 
-t_pipeline	*msh_pipeline_malloc(void)
+t_heredoc	*msh_heredoc_malloc(int fd, char *name)
 {
-	t_pipeline	*pipeline;
+	t_heredoc	*heredoc;
 
-	pipeline = (t_pipeline *)malloc(sizeof(t_pipeline));
-	if (pipeline == NULL)
+	heredoc = (t_heredoc *)malloc(sizeof(t_heredoc));
+	if (heredoc == NULL)
 		return (NULL);
-	pipeline->tokens = NULL;
-	pipeline->next = NULL;
-	pipeline->heredoc = NULL;
-	return (pipeline);
+	heredoc->fd = fd;
+	heredoc->name = name;
+	heredoc->next = NULL;
+	return (heredoc);
 }

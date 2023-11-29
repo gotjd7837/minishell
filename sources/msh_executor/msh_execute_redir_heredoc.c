@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 03:32:14 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 16:35:18 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,21 @@ int	msh_execute_redir_heredoc_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-int	msh_execute_redir_heredoc(char *limiter, int *fd, char *heredoc_list)
+int	msh_execute_redir_heredoc(t_pipeline *pl, char *limiter, int *fd)
 {
 	char	*line;
 	char	*name;
 
 	limiter = msh_substr(limiter, 2, msh_strlen(limiter));
+	if (limiter == NULL)
+		return (0);
 	name = msh_execute_mktemp();
-	fd[4] = open(heredoc_list, O_WRONLY | O_APPEND);
-	write(fd[4], name, msh_strlen(name));
-	write(fd[4], "\n", 1);
-	close(fd[4]);
+	if (fd[0] != 0 && close(fd[0]) == -1)
+		return (0);
 	fd[0] = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd[0] == -1)
+		return (0);
+	msh_pipeline_add_heredoc(pl, msh_heredoc_malloc(fd[0], name));
 	while (1)
 	{
 		write(1, "> ", 2);
@@ -53,7 +56,10 @@ int	msh_execute_redir_heredoc(char *limiter, int *fd, char *heredoc_list)
 		free(line);
 	}
 	free(limiter);
-	close(fd[0]);
+	if (close(fd[0]) == -1)
+		return (0);
 	fd[0] = open(name, O_RDONLY);
+	if (fd[0] == -1)
+		return (0);
 	return (1);
 }

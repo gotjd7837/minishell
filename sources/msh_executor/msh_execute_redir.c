@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 05:27:39 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 17:01:50 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	msh_execute_redir_write(char *val, int *fd)
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (open_fd == -1 || close(fd[1]) == -1)
+	if (open_fd == -1)
+		return (0);
+	if (fd[1] != 1 && close(fd[1]) == -1)
 		return (0);
 	fd[1] = open_fd;
 	return (1);
@@ -51,21 +53,26 @@ int	msh_execute_redir_append(char *val, int *fd)
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (open_fd == -1 || close(fd[1]) == -1)
+	if (open_fd == -1)
+		return (0);
+	if (fd[1] != 1 && close(fd[1]) == -1)
 		return (0);
 	fd[1] = open_fd;
 	return (1);
 }
 
-int	msh_execute_redir(t_token *tokens, int *fd, char *heredoc_list)
+int	msh_execute_redir(t_pipeline *pl, int *fd)
 {
+	t_token	*tokens;
+
+	tokens = pl->tokens;
 	while (tokens != NULL)
 	{
 		if (tokens->sym == REDIR)
 		{
 			if (*(tokens->val) == '<' && *(tokens->val + 1) == '<')
 			{
-				if (!msh_execute_redir_heredoc(tokens->val, fd, heredoc_list))
+				if (!msh_execute_redir_heredoc(pl, tokens->val, fd))
 					return (0);
 			}
 			else if (*(tokens->val) == '<')

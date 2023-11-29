@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 18:19:47 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 15:51:54 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# define UNFORKED 0
+# define FORKED 1
 
 int		g_exit_status;
 

@@ -6,18 +6,20 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:49:34 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:17:47 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:43:25 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-int	msh_builtin_export(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_export(int *fd, char **cmd, t_env *env, int forked)
 {
 	int	i;
 	int	argc;
+	int	out;
 
-	(void)in;
+	out = fd[1];
+	(void)forked;
 	i = 1;
 	argc = 0;
 	g_exit_status = 0;
