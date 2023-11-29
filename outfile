@@ -1,3 +1,25 @@
-5$$
-6$$
-7$$
+declare -x TERM_PROGRAM=^@"^@Apple_Terminal"^@$
+^@declare -x SHELL=^@"^@/bin/zsh"^@$
+^@declare -x TERM=^@"^@xterm-256color"^@$
+^@declare -x TMPDIR=^@"^@/var/folders/zz/zyxvpxvq6csfxvn_n000cy940037k9/T/"^@$
+^@declare -x TERM_PROGRAM_VERSION=^@"^@433"^@$
+^@declare -x TERM_SESSION_ID=^@"^@5A341A72-379E-47DD-B597-CAC5820CFF83"^@$
+^@declare -x USER=^@"^@jho"^@$
+^@declare -x SSH_AUTH_SOCK=^@"^@/private/tmp/com.apple.launchd.k4WvcoW9b7/Listeners"^@$
+^@declare -x PATH=^@"^@/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin"^@$
+^@declare -x LaunchInstanceID=^@"^@D786C04A-CB77-4019-8268-4B2D7AE165A9"^@$
+^@declare -x PWD=^@"^@/Users/jho/desktop/msh"^@$
+^@declare -x LANG=^@"^@en_US.UTF-8"^@$
+^@declare -x XPC_FLAGS=^@"^@0x0"^@$
+^@declare -x XPC_SERVICE_NAME=^@"^@0"^@$
+^@declare -x SHLVL=^@"^@1"^@$
+^@declare -x HOME=^@"^@/Users/jho"^@$
+^@declare -x LOGNAME=^@"^@jho"^@$
+^@declare -x SECURITYSESSIONID=^@"^@186a6"^@$
+^@declare -x OLDPWD=^@"^@/Users/jho/desktop/msh/sources"^@$
+^@declare -x ZSH=^@"^@/Users/jho/.oh-my-zsh"^@$
+^@declare -x PAGER=^@"^@less"^@$
+^@declare -x LESS=^@"^@-R"^@$
+^@declare -x LSCOLORS=^@"^@Gxfxcxdxbxegedabagacad"^@$
+^@declare -x LS_COLORS=^@"^@di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"^@$
+^@

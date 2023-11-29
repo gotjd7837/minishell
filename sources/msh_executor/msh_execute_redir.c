@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 17:01:50 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/29 19:21:09 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	msh_execute_redir_read(char *val, int *fd)
 	if (open_fd == -1)
 		return (0);
 	fd[0] = open_fd;
+	free(name);
 	return (1);
 }
 
@@ -41,6 +42,7 @@ int	msh_execute_redir_write(char *val, int *fd)
 	if (fd[1] != 1 && close(fd[1]) == -1)
 		return (0);
 	fd[1] = open_fd;
+	free(name);
 	return (1);
 }
 
@@ -58,6 +60,7 @@ int	msh_execute_redir_append(char *val, int *fd)
 	if (fd[1] != 1 && close(fd[1]) == -1)
 		return (0);
 	fd[1] = open_fd;
+	free(name);
 	return (1);
 }
 
