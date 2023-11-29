@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 07:09:05 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:58:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ static long long	msh_atol(char *str)
 	return (result * flag);
 }
 
-int	msh_builtin_exit(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 {
-	(void)in;
-	(void)out;
+	(void)fd;
 	(void)env;
 	if (cmd[1] == NULL)
 		msh_exit_and_print(g_exit_status, NULL);

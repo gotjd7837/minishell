@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:27:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 07:44:27 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:01:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	msh_unset_search_env(t_env *env, char *key)
 	return (0);
 }
 
-static int	msh_unset_check_key(char *key)
+static int	msh_unset_check_key(char *key, int pipe)
 {
 	int	i;
 
@@ -69,27 +69,30 @@ static int	msh_unset_check_key(char *key)
 		{
 			printf("minishell: unset: '%s': not a valid identifier\n", key);
 			g_exit_status = 1;
+			if (pipe == 1)
+				exit (g_exit_status);
 			return (0);
 		}
 	}
 	return (1);
 }
 
-int	msh_builtin_unset(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_unset(int *fd, int pipe, char **cmd, t_env *env)
 {
 	char	**key;
 	int		i;
 
-	(void)in;
-	(void)out;
+	(void)fd;
 	(void)env;
 	g_exit_status = 0;
 	key = cmd;
 	i = 1;
 	while (key[i] != NULL)
-		msh_unset_check_key(key[i++]);
+		msh_unset_check_key(key[i++], pipe);
 	i = 1;
 	while (key[i] != NULL)
 		msh_unset_search_env(env, key[i++]);
+	if (pipe == 1)
+		exit (g_exit_status);
 	return (0);
 }

@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_builtin_export.c                               :+:      :+:    :+:   */
+/*   msh_builtin_cd_chdir.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 21:49:34 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 16:19:15 by haekang          ###   ########.fr       */
+/*   Created: 2023/11/29 16:14:44 by haekang           #+#    #+#             */
+/*   Updated: 2023/11/29 16:15:50 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-int	msh_builtin_export(int *fd, int pipe, char **cmd, t_env *env)
+int	msh_builtin_cd_chdir(char *path, char *old_pwd, int pipe)
 {
-	int	i;
-	int	argc;
-
-	i = 1;
-	argc = 0;
-	g_exit_status = 0;
-	while (cmd[argc] != NULL)
-		argc++;
-	if (argc == 1)
-		msh_export_print(env, fd[1]);
-	while (i < argc)
+	if (chdir(path))
 	{
-		if (!msh_export_create(cmd[i++], env))
-		{
-			g_exit_status = 1;
-			if (pipe == 1)
-				exit (g_exit_status);
-		}
+		free(old_pwd);
+		printf("minishell: cd: %s: No such file or directory\n", path);
+		g_exit_status = 1;
+		if (pipe == 1)
+			exit (g_exit_status);
+		return (0);
 	}
-	if (pipe == 1)
-		exit (g_exit_status);
-	return (0);
+	return (1);
 }

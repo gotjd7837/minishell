@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 14:55:22 by haekang          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:57:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ static void	msh_check_option(char **cmd, int *n_flag)
 	return ;
 }
 
-int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
+int	msh_builtin_echo(int *fd, int pipe, char **cmd, t_env *env)
 {
 	int		n_flag;
 	int		start_idx;
 	int		i;
 
-	(void)in;
 	(void)env;
 	i = 1;
 	n_flag = 0;
@@ -78,12 +77,14 @@ int	msh_builtin_echo(int in, int out, char **cmd, t_env *env)
 	msh_get_start_idx(cmd, &start_idx, 1);
 	while (cmd[start_idx] != NULL)
 	{
-		write(out, cmd[start_idx], msh_strlen(cmd[start_idx]));
+		write(fd[1], cmd[start_idx], msh_strlen(cmd[start_idx]));
 		if (cmd[++start_idx] != NULL)
-			write(out, " ", 2);
+			write(fd[1], " ", 2);
 	}
 	if (n_flag == 0)
-		write(out, "\n", 2);
+		write(fd[1], "\n", 2);
 	g_exit_status = 0;
+	if (pipe == 1)
+		exit (g_exit_status);
 	return (0);
 }
