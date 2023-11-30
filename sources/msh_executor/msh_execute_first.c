@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 17:03:15 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 16:30:51 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,59 @@
 
 int	msh_execute_first_builtin(t_pipeline *pl, int *fd, t_env *env, int forked)
 {
-	int		fd_cp[4];
 	char	**param;
 
-	fd_cp[0] = 0;
-	fd_cp[1] = fd[1];
-	if (!msh_execute_redir(pl, fd_cp))
-		return (0);
 	param = msh_token_filter_sym(pl->tokens, WORD);
-	//if (!msh_execute_redir(pl->tokens, fd, heredoc_list))
-	//	return (0);
 	if (param == NULL)
-		return (0);
-	msh_execute_builtin(fd_cp, param, env, forked);
-	if (fd_cp[0] != 0 && close(fd_cp[0]) == -1)
-		return (0);
-	if (fd_cp[1] != fd[1] && close(fd_cp[1]) == -1)
-		return (0);
-	return (1);
+	{
+		if (forked == FORKED)
+			exit(errno);
+		else
+			return (-1);
+	}
+	msh_execute_builtin(fd, param, env, forked);
+	msh_execute_free_param(param);
+	return (forked);
 }
 
-int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
+void	msh_execute_first_child(t_pipeline *pl, int *fd, t_env *env, int fk)
 {
-	int		fd_cp[4];
-	pid_t	pid;
 	char	**param;
 
-	if (msh_execute_check_builtin(pl) && !forked)
-		return (msh_execute_first_builtin(pl, fd, env, forked));
-	fd_cp[0] = 0;
-	fd_cp[1] = fd[1];
-	if (!msh_execute_redir(pl, fd_cp))
-		return (0);
-	pid = fork();
-	if (pid == -1)
-		return (0);
-	if (pid == 0)
+	if (msh_execute_check_builtin(pl))
+		msh_execute_first_builtin(pl, fd, env, fk);
+	else
 	{
 		param = msh_token_filter_sym(pl->tokens, WORD);
 		if (param == NULL)
 			exit(errno);
-		if (msh_execute_check_builtin(pl))
-			msh_execute_first_builtin(pl, fd, env, forked);
-		else
-			msh_execute_pipeline(fd_cp[0], fd_cp[1], param, env);
+		msh_execute_pipeline(fd[0], fd[1], param, env);
 	}
-	if (fd_cp[0] != 0 && close(fd_cp[0]) == -1)
-		return (0);
-	if (fd_cp[1] != fd[1] && close(fd_cp[1]) == -1)
-		return (0);
+}
+
+int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
+{
+	int		local_fd[2];
+	pid_t	pid;
+
+	local_fd[0] = 0;
+	local_fd[1] = fd[1];
+	if (msh_execute_redir(pl, local_fd) != 1)
+		return (-1);
+	if (msh_execute_check_builtin(pl) && !forked)
+		return (msh_execute_first_builtin(pl, local_fd, env, forked));
+	pid = fork();
+	if (pid == -1)
+		return (-1);
+	if (pid == 0)
+	{
+		if (fd[0] != 0 && close(fd[0]) == -1)
+			return (-1);
+		msh_execute_first_child(pl, local_fd, env, forked);
+	}
+	if (local_fd[0] != 0 && close(local_fd[0]) == -1)
+		return (-1);
+	if (local_fd[1] != fd[1] && close(local_fd[1]) == -1)
+		return (-1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 19:21:09 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 16:32:15 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,36 +64,46 @@ int	msh_execute_redir_append(char *val, int *fd)
 	return (1);
 }
 
+int	msh_execute_redir_filter(t_pipeline *pl, t_token *tokens, int *fd)
+{
+	int	stat;
+
+	if (tokens->sym == REDIR)
+	{
+		if (*(tokens->val) == '<' && *(tokens->val + 1) == '<')
+		{
+			stat = msh_execute_redir_heredoc(pl, tokens->val, fd);
+			if (stat != 1)
+				return (0);
+		}
+		else if (*(tokens->val) == '<'
+			&& !msh_execute_redir_read(tokens->val, fd))
+			return (0);
+		else if (*(tokens->val) == '>' && *(tokens->val + 1) == '>')
+		{
+			if (!msh_execute_redir_append(tokens->val, fd))
+				return (0);
+		}
+		else if (*(tokens->val) == '>')
+		{
+			if (!msh_execute_redir_write(tokens->val, fd))
+				return (0);
+		}
+	}
+	return (1);
+}
+
 int	msh_execute_redir(t_pipeline *pl, int *fd)
 {
 	t_token	*tokens;
+	int		stat;
 
 	tokens = pl->tokens;
 	while (tokens != NULL)
 	{
-		if (tokens->sym == REDIR)
-		{
-			if (*(tokens->val) == '<' && *(tokens->val + 1) == '<')
-			{
-				if (!msh_execute_redir_heredoc(pl, tokens->val, fd))
-					return (0);
-			}
-			else if (*(tokens->val) == '<')
-			{
-				if (!msh_execute_redir_read(tokens->val, fd))
-					return (0);
-			}
-			else if (*(tokens->val) == '>' && *(tokens->val + 1) == '>')
-			{
-				if (!msh_execute_redir_append(tokens->val, fd))
-					return (0);
-			}
-			else if (*(tokens->val) == '>')
-			{
-				if (!msh_execute_redir_write(tokens->val, fd))
-					return (0);
-			}
-		}
+		stat = msh_execute_redir_filter(pl, tokens, fd);
+		if (stat != 1)
+			return (stat);
 		tokens = tokens->next;
 	}
 	return (1);

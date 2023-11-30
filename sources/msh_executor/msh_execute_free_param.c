@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute_pipe_shift.c                           :+:      :+:    :+:   */
+/*   msh_execute_free_param.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 14:23:35 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 15:45:42 by jho              ###   ########.fr       */
+/*   Created: 2023/11/30 12:50:41 by jho               #+#    #+#             */
+/*   Updated: 2023/11/30 12:59:31 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
 
-int	msh_execute_pipe_shift(int *fd, int *local_fd)
+void	msh_execute_free_param(char **params)
 {
-	if (fd[0] != local_fd[0])
-		close(local_fd[0]);
-	if (fd[1] != local_fd[1])
-		close(local_fd[1]);
-	close(fd[0]);
-	close(fd[1]);
-	fd[0] = fd[2];
-	fd[1] = fd[3];
-	return (1);
+	int	index;
+
+	if (params == NULL)
+		return ;
+	index = 0;
+	while (*(params + index) != NULL)
+	{
+		free(*(params + index));
+		++index;
+	}
+	free(params);
 }

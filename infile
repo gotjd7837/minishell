@@ -1,10 +1,16 @@
-Processes: 290 total, 2 running, 288 sleeping, 1197 threads 
-2023/11/23 14:53:11
-Load Avg: 0.82, 0.81, 0.76 
-CPU usage: 5.66% user, 13.20% sys, 81.13% idle 
-SharedLibs: 372M resident, 67M data, 47M linkedit.
-MemRegions: 121420 total, 1973M resident, 163M private, 1468M shared.
-PhysMem: 7433M used (2556M wired), 25G unused.
-VM: 9560G vsize, 1997M framework vsize, 0(0) swapins, 0(0) swapouts.
-Networks: packets: 884681/430M in, 885838/1007M out.
-Disks: 122516/2435M read, 84433/1370M written.
+Makefile
+README.md
+a
+b
+c
+d
+e
+includes
+infile
+minishell
+out1
+out2
+out3
+out4
+outfile
+sources
