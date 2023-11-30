@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
+#include <string.h>
+#include <errno.h>
+
+void	msh_signal_int(int num)
+{
+	num = 0;
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -21,7 +28,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
-	set_signal();
+	signal(SIGINT, msh_signal_int);
 	env = msh_env_new_list(envp);
 	while (1)
 	{
@@ -44,7 +51,7 @@ int	main(int argc, char *argv[], char *envp[])
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		system("leaks minishell | grep leaks");
+		system("leaks minishell | grep leaked");
 	}
 	return (0);
 }

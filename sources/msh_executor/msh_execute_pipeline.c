@@ -6,11 +6,12 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:18:56 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 16:37:14 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include <string.h>
 
 void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 {
@@ -30,7 +31,10 @@ void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 		exit(errno);
 	path = msh_pathfind(param[0], env);
 	if (path == NULL)
+	{
+		printf("command not found\n");
 		exit(errno);
+	}
 	execve(path, param, envp);
 	exit(errno);
 }

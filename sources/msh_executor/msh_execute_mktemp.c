@@ -6,19 +6,14 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 02:23:26 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:46:10 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 15:36:34 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
 
-char	*msh_execute_mktemp(void)
+void	msh_execute_mktemp_template(char *temp)
 {
-	char	*temp;
-
-	temp = malloc(sizeof(char) * 18);
-	if (temp == NULL)
-		return (NULL);
 	temp[0] = '/';
 	temp[1] = 't';
 	temp[2] = 'm';
@@ -37,6 +32,16 @@ char	*msh_execute_mktemp(void)
 	temp[15] = 'c';
 	temp[16] = ' ';
 	temp[17] = '\0';
+}
+
+char	*msh_execute_mktemp(void)
+{
+	char	*temp;
+
+	temp = malloc(sizeof(char) * 18);
+	if (temp == NULL)
+		return (NULL);
+	msh_execute_mktemp_template(temp);
 	while (access(temp, 0) == 0)
 	{
 		if (temp[16] == 126)
