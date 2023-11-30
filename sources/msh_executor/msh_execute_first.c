@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_first.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 17:03:15 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 17:47:50 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 		return (0);
 	if (pid == 0)
 	{
+		set_default_signal();
 		param = msh_token_filter_sym(pl->tokens, WORD);
 		if (param == NULL)
 			exit(errno);
