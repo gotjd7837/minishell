@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 16:11:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/01 18:05:30 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,12 @@ int	msh_execute_redir_heredoc_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-void	msh_execute_redir_heredoc_child_signal(int num)
-{
-	num = 0;
-	exit(0);
-}
-
 void	msh_heredoc(char *limiter, int fd, t_env *env)
 {
 	char	*expanded;
 	char	*line;
 
-	signal(SIGINT, msh_execute_redir_heredoc_child_signal);
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
@@ -66,7 +60,6 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
 	int		stat;
 	pid_t	pid;
 
-	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -77,10 +70,8 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
 	if (WEXITSTATUS(stat) == 0)
 	{
 		g_exit_status = -1;
-		signal(SIGQUIT, msh_handler_blocking_ctrl_slash);
 		return (-1);
 	}
-	signal(SIGQUIT, msh_handler_blocking_ctrl_slash);
 	return (1);
 }
 
