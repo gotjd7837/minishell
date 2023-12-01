@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_redir.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 15:54:49 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 16:35:36 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include "../../includes/msh_signal.h"
 
 int	msh_execute_redir_read(char *val, int *fd)
 {
@@ -101,6 +102,7 @@ int	msh_execute_redir(t_pipeline *pl, int *fd, t_env *env)
 	t_token	*tokens;
 	int		stat;
 
+	signal(SIGINT, msh_handler_heredoc_ctrl_c);
 	tokens = pl->tokens;
 	while (tokens != NULL)
 	{

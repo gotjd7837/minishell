@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:32:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 16:19:31 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/01 14:31:39 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_pipeline	*msh_tokenize_and_create_pipelines(char *s)
 		}
 		if (!msh_pipeline_add_node(&head, pipeline))
 			return (msh_pipeline_free_list(head));
-		if (*(s + idx) != '\0')
+		if (*(s + idx) == '|')
 			idx++;
 	}
 	return (head);

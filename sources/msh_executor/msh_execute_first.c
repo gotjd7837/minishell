@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_first.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 19:10:12 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 16:00:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include "../../includes/msh_signal.h"
 
 int	msh_execute_first_builtin(t_pipeline *pl, int *fd, t_env *env, int forked)
 {
@@ -60,10 +61,12 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 		return (-1);
 	if (pid == 0)
 	{
+		msh_set_default_signal();
 		if (fd[0] != 0 && close(fd[0]) == -1)
 			return (-1);
 		msh_execute_first_child(pl, local_fd, env, forked);
 	}
+	msh_set_blocking_signal();
 	if (local_fd[0] != 0 && close(local_fd[0]) == -1)
 		return (-1);
 	if (local_fd[1] != fd[1] && close(local_fd[1]) == -1)
