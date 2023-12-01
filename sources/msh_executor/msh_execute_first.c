@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 16:30:51 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 19:10:12 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 
 	local_fd[0] = 0;
 	local_fd[1] = fd[1];
-	if (msh_execute_redir(pl, local_fd) != 1)
+	if (msh_execute_redir(pl, local_fd, env) != 1)
 		return (-1);
 	if (msh_execute_check_builtin(pl) && !forked)
 		return (msh_execute_first_builtin(pl, local_fd, env, forked));
