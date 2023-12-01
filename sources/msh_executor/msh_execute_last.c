@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 16:17:20 by jho              ###   ########.fr       */
+/*   Updated: 2023/11/30 19:10:24 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	msh_execute_last(t_pipeline *pl, int *fd, t_env *env)
 	close(fd[1]);
 	local_fd[0] = fd[0];
 	local_fd[1] = 1;
-	if (msh_execute_redir(pl, local_fd) != 1)
+	if (msh_execute_redir(pl, local_fd, env) != 1)
 		return (-1);
 	pid = fork();
 	if (pid == -1)

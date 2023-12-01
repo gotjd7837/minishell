@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:51:03 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 09:51:34 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/01 15:43:50 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	**msh_split(char *s, char c);
 char	*msh_strjoin(char *s1, char *s2);
 size_t	msh_strlcpy(char *dst, char *src, size_t dstsize);
 char	*msh_itoa(int n);
+char	*msh_remove_whitespace(char *s);
 
 #endif

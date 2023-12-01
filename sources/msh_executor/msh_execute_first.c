@@ -52,7 +52,7 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 
 	local_fd[0] = 0;
 	local_fd[1] = fd[1];
-	if (msh_execute_redir(pl, local_fd) != 1)
+	if (msh_execute_redir(pl, local_fd, env) != 1)
 		return (-1);
 	if (msh_execute_check_builtin(pl) && !forked)
 		return (msh_execute_first_builtin(pl, local_fd, env, forked));

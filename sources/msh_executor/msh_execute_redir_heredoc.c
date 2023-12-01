@@ -33,8 +33,9 @@ void	msh_execute_redir_heredoc_child_signal(int num)
 	exit(0);
 }
 
-void	msh_heredoc(char *limiter, int fd)
+void	msh_heredoc(char *limiter, int fd, t_env *env)
 {
+	char	*expanded;
 	char	*line;
 
 	signal(SIGINT, msh_execute_redir_heredoc_child_signal);
@@ -53,13 +54,14 @@ void	msh_heredoc(char *limiter, int fd)
 			free(line);
 			break ;
 		}
-		write(fd, line, msh_strlen(line));
+		expanded = msh_expand_heredoc(line, env);
+		write(fd, expanded, msh_strlen(expanded));
 		free(line);
 	}
 	exit(1);
 }
 
-int	msh_execute_redir_heredoc_input(char *limiter, int fd)
+int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
 {
 	int		stat;
 	pid_t	pid;
@@ -69,7 +71,7 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd)
 	if (pid == -1)
 		return (0);
 	else if (pid == 0)
-		msh_heredoc(limiter, fd);
+		msh_heredoc(limiter, fd, env);
 	if (waitpid(pid, &stat, 0) == -1)
 		return (0);
 	if (WEXITSTATUS(stat) == 0)
@@ -82,13 +84,14 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd)
 	return (1);
 }
 
-int	msh_execute_redir_heredoc(t_pipeline *pl, char *limiter, int *fd)
+int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 {
 	char	*name;
 	int		stat;
 
-	limiter = msh_substr(limiter, 2, msh_strlen(limiter));
-	if (limiter == NULL)
+	lim = msh_substr(lim, 2, msh_strlen(lim));
+	lim = msh_remove_whitespace(lim);
+	if (lim == NULL)
 		return (0);
 	name = msh_execute_mktemp();
 	if (fd[0] != 0 && close(fd[0]) == -1)
@@ -97,8 +100,8 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *limiter, int *fd)
 	if (fd[0] == -1)
 		return (0);
 	msh_pipeline_add_heredoc(pl, msh_heredoc_malloc(fd[0], name));
-	stat = msh_execute_redir_heredoc_input(limiter, fd[0]);
-	free(limiter);
+	stat = msh_execute_redir_heredoc_input(lim, fd[0], env);
+	free(lim);
 	if (close(fd[0]) == -1)
 		return (0);
 	if (stat != -1)
