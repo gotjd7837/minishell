@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 15:14:38 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 15:44:51 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	msh_heredoc(char *limiter, int fd, t_env *env)
 		expanded = msh_expand_heredoc(line, env);
 		write(fd, expanded, msh_strlen(expanded));
 		free(line);
-		//free(expanded);
 	}
 	exit(1);
 }
@@ -86,6 +85,7 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 	int		stat;
 
 	lim = msh_substr(lim, 2, msh_strlen(lim));
+	lim = msh_remove_whitespace(lim);
 	if (lim == NULL)
 		return (0);
 	name = msh_execute_mktemp();

@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 19:07:27 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 15:54:49 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	msh_execute_redir_read(char *val, int *fd)
 	char	*name;
 
 	name = msh_substr(val, 1, msh_strlen(val));
+	name = msh_remove_whitespace(name);
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_RDONLY);
@@ -34,6 +35,7 @@ int	msh_execute_redir_write(char *val, int *fd)
 	char	*name;
 
 	name = msh_substr(val, 1, msh_strlen(val));
+	name = msh_remove_whitespace(name);
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -52,6 +54,7 @@ int	msh_execute_redir_append(char *val, int *fd)
 	char	*name;
 
 	name = msh_substr(val, 2, msh_strlen(val));
+	name = msh_remove_whitespace(name);
 	if (name == NULL)
 		return (0);
 	open_fd = open(name, O_WRONLY | O_CREAT | O_APPEND, 0644);
