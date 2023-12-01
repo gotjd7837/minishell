@@ -6,18 +6,14 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 16:15:28 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 16:25:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
 #include <string.h>
 #include <errno.h>
-
-void	msh_signal_int(int num)
-{
-	num = 0;
-}
+#include "../../includes/msh_signal.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -28,25 +24,30 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
-	signal(SIGINT, msh_signal_int);
 	env = msh_env_new_list(envp);
 	while (1)
 	{
+		msh_set_signal();
 		input = readline("msh$> ");
+		if (input == NULL)
+		{
+			msh_terminal_print_on();
+			exit (0);
+		}
+		if (*input == '\0')
+			continue ;
 		expanded = msh_expand(input, env);
 		pipelines = msh_lex(expanded);
 		if (pipelines == NULL)
 		{
 			printf("Lex error\n");
-			free(input);
-			free(expanded);
-			continue ;
+			return (1);
 		}
 		msh_execute(pipelines, env);
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		system("leaks minishell | grep leaked");
+		// system("leaks minishell | grep leaked");
 	}
 	return (0);
 }

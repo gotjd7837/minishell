@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_redir_heredoc.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 16:34:12 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/01 16:11:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_executor.h"
+#include "../../includes/msh_signal.h"
 
 int	msh_execute_redir_heredoc_strcmp(char *s1, char *s2)
 {
@@ -37,6 +38,7 @@ void	msh_heredoc(char *limiter, int fd)
 	char	*line;
 
 	signal(SIGINT, msh_execute_redir_heredoc_child_signal);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		write(1, "> ", 2);
@@ -62,6 +64,7 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd)
 	int		stat;
 	pid_t	pid;
 
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -72,8 +75,10 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd)
 	if (WEXITSTATUS(stat) == 0)
 	{
 		g_exit_status = -1;
+		signal(SIGQUIT, msh_handler_blocking_ctrl_slash);
 		return (-1);
 	}
+	signal(SIGQUIT, msh_handler_blocking_ctrl_slash);
 	return (1);
 }
 
