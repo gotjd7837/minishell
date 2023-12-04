@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:20:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/01 20:24:52 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:53:09 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	*msh_find_cmd_abspath(char **path, char *cmd)
 
 	if (msh_is_path(cmd) == 1)
 	{
-		printf("sdf\n");
-		// /bin일떄 엑세스 성공함 ?
 		return (msh_check_cmd_exist(cmd));
 	}
 	i = 0;

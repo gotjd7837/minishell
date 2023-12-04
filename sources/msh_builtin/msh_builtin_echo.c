@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 17:46:39 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:54:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int	msh_builtin_echo(int *fd, int pipe, char **cmd, t_env *env)
 	{
 		write(fd[1], cmd[start_idx], msh_strlen(cmd[start_idx]));
 		if (cmd[++start_idx] != NULL)
-			write(fd[1], " ", 2);
+			write(fd[1], " ", 1);
 	}
 	if (n_flag == 0)
-		write(fd[1], "\n", 2);
+		write(fd[1], "\n", 1);
 	g_exit_status = 0;
 	if (pipe == 1)
 		exit(g_exit_status);

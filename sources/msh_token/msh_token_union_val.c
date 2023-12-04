@@ -6,14 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:11:24 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 19:34:19 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:08:14 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_token.h"
-#include "../../includes/msh_util.h"
 
-char	* msh_token_union_val(t_token *token)
+char	*msh_token_union_val(t_token *token)
 {
 	int		len;
 	char	*unioned;

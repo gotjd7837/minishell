@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:10:18 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 15:51:59 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:54:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	msh_print_key_value(int out, char *key, char *value)
 {
 	write(out, "declare -x ", msh_strlen("declare -x "));
 	write(out, key, msh_strlen(key));
-	write(out, "=", 2);
-	write(out, "\"", 2);
+	write(out, "=", 1);
+	write(out, "\"", 1);
 	write(out, value, msh_strlen(value));
-	write(out, "\"", 2);
-	write(out, "\n", 2);
+	write(out, "\"", 1);
+	write(out, "\n", 1);
 }
 
 int	msh_export_print(t_env *env, int out)
@@ -34,7 +34,7 @@ int	msh_export_print(t_env *env, int out)
 		{
 			write(out, "declare -x ", msh_strlen("declare -x "));
 			write(out, node->key, msh_strlen(node->key));
-			write(out, "\n", 2);
+			write(out, "\n", 1);
 		}
 		else if (!msh_strcmp(node->key, "_"))
 		{

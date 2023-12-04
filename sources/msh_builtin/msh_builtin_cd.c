@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 16:14:54 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/04 16:28:41 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,10 @@ static char	*msh_get_pwd(int pipe)
 {
 	char	*pwd;
 
+	(void)pipe;
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-	{
-		printf("getcwd error\n");
-		g_exit_status = 1;
-		if (pipe == 1)
-			exit (g_exit_status);
 		return (NULL);
-	}
 	return (pwd);
 }
 
@@ -50,10 +45,15 @@ static void	msh_fix_pwd_oldpwd(t_env *env, char *old_pwd, int pipe)
 	t_env	*pwd_node;
 	t_env	*oldpwd_node;
 
+	if (old_pwd == NULL)
+		return ;
 	pwd_node = msh_env_get_node(env, "PWD");
 	oldpwd_node = msh_env_get_node(env, "OLDPWD");
 	if (oldpwd_node == NULL)
-		free(old_pwd);
+	{
+		if (old_pwd != NULL)
+			free(old_pwd);
+	}
 	else
 	{
 		free(oldpwd_node->value);
@@ -76,7 +76,8 @@ static int	msh_cd_env(t_env *env, char *key, char *old_pwd, int pipe)
 		path = msh_cd_env_get_value(env, "HOME");
 		if (path == NULL)
 		{
-			free(old_pwd);
+			if (old_pwd != NULL)
+				free(old_pwd);
 			printf("minishell: cd: HOME not set\n");
 			g_exit_status = 1;
 			if (pipe == 1)
@@ -98,8 +99,6 @@ int	msh_builtin_cd(int *fd, int pipe, char **cmd, t_env *env)
 	(void)fd;
 	g_exit_status = 0;
 	old_pwd = msh_get_pwd(pipe);
-	if (old_pwd == NULL)
-		return (0);
 	if (cmd[1] == NULL || msh_strcmp(cmd[1], "~") == 0)
 		return (msh_cd_env(env, "HOME", old_pwd, pipe));
 	else if (cmd[1][0] == '$' && cmd[1][1] != '\0')
