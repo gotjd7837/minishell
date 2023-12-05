@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:26:38 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 15:26:58 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:57:30 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_pipeline	*msh_pipeline_malloc(void)
 	pipeline->tokens = NULL;
 	pipeline->next = NULL;
 	pipeline->heredoc = NULL;
+	pipeline->pid = -1;
 	return (pipeline);
 }

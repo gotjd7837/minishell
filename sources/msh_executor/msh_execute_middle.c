@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:44 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:20:27 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:57:12 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ void	msh_execute_middle_child(t_pipeline *pl, int *fd1, int *fd2, t_env *env)
 		msh_execute_middle_no_builtin(pl, fd2, env);
 }
 
-int	msh_execute_middle(t_pipeline *pl, int *fd, t_env *env, int *total)
+int	msh_execute_middle(t_pipeline *pl, int *fd, t_env *env)
 {
-	pid_t	pid;
 	int		local_fd[4];
 
 	while (pl->next != NULL)
@@ -57,12 +56,11 @@ int	msh_execute_middle(t_pipeline *pl, int *fd, t_env *env, int *total)
 			local_fd[1] = fd[3];
 			if (msh_execute_redir(pl, local_fd, env) != 1)
 				return (-1);
-			pid = fork();
-			if (pid == -1)
+			pl->pid = fork();
+			if (pl->pid == -1)
 				msh_exit(errno);
-			if (pid == 0)
+			if (pl->pid == 0)
 				msh_execute_middle_child(pl, fd, local_fd, env);
-			++(*total);
 		}
 		if (!msh_execute_pipe_shift(fd, local_fd))
 			msh_exit(errno);

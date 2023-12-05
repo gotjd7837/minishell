@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:12:31 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:50:24 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	msh_execute_first_child(t_pipeline *pl, int *fd, t_env *env, int fk)
 int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 {
 	int		local_fd[2];
-	pid_t	pid;
 
 	local_fd[0] = 0;
 	local_fd[1] = fd[1];
@@ -56,10 +55,10 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 		return (-1);
 	if (msh_execute_check_builtin(pl) && !forked)
 		return (msh_execute_first_builtin(pl, local_fd, env, forked));
-	pid = fork();
-	if (pid == -1)
+	pl->pid = fork();
+	if (pl->pid == -1)
 		msh_exit(errno);
-	if (pid == 0)
+	if (pl->pid == 0)
 	{
 		msh_set_default_signal();
 		if (fd[0] != 0 && close(fd[0]) == -1)

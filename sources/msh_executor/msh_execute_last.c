@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:12:57 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 17:01:01 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	msh_execute_last_child(t_pipeline *pl, int *fd, t_env *env)
 
 int	msh_execute_last(t_pipeline *pl, int *fd, t_env *env)
 {
-	pid_t	pid;
 	int		local_fd[4];
 
 	close(fd[1]);
@@ -44,10 +43,10 @@ int	msh_execute_last(t_pipeline *pl, int *fd, t_env *env)
 	local_fd[1] = 1;
 	if (msh_execute_redir(pl, local_fd, env) != 1)
 		return (-1);
-	pid = fork();
-	if (pid == -1)
+	pl->pid = fork();
+	if (pl->pid == -1)
 		msh_exit(errno);
-	else if (pid == 0)
+	else if (pl->pid == 0)
 		msh_execute_last_child(pl, local_fd, env);
 	close(fd[0]);
 	close(local_fd[0]);

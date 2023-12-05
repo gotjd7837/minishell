@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:44:00 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:31:54 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:47:43 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_pipeline
 	t_token				*tokens;
 	struct s_pipeline	*next;
 	t_heredoc			*heredoc;
+	pid_t				pid;
 }	t_pipeline;
 
 t_heredoc	*msh_heredoc_malloc(int fd, char *name);

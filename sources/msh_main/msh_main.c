@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 10:58:46 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:18:32 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		if (*input == '\0')
 			continue ;
+		add_history(input);
 		expanded = msh_expand(input, env);
 		pipelines = msh_lex(expanded);
 		if (pipelines == NULL)
-		{
 			printf("Lex error\n");
-			return (1);
-		}
-		add_history(input);
-		msh_execute(pipelines, env);
+		else
+			msh_execute(pipelines, env);
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		system("leaks minishell | grep leaked");
+		//system("leaks minishell | grep leaked");
 	}
 	return (0);
 }

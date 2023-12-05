@@ -12,7 +12,7 @@
 
 #include "../../includes/msh_executor.h"
 
-int	msh_execute_wait_children(int children_num, int status)
+int	msh_execute_wait_children(t_pipeline *pl, int status)
 {
 	int	child_status;
 	int	is_signal;
@@ -24,17 +24,18 @@ int	msh_execute_wait_children(int children_num, int status)
 	}
 	else
 		is_signal = 0;
-	while (--children_num > -1)
+	while (pl != NULL && pl->pid != -1)
 	{
-		if (wait(&child_status) == -1)
+		if (waitpid(pl->pid, &child_status, 0) == -1)
 			msh_exit(errno);
-		if (is_signal)
+		if (!is_signal)
 			g_exit_status = WEXITSTATUS(child_status);
+		pl = pl->next;
 	}
 	return (status);
 }
 
-int	msh_execute_single(t_pipeline *pipelines, int *fd, t_env *env, int *total)
+int	msh_execute_single(t_pipeline *pipelines, int *fd, t_env *env)
 {
 	int	children_num;
 
@@ -42,62 +43,54 @@ int	msh_execute_single(t_pipeline *pipelines, int *fd, t_env *env, int *total)
 	fd[1] = 1;
 	children_num = msh_execute_first(pipelines, fd, env, UNFORKED);
 	if (children_num == -1)
-		return (msh_execute_wait_children(*total, 0));
-	else
-		*total += children_num;
+		return (0);
 	return (1);
 }
 
-int	msh_execute_single_fork(t_pipeline *pl, int *fd, t_env *env, int *total)
+int	msh_execute_single_fork(t_pipeline *pl, int *fd, t_env *env)
 {
 	int	children_num;
 
 	children_num = msh_execute_first(pl, fd, env, FORKED);
 	if (children_num == -1)
-		return (msh_execute_wait_children(*total, 0));
-	else
-		*total += children_num;
+		return (0);
 	return (1);
 }
 
-int	msh_execute_multiple(t_pipeline *pl, int *fd, t_env *env, int *total)
+int	msh_execute_multiple(t_pipeline *pl, int *fd, t_env *env)
 {
 	int	children_num;
 
 	if (pl->next->next != NULL)
 	{
-		children_num = msh_execute_middle(pl->next, fd, env, total);
+		children_num = msh_execute_middle(pl->next, fd, env);
 		if (children_num == -1)
-			return (msh_execute_wait_children(*total, 0));
+			return (0);
 	}
 	return (1);
 }
 
-int	msh_execute(t_pipeline *pipelines, t_env *env)
+int	msh_execute(t_pipeline *pl, t_env *env)
 {
-	int			children_num;
-	int			total_children;
+	int			stat;
 	int			fd[4];
 
-	total_children = 0;
-	if (pipelines->next == NULL)
+	if (pl->next == NULL)
 	{
-		if (!msh_execute_single(pipelines, fd, env, &total_children))
+		if (!msh_execute_single(pl, fd, env))
 			return (0);
 	}
 	else
 	{
 		if (pipe(fd) == -1)
 			return (0);
-		if (!msh_execute_single_fork(pipelines, fd, env, &total_children))
-			return (0);
-		if (!msh_execute_multiple(pipelines, fd, env, &total_children))
-			return (0);
-		children_num = msh_execute_last(msh_pipeline_last(pipelines), fd, env);
-		if (children_num == -1)
-			return (msh_execute_wait_children(total_children, 0));
-		else
-			total_children += children_num;
+		if (!msh_execute_single_fork(pl, fd, env))
+			return (msh_execute_wait_children(pl, 0));
+		if (!msh_execute_multiple(pl, fd, env))
+			return (msh_execute_wait_children(pl, 0));
+		stat = msh_execute_last(msh_pipeline_last(pl), fd, env);
+		if (stat == -1)
+			return (msh_execute_wait_children(pl, 0));
 	}
-	return (msh_execute_wait_children(total_children, 1));
+	return (msh_execute_wait_children(pl, 1));
 }
