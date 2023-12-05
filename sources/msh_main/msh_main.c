@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 16:25:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 10:58:46 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ int	main(int argc, char *argv[], char *envp[])
 			printf("Lex error\n");
 			return (1);
 		}
+		add_history(input);
 		msh_execute(pipelines, env);
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		// system("leaks minishell | grep leaked");
+		system("leaks minishell | grep leaked");
 	}
 	return (0);
 }
