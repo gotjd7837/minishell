@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:14:06 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 17:14:43 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 		exit(errno);
 	if (out != 1 && close(out) == -1)
 		exit(errno);
-	execve(path, param, envp);
+	if (execve(path, param, envp) == -1)
+	{
+		printf("minishell: %s: %s\n", param[0], strerror(errno));
+		exit (errno);
+	}
 	msh_exit(errno);
 }

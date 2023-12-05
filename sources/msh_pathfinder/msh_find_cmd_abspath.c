@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:20:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/04 20:09:43 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 17:08:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/stat.h>
+
+int	is_directory_2(const char *path)
+{
+	struct stat	path_stat;
+
+	stat(path, &path_stat);
+	return (S_ISDIR(path_stat.st_mode));
+}
 
 char	*msh_find_cmd_abspath(char **path, char *cmd)
 {
@@ -37,6 +45,11 @@ char	*msh_find_cmd_abspath(char **path, char *cmd)
 	while (path[i] != NULL)
 	{
 		cmd_path = msh_strjoin(path[i], slash_cmd);
+		if (is_directory_2(cmd) == 1)
+		{
+			printf("minishell: %s: is a directory\n", cmd);
+			exit (126);
+		}
 		if (access(cmd_path, X_OK) == 0)
 		{
 			free(slash_cmd);
@@ -46,5 +59,5 @@ char	*msh_find_cmd_abspath(char **path, char *cmd)
 		i++;
 	}
 	printf("minishell: %s: command not found\n", cmd);
-	exit(errno);
+	exit(127);
 }

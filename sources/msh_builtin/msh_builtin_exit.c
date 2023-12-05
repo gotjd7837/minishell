@@ -6,19 +6,19 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 19:45:29 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 16:23:27 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_builtin.h"
 
-static int	msh_exit_and_print(int exit_status, char *s, int out, int pipe)
+static int	msh_exit_and_print(int exit_code, char *s, int out, int pipe)
 {
 	if (pipe != 1)
 		write (out, "exit\n", 6);
 	if (s != NULL)
 		printf("minishell: exit: %s: numeric argument required\n", s);
-	exit(exit_status);
+	exit(exit_code);
 }
 
 static int	msh_check_overflow(char *str)
