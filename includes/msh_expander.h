@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:57:30 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 14:47:44 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 11:32:24 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "msh.h"
 
 char		*msh_expand(char *s, t_env *env);
+int			msh_trim_both_end(t_token **tokens);
 char		*msh_expand_heredoc(char *s, t_env *env);
 int			msh_replace_env(t_token **tokens, t_env *env);
 t_token		*msh_replace_tokenize(char *s);
