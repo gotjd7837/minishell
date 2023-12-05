@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pathfind.c                                     :+:      :+:    :+:   */
+/*   msh_pathfinder_is_dir.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 15:44:27 by jho               #+#    #+#             */
-/*   Updated: 2023/12/04 20:04:34 by haekang          ###   ########.fr       */
+/*   Created: 2023/12/05 17:52:39 by haekang           #+#    #+#             */
+/*   Updated: 2023/12/05 17:54:48 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_pathfinder.h"
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/stat.h>
-char	*msh_pathfind(char *cmd, t_env *env)
-{
-	char	**path;
-	char	*cmd_path;
 
-	path = msh_find_env_path(env);
-	cmd_path = msh_find_cmd_abspath(path, cmd);
-	if (cmd_path == NULL)
+int	msh_pathfinder_is_dir(const char *path)
+{
+	struct stat	path_stat;
+
+	stat(path, &path_stat);
+	if (S_ISDIR(path_stat.st_mode) == 1)
 	{
-		printf("minishell: %s: %s\n", cmd, strerror(errno));
-		exit (errno);
+		printf("minishell: %s: is a directory\n", path);
+		exit (126);
 	}
-	return (cmd_path);
+	return (S_ISDIR(path_stat.st_mode));
 }

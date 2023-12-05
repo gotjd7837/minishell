@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_is_path.c                                      :+:      :+:    :+:   */
+/*   msh_pathfinder_find_env_path.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 17:21:52 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 17:53:59 by haekang          ###   ########.fr       */
+/*   Created: 2023/11/03 17:19:27 by haekang           #+#    #+#             */
+/*   Updated: 2023/12/05 17:56:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh_pathfinder.h"
 
-int	msh_is_path(char *cmd)
+char	**msh_pathfinder_find_env_path(t_env *env)
 {
-	while (*cmd)
+	char	**res;
+	char	*path;
+
+	path = msh_env_get_value(env, "PATH");
+	if (*path == '\0')
 	{
-		if (*cmd == '/')
-			return (1);
-		cmd++;
+		free(path);
+		return (NULL);
 	}
-	return (0);
+	res = msh_split(path, ':');
+	if (res == NULL)
+		return (NULL);
+	return (res);
 }
