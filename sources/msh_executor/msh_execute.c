@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:10:50 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 16:30:21 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	msh_execute_wait_children(int children_num, int status)
 	{
 		if (wait(&child_status) == -1)
 			msh_exit(errno);
-		if (is_signal)
+		if (!is_signal)
 			g_exit_status = WEXITSTATUS(child_status);
 	}
 	return (status);
