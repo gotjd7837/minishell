@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_free_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:08:59 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:03:14 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:31 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 t_env	*msh_env_free_node(t_env *node)
 {

@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 17:01:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:17 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
+#include "../../includes/msh.h"
 
 int	msh_execute_last_builtin(int *fd, t_env *env, char **param)
 {

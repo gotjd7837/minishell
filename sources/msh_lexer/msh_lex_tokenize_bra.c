@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_tokenize_bra.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 08:48:09 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:48:16 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:42:34 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_lexer.h"
+#include "../../includes/msh.h"
 
 int	msh_lex_tokenize_bra(t_token **sym_table, char *s)
 {

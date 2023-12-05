@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_get_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 08:23:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:03:09 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:34 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 t_env	*msh_env_get_node(t_env *env, char *key)
 {

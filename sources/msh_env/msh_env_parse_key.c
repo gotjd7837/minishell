@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_parse_key.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:07:28 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:02:44 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:50 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 char	*msh_env_parse_key(char *envp)
 {

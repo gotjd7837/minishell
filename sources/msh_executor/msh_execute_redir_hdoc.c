@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute_redir_heredoc.c                        :+:      :+:    :+:   */
+/*   msh_execute_redir_hdoc.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
-#include "../../includes/msh_signal.h"
+#include "../../includes/msh.h"
 
-int	msh_execute_redir_heredoc_strcmp(char *s1, char *s2)
+int	msh_execute_redir_hdoc_strcmp(char *s1, char *s2)
 {
 	while (*s1 != '\n' && *s1 != '\0')
 	{
@@ -43,7 +42,7 @@ void	msh_heredoc(char *limiter, int fd, t_env *env)
 			free(limiter);
 			break ;
 		}
-		if (msh_execute_redir_heredoc_strcmp(line, limiter) == 0)
+		if (msh_execute_redir_hdoc_strcmp(line, limiter) == 0)
 		{
 			free(line);
 			break ;
@@ -56,7 +55,7 @@ void	msh_heredoc(char *limiter, int fd, t_env *env)
 	exit(1);
 }
 
-int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
+int	msh_execute_redir_hdoc_input(char *limiter, int fd, t_env *env)
 {
 	int		stat;
 	pid_t	pid;
@@ -76,7 +75,7 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
 	return (1);
 }
 
-int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
+int	msh_execute_redir_hdoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 {
 	char	*name;
 	int		stat;
@@ -92,7 +91,7 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 	if (fd[0] == -1)
 		msh_exit(errno);
 	msh_pipeline_add_heredoc(pl, msh_heredoc_malloc(fd[0], name));
-	stat = msh_execute_redir_heredoc_input(lim, fd[0], env);
+	stat = msh_execute_redir_hdoc_input(lim, fd[0], env);
 	free(lim);
 	if (close(fd[0]) == -1)
 		return (0);

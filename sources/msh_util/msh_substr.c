@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:30:58 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:34:26 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:40:36 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../../includes/msh.h"
 
 char	*msh_substr(char *str, int begin, int end)
 {

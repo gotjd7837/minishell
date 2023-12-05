@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 16:23:27 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 20:08:04 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 static int	msh_exit_and_print(int exit_code, char *s, int out, int pipe)
 {
@@ -105,8 +105,8 @@ int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 		if (!msh_check_overflow(cmd[1]))
 			msh_exit_and_print(255, cmd[1], fd[1], pipe);
 		else
-			msh_exit_and_print((unsigned char)msh_atol(cmd[1])
-				, NULL, fd[1], pipe);
+			msh_exit_and_print((unsigned char)msh_atol(cmd[1]),
+				NULL, fd[1], pipe);
 	}
 	return (0);
 }

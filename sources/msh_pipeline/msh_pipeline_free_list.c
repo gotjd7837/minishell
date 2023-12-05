@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:28:20 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:51:51 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 20:03:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pipeline.h"
+#include "../../includes/msh.h"
 
-void		msh_pipeline_free_list_heredoc(t_heredoc *heredoc)
+void	msh_pipeline_free_list_heredoc(t_heredoc *heredoc)
 {
 	t_heredoc	*next;
 

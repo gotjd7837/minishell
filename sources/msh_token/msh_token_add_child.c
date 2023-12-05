@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_add_child.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:14:41 by jho               #+#    #+#             */
-/*   Updated: 2023/10/31 00:13:53 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:04 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 void	msh_token_add_child(t_token **parent, t_token *child)
 {

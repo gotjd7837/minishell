@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_pipe_shift.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:35 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 15:45:42 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:31 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
+#include "../../includes/msh.h"
 
 int	msh_execute_pipe_shift(int *fd, int *local_fd)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_remove_front.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:29:23 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 21:56:07 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:39:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 void	msh_token_remove_front(t_token **tokens)
 {

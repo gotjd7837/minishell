@@ -6,15 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:24:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 18:03:16 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:55 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/stat.h>
+#include "../../includes/msh.h"
 
 char	*msh_pathfinder_check_path_exist(char *cmd)
 {

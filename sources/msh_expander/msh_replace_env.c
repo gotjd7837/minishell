@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_replace_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 21:30:15 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:10 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 int	msh_replace_env_2(t_token *tokens_cpy, t_env *env)
 {

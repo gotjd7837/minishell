@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pipeline_malloc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:26:38 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 16:57:30 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:40 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pipeline.h"
+#include "../../includes/msh.h"
 
 t_pipeline	*msh_pipeline_malloc(void)
 {

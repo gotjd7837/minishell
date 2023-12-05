@@ -6,12 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 08:50:12 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 16:23:51 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_lexer.h"
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 int	msh_lex_tokenize_word_qoutes_find_last_idx(char *s)
 {

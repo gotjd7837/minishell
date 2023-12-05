@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_middle.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:44 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 16:57:12 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
+#include "../../includes/msh.h"
 
 int	msh_execute_middle_builtin(t_pipeline *pl, int *fd, t_env *env)
 {

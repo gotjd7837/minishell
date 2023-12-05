@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_print_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:40:12 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 21:09:30 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:39:08 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
-#include <stdio.h>
+#include "../../includes/msh.h"
 
 void	msh_token_print_list(t_token *list)
 {

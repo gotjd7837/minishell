@@ -6,12 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 16:50:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:11 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
-#include "../../includes/msh_signal.h"
+#include "../../includes/msh.h"
 
 int	msh_execute_first_builtin(t_pipeline *pl, int *fd, t_env *env, int forked)
 {

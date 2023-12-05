@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_add_next.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:11:22 by jho               #+#    #+#             */
-/*   Updated: 2023/11/14 14:38:07 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:07 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 void	msh_token_add_next(t_token **head, t_token *token)
 {

@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:47:19 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/01 17:50:27 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_signal.h"
+#include "../../includes/msh.h"
 
 void	msh_terminal_print_off(void)
 {

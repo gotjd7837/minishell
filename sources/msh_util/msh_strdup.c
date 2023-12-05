@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_strdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:12:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:12:54 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:40:13 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_util.h"
+#include "../../includes/msh.h"
 
 char	*msh_strdup(char *s1)
 {

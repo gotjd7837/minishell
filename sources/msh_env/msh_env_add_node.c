@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_add_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:10:17 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:09:39 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 int	msh_env_add_node(t_env **list, char *envp)
 {

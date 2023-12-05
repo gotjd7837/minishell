@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:27:02 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 17:12:32 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:40:25 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_util.h"
+#include "../../includes/msh.h"
 
 size_t	msh_strlcpy(char *dst, char *src, size_t dstsize)
 {

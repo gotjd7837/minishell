@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_len_val.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:18:36 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:25:37 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:49 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
-#include "../../includes/msh_util.h"
+#include "../../includes/msh.h"
 
 int	msh_token_len_val(t_token *token)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_free_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:10:43 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:03:19 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:28 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 t_env	*msh_env_free_list(t_env *list)
 {

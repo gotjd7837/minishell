@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_vqoutes_idx.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:37:15 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 15:37:35 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:25 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/msh.h"
 
 void	msh_vqoutes_idx(char *s, int **v_idx)
 {

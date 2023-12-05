@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:42:23 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 14:16:34 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 20:03:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 static char	*msh_malloc_key_value(t_env *env)
 {

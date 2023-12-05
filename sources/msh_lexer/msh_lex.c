@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:32:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 18:51:08 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_lexer.h"
+#include "../../includes/msh.h"
 
 static int	msh_lex_check_pipe(char *s)
 {

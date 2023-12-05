@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:19:27 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 17:56:45 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
+#include "../../includes/msh.h"
 
 char	**msh_pathfinder_find_env_path(t_env *env)
 {

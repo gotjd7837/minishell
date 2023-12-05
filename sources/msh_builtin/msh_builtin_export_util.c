@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_builtin_export_utill.c                         :+:      :+:    :+:   */
+/*   msh_builtin_export_util.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:22:20 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:14:46 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 int	msh_export_key_exist(t_env *env, char *key)
 {

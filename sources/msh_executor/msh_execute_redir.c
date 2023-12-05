@@ -6,14 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:22:26 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
-#include "../../includes/msh_signal.h"
-#include <stdio.h>
-#include <errno.h>
+#include "../../includes/msh.h"
 
 int	msh_execute_redir_read(char *val, int *fd)
 {
@@ -82,7 +79,7 @@ int	msh_execute_redir_filter(t_pipeline *pl, t_token *tk, int *fd, t_env *env)
 	{
 		if (*(tk->val) == '<' && *(tk->val + 1) == '<')
 		{
-			stat = msh_execute_redir_heredoc(pl, tk->val, fd, env);
+			stat = msh_execute_redir_hdoc(pl, tk->val, fd, env);
 			if (stat != 1)
 				return (0);
 		}

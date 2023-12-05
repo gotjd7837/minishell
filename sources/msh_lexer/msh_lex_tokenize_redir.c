@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_tokenize_redir.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 08:49:22 by jho               #+#    #+#             */
-/*   Updated: 2023/10/28 08:49:33 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:18 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_lexer.h"
+#include "../../includes/msh.h"
 
 int	msh_lex_tokenize_redir(t_token **sym_table, char *s)
 {

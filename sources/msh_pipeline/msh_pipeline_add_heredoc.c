@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pipeline_add_heredoc.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:23:37 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 15:26:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:24 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pipeline.h"
+#include "../../includes/msh.h"
 
 int	msh_pipeline_add_heredoc(t_pipeline *pipeline, t_heredoc *heredoc)
 {

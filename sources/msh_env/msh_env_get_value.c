@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:29:48 by jho               #+#    #+#             */
-/*   Updated: 2023/10/27 20:43:58 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:38 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_env.h"
+#include "../../includes/msh.h"
 
 char	*msh_env_get_value(t_env *env, char *key)
 {

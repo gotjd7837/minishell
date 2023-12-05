@@ -3,15 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_print_tree.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/10/30 18:07:01 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 20:06:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
-#include <stdio.h>
+#include "../../includes/msh.h"
+
+void	msh_token_print_sym_2(t_token *token)
+{
+	if (token->sym == R_BRA)
+		printf("%-12s", "R_BRA");
+	else if (token->sym == REDIR_LIST)
+		printf("%-12s", "REDIR_LIST");
+	else if (token->sym == SIMPLE_CMD)
+		printf("%-12s", "SIMPLE_CMD");
+	else if (token->sym == CMD)
+		printf("%-12s", "CMD");
+	else if (token->sym == PIPELINE)
+		printf("%-12s", "PIPELINE");
+	else if (token->sym == LIST)
+		printf("%-12s", "LIST");
+	else if (token->sym == SUBSHELL)
+		printf("%-12s", "SUBSHELL");
+	else if (token->sym == ROOT)
+		printf("%-12s", "ROOT");
+}
 
 void	msh_token_print_sym(t_token *token)
 {
@@ -29,22 +48,7 @@ void	msh_token_print_sym(t_token *token)
 		printf("%-12s", "OR_IF");
 	else if (token->sym == L_BRA)
 		printf("%-12s", "L_BRA");
-	else if (token->sym == R_BRA)
-		printf("%-12s", "R_BRA");
-	else if (token->sym == REDIR_LIST)
-		printf("%-12s", "REDIR_LIST");
-	else if (token->sym == SIMPLE_CMD)
-		printf("%-12s", "SIMPLE_CMD");
-	else if (token->sym == CMD)
-		printf("%-12s", "CMD");
-	else if (token->sym == PIPELINE)
-		printf("%-12s", "PIPELINE");
-	else if (token->sym == LIST)
-		printf("%-12s", "LIST");
-	else if (token->sym == SUBSHELL)
-		printf("%-12s", "SUBSHELL");
-	else if (token->sym == ROOT)
-		printf("%-12s", "ROOT");
+	msh_token_print_sym_2(token);
 }
 
 void	msh_token_print_val(t_token *token)

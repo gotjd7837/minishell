@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:14:44 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 17:01:42 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:32:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 int	msh_builtin_cd_chdir(char *path, char *old_pwd, int pipe)
 {

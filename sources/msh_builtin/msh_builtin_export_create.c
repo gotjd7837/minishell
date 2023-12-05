@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 05:22:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:52:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 static int	msh_export_add_only_key(t_env *env, char *cmd_arg)
 {
@@ -53,6 +53,7 @@ static int	msh_export_add_node(t_env *env, char *cmd_arg)
 	}
 	else
 	{
+		free(key);
 		if (!msh_env_add_node(&env, cmd_arg))
 			return (0);
 	}

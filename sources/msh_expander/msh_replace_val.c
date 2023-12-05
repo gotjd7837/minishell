@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:04:58 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 15:07:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:17 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 static int	msh_replace_val_exit_status(t_token *token)
 {

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_remove_whitespace.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 15:38:31 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 15:54:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:39:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_util.h"
-#include <stdio.h>
-
+#include "../../includes/msh.h"
 
 char	*msh_remove_whitespace(char *s)
 {

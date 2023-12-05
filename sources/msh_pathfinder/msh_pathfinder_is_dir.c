@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:52:39 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 17:54:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
+#include "../../includes/msh.h"
 
 int	msh_pathfinder_is_dir(const char *path)
 {

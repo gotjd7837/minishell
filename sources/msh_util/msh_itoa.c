@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 09:50:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/25 09:52:43 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:39:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_util.h"
+#include "../../includes/msh.h"
 
 static char	*msh_result_malloc(long value, size_t *len, unsigned char *neg_flag)
 {

@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:10:18 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/04 13:54:56 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:32:58 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 void	msh_print_key_value(int out, char *key, char *value)
 {

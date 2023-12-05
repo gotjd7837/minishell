@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:59:25 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/03 17:12:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:40:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_util.h"
+#include "../../includes/msh.h"
 
 static char	*msh_str_cpy(char *s1, char *s2, char *arr)
 {

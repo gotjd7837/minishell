@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_heredoc_malloc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:21:13 by jho               #+#    #+#             */
-/*   Updated: 2023/11/29 16:31:11 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:37:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pipeline.h"
+#include "../../includes/msh.h"
 
 t_heredoc	*msh_heredoc_malloc(int fd, char *name)
 {

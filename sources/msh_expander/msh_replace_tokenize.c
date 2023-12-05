@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:06:26 by jho               #+#    #+#             */
-/*   Updated: 2023/11/27 19:16:17 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:13 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 int	msh_replace_tokenize_dollar(t_token **tokens, char *s, int begin, int end)
 {

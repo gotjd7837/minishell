@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:20:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 18:11:29 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:59 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_pathfinder.h"
+#include "../../includes/msh.h"
 
 char	*msh_pathfinder_find_cmd_abspath(char **path, char *cmd)
 {

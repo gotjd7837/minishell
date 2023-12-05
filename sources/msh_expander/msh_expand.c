@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:58:12 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 11:32:08 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 int	msh_trim_both_end(t_token **tokens)
 {
@@ -44,8 +44,6 @@ char	*msh_expand(char *s, t_env *env)
 		return (NULL);
 	if (!msh_replace_env(&tokens, env))
 		return (NULL);
-	// if (!msh_trim_both_end(&tokens))
-	// 	return (NULL);
 	expanded = msh_token_union_val(tokens);
 	if (expanded == NULL)
 		return (NULL);

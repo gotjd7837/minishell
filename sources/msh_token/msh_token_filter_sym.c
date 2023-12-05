@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_filter_sym.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:14:34 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:32:16 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:30 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 char	**msh_token_filter_sym_free(char **result, int size)
 {

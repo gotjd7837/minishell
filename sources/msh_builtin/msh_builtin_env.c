@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:07:51 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 16:19:04 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:32:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 int	msh_builtin_env(int *fd, int pipe, char **cmd, t_env *env)
 {

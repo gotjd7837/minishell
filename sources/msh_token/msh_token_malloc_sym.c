@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_malloc_sym.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:09:29 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:08:35 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 t_token	*msh_token_malloc_sym(t_sym sym)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_count_sym.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:32:26 by jho               #+#    #+#             */
-/*   Updated: 2023/11/23 14:33:31 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:38:15 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 int	msh_token_count_sym(t_token *tokens, t_sym sym)
 {

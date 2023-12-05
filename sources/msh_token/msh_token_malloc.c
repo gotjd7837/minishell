@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_malloc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:09:15 by jho               #+#    #+#             */
-/*   Updated: 2023/10/26 12:24:41 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:39:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_token.h"
+#include "../../includes/msh.h"
 
 t_token	*msh_token_malloc(void)
 {

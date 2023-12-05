@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:54:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/11/29 17:28:09 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:33:10 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 int	msh_builtin_pwd(int *fd, int pipe, char **cmd, t_env *env)
 {

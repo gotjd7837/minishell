@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 20:02:01 by jho               #+#    #+#             */
-/*   Updated: 2023/11/25 00:53:15 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:31:36 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/get_next_line.h"
-#include <unistd.h>
 
 char	*mfree(char **p1, char *p2, t_fd_node **head, int fd)
 {

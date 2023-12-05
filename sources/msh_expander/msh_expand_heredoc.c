@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 14:41:04 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 15:21:39 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:35:04 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_expander.h"
+#include "../../includes/msh.h"
 
 static int	msh_replace_val_exit_status(t_token *token)
 {

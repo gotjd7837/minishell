@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/04 13:54:21 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:32:41 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_builtin.h"
+#include "../../includes/msh.h"
 
 static void	msh_get_start_idx(char **cmd, int *start_idx, int i)
 {

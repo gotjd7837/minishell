@@ -6,14 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 16:18:32 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:36:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
-#include <string.h>
-#include <errno.h>
-#include "../../includes/msh_signal.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -46,7 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 		msh_pipeline_free_list(pipelines);
 		free(expanded);
 		free(input);
-		//system("leaks minishell | grep leaked");
+		system("leaks minishell | grep leaked");
 	}
 	return (0);
 }

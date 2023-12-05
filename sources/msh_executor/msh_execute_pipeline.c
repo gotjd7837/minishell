@@ -6,12 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 18:06:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
-#include <string.h>
+#include "../../includes/msh.h"
 
 void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_mktemp.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 02:23:26 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 15:36:34 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 19:34:26 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/msh_executor.h"
+#include "../../includes/msh.h"
 
 void	msh_execute_mktemp_template(char *temp)
 {
