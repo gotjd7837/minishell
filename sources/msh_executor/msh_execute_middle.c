@@ -6,7 +6,7 @@
 /*   By: jho <jho@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:44 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 19:10:32 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 11:20:27 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	msh_execute_middle_builtin(t_pipeline *pl, int *fd, t_env *env)
 
 	param = msh_token_filter_sym(pl->tokens, WORD);
 	if (param == NULL)
-		exit(errno);
+		msh_exit(errno);
 	return (msh_execute_builtin(fd, param, env, 1));
 }
 
@@ -28,7 +28,7 @@ void	msh_execute_middle_no_builtin(t_pipeline *pl, int *fd, t_env *env)
 
 	param = msh_token_filter_sym(pl->tokens, WORD);
 	if (param == NULL)
-		exit(errno);
+		msh_exit(errno);
 	msh_execute_pipeline(fd[0], fd[1], param, env);
 }
 
@@ -59,13 +59,13 @@ int	msh_execute_middle(t_pipeline *pl, int *fd, t_env *env, int *total)
 				return (-1);
 			pid = fork();
 			if (pid == -1)
-				return (-1);
+				msh_exit(errno);
 			if (pid == 0)
 				msh_execute_middle_child(pl, fd, local_fd, env);
 			++(*total);
 		}
 		if (!msh_execute_pipe_shift(fd, local_fd))
-			return (-1);
+			msh_exit(errno);
 		pl = pl->next;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:24:03 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 16:00:32 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 11:12:31 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	msh_execute_first_builtin(t_pipeline *pl, int *fd, t_env *env, int forked)
 	if (param == NULL)
 	{
 		if (forked == FORKED)
-			exit(errno);
+			msh_exit(errno);
 		else
 			return (-1);
 	}
@@ -40,7 +40,7 @@ void	msh_execute_first_child(t_pipeline *pl, int *fd, t_env *env, int fk)
 	{
 		param = msh_token_filter_sym(pl->tokens, WORD);
 		if (param == NULL)
-			exit(errno);
+			msh_exit(errno);
 		msh_execute_pipeline(fd[0], fd[1], param, env);
 	}
 }
@@ -58,18 +58,18 @@ int	msh_execute_first(t_pipeline *pl, int *fd, t_env *env, int forked)
 		return (msh_execute_first_builtin(pl, local_fd, env, forked));
 	pid = fork();
 	if (pid == -1)
-		return (-1);
+		msh_exit(errno);
 	if (pid == 0)
 	{
 		msh_set_default_signal();
 		if (fd[0] != 0 && close(fd[0]) == -1)
-			return (-1);
+			msh_exit(errno);
 		msh_execute_first_child(pl, local_fd, env, forked);
 	}
 	msh_set_blocking_signal();
 	if (local_fd[0] != 0 && close(local_fd[0]) == -1)
-		return (-1);
+		msh_exit(errno);
 	if (local_fd[1] != fd[1] && close(local_fd[1]) == -1)
-		return (-1);
+		msh_exit(errno);
 	return (1);
 }

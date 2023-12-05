@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 00:34:28 by jho               #+#    #+#             */
-/*   Updated: 2023/12/01 18:05:30 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 11:18:52 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	msh_heredoc(char *limiter, int fd, t_env *env)
 			break ;
 		}
 		expanded = msh_expand_heredoc(line, env);
-		write(fd, expanded, msh_strlen(expanded));
+		if (write(fd, expanded, msh_strlen(expanded)) == -1)
+			msh_exit(errno);
 		free(line);
 	}
 	exit(1);
@@ -62,11 +63,11 @@ int	msh_execute_redir_heredoc_input(char *limiter, int fd, t_env *env)
 
 	pid = fork();
 	if (pid == -1)
-		return (0);
+		msh_exit(errno);
 	else if (pid == 0)
 		msh_heredoc(limiter, fd, env);
 	if (waitpid(pid, &stat, 0) == -1)
-		return (0);
+		msh_exit(errno);
 	if (WEXITSTATUS(stat) == 0)
 	{
 		g_exit_status = -1;
@@ -81,15 +82,15 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 	int		stat;
 
 	lim = msh_substr(lim, 2, msh_strlen(lim));
-	lim = msh_remove_whitespace(lim);
 	if (lim == NULL)
-		return (0);
+		msh_exit(errno);
+	lim = msh_remove_whitespace(lim);
 	name = msh_execute_mktemp();
 	if (fd[0] != 0 && close(fd[0]) == -1)
-		return (0);
+		msh_exit(errno);
 	fd[0] = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd[0] == -1)
-		return (0);
+		msh_exit(errno);
 	msh_pipeline_add_heredoc(pl, msh_heredoc_malloc(fd[0], name));
 	stat = msh_execute_redir_heredoc_input(lim, fd[0], env);
 	free(lim);
@@ -99,7 +100,7 @@ int	msh_execute_redir_heredoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 	{
 		fd[0] = open(name, O_RDONLY);
 		if (fd[0] == -1)
-			return (0);
+			msh_exit(errno);
 	}
 	return (stat);
 }

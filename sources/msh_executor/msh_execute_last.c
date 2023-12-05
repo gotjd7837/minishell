@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/11/30 19:10:24 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/05 11:12:57 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	msh_execute_last(t_pipeline *pl, int *fd, t_env *env)
 		return (-1);
 	pid = fork();
 	if (pid == -1)
-		return (-1);
+		msh_exit(errno);
 	else if (pid == 0)
 		msh_execute_last_child(pl, local_fd, env);
 	close(fd[0]);

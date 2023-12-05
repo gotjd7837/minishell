@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/12/04 20:05:58 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/05 11:14:06 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 
 	envp = msh_env_convert_arr(env);
 	if (envp == NULL)
-		exit(errno);
+		msh_exit(errno);
 	path = msh_pathfind(param[0], env);
 	if (in != 0 && dup2(in, 0) == -1)
 		exit(errno);
@@ -31,5 +31,5 @@ void	msh_execute_pipeline(int in, int out, char **param, t_env *env)
 	if (out != 1 && close(out) == -1)
 		exit(errno);
 	execve(path, param, envp);
-	exit(errno);
+	msh_exit(errno);
 }
