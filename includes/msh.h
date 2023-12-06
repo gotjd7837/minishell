@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:27:19 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 13:56:25 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		msh_set_signal(void);
 void		msh_set_blocking_signal(void);
 void		msh_set_default_signal(void);
 void		msh_handler_ctrl_c(int signum);
+void		msh_handler_ctrl_d(int signum);
 void		msh_handler_heredoc_ctrl_c(int signum);
 void		msh_handler_blocking_ctrl_c(int signum);
 void		msh_handler_blocking_ctrl_slash(int signum);
