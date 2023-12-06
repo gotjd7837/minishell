@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/06 17:15:38 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:09:10 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int	msh_builtin_echo(int *fd, int pipe, char **cmd, t_env *env)
 {
 	int		n_flag;
 	int		start_idx;
-	int		i;
 
 	(void)env;
-	i = 1;
 	n_flag = 0;
 	start_idx = 1;
 	msh_check_option(cmd, &n_flag);
