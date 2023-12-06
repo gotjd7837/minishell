@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:29:19 by jho               #+#    #+#             */
-/*   Updated: 2023/12/06 13:56:25 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:35:58 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ int			msh_export_key_exist(t_env *env, char *key);
 char		*msh_pathfinder(char *cmd, t_env *env);
 char		*msh_pathfinder_unset_path(char *cmd);
 int			msh_pathfinder_is_path(char *cmd);
-int			msh_pathfinder_is_dir(const char *path);
+int			msh_pathfinder_is_dir(char *path);
 char		**msh_pathfinder_find_env_path(t_env *env);
 char		*msh_pathfinder_find_cmd_abspath(char **path, char *cmd);
 char		*msh_pathfinder_check_path_exist(char *cmd);

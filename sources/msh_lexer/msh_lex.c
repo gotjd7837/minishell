@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:32:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:36:29 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 18:15:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ static int	msh_lex_check_pipe(char *s)
 	if (*(s + idx) == '|')
 		return (0);
 	while (*(s + idx) != '\0')
-	{
-		if (*(s + idx) == '|' && *(s + idx + 1) == '|')
-			return (0);
 		idx++;
-	}
 	if (*(s + idx - 1) == '|')
 		return (0);
 	return (1);

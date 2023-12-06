@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:19:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 19:32:41 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 17:15:38 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	msh_check_option(char **cmd, int *n_flag)
 				j++;
 			if (cmd[i][j] == '\0')
 				*n_flag = 1;
+			else
+				return ;
 		}
 		i++;
 	}

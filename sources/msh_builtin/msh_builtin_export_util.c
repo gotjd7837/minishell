@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:22:20 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 19:33:02 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:19:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	msh_check_key(char *cmd_arg)
 			i++;
 		else
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", cmd_arg);
+			write(2, "minishell: export: `", 20);
+			write(2, cmd_arg, msh_strlen(cmd_arg));
+			write(2, "': not a valid identifier\n", 26);
 			return (0);
 		}
 	}
@@ -58,7 +60,9 @@ int	msh_is_valid_identifier(char *cmd_arg)
 	}
 	else
 	{
-		printf("minishell: export: `%s': not a valid identifier\n", cmd_arg);
+		write(2, "minishell: export: `", 20);
+		write(2, cmd_arg, msh_strlen(cmd_arg));
+		write(2, "': not a valid identifier\n", 26);
 		return (0);
 	}
 }

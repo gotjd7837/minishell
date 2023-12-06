@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:27:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 19:33:14 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:23:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ static int	msh_unset_check_key(char *key, int pipe)
 			i++;
 		else
 		{
-			printf("minishell: unset: '%s': not a valid identifier\n", key);
+			write(2, "minishell: unset: '", 19);
+			write(2, key, msh_strlen(key));
+			write(2, "': not a valid identifier\n", 26);
 			g_exit_status = 1;
 			if (pipe == 1)
 				exit (g_exit_status);

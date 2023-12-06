@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:41:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 20:08:04 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:51:22 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static int	msh_exit_and_print(int exit_code, char *s, int out, int pipe)
 	if (pipe != 1)
 		write (out, "exit\n", 6);
 	if (s != NULL)
-		printf("minishell: exit: %s: numeric argument required\n", s);
+	{
+		write(2, "minishell: exit: ", 17);
+		write(2, s, msh_strlen(s));
+		write(2, ": numeric argument required\n", 28);
+	}
 	exit(exit_code);
 }
 
@@ -49,6 +53,8 @@ static int	msh_check_overflow(char *str)
 
 static int	msh_num_format_exception(char *str)
 {
+	if (*str == '\0')
+		return (0);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-' || *str == '+')
@@ -86,6 +92,7 @@ static long long	msh_atol(char *str)
 int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 {
 	(void)env;
+	fd[1] = 2;
 	if (cmd[1] == NULL)
 		msh_exit_and_print(g_exit_status, NULL, fd[1], pipe);
 	else if (cmd[1] != NULL)
@@ -96,7 +103,7 @@ int	msh_builtin_exit(int *fd, int pipe, char **cmd, t_env *env)
 		{
 			if (pipe != 1)
 				write (fd[1], "exit\n", 6);
-			printf("minishell: exit: too many arguments\n");
+			write(2, "minishell: exit: too many arguments\n", 36);
 			g_exit_status = 1;
 			if (pipe == 1)
 				exit(g_exit_status);

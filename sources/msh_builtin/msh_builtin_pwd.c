@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:54:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 19:33:10 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:20:48 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	msh_builtin_pwd(int *fd, int pipe, char **cmd, t_env *env)
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 	{
-		printf("getcwd error\n");
+		write(2, "getcwd error\n", 13);
 		g_exit_status = 1;
 		if (pipe == 1)
 			exit (g_exit_status);

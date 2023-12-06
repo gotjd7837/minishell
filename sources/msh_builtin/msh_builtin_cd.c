@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/05 19:32:34 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:07:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	msh_cd_env(t_env *env, char *key, char *old_pwd, int pipe)
 		{
 			if (old_pwd != NULL)
 				free(old_pwd);
-			printf("minishell: cd: HOME not set\n");
+			write(2, "minishell: cd: HOME not set\n", 28);
 			g_exit_status = 1;
 			if (pipe == 1)
 				exit (g_exit_status);
