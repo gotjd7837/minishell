@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:12:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/06 16:07:12 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:03:28 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	msh_builtin_cd(int *fd, int pipe, char **cmd, t_env *env)
 
 	(void)fd;
 	g_exit_status = 0;
+	if (cmd[1][0] == '\0')
+		return (1);
 	old_pwd = msh_get_pwd(pipe);
 	if (cmd[1] == NULL || msh_strcmp(cmd[1], "~") == 0)
 		return (msh_cd_env(env, "HOME", old_pwd, pipe));
