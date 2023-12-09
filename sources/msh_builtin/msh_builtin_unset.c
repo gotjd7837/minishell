@@ -24,6 +24,7 @@ static void	msh_del_node(t_env *node)
 		node->value = node->next->value;
 		tmp = node->next;
 		node->next = node->next->next;
+		node->next->prev = node;
 		free(tmp);
 	}
 	else if (node->next == NULL)
