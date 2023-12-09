@@ -6,7 +6,7 @@
 #    By: haekang <haekang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/25 15:50:06 by jho               #+#    #+#              #
-#    Updated: 2023/12/09 16:20:16 by haekang          ###   ########.fr        #
+#    Updated: 2023/12/09 16:28:36 by haekang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ NAME = minishell
 HEADERS = ./includes
 MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/get_next_line/get_next_line_utils.c \
-
 	sources/msh_builtin/msh_builtin_cd_chdir.c \
 	sources/msh_builtin/msh_builtin_cd.c \
 	sources/msh_builtin/msh_builtin_echo.c \
@@ -29,7 +28,6 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_builtin/msh_builtin_export.c \
 	sources/msh_builtin/msh_builtin_pwd.c \
 	sources/msh_builtin/msh_builtin_unset.c \
-
 	sources/msh_env/msh_env_add_node.c \
 	sources/msh_env/msh_env_convert_arr.c \
 	sources/msh_env/msh_env_free_list.c \
@@ -41,7 +39,6 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_env/msh_env_new_node.c \
 	sources/msh_env/msh_env_parse_key.c \
 	sources/msh_env/msh_env_parse_value.c \
-
 	sources/msh_executor/msh_execute_builtin.c \
 	sources/msh_executor/msh_execute_check_builtin.c \
 	sources/msh_executor/msh_execute_first.c \
@@ -55,7 +52,6 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_executor/msh_execute_redir.c \
 	sources/msh_executor/msh_execute.c \
 	sources/msh_executor/msh_exit.c \
-
 	sources/msh_expander/msh_expand_heredoc.c \
 	sources/msh_expander/msh_expand.c \
 	sources/msh_expander/msh_replace_env.c \
@@ -65,17 +61,14 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_expander/msh_vqoutes_num.c \
 	sources/msh_expander/msh_vqoutes_tokenize.c \
 	sources/msh_expander/msh_vqoutes.c \
-
-	sources/msh_lexer\msh_lex_tokenize_bra.c \
-	sources/msh_lexer\msh_lex_tokenize_pipe.c \
-	sources/msh_lexer\msh_lex_tokenize_qoutes.c \
-	sources/msh_lexer\msh_lex_tokenize_redir.c \
-	sources/msh_lexer\msh_lex_tokenize_word.c \
-	sources/msh_lexer\msh_lex_tokenize.c \
-	sources/msh_lexer\msh_lex.c \
-
+	sources/msh_lexer/msh_lex_tokenize_bra.c \
+	sources/msh_lexer/msh_lex_tokenize_pipe.c \
+	sources/msh_lexer/msh_lex_tokenize_qoutes.c \
+	sources/msh_lexer/msh_lex_tokenize_redir.c \
+	sources/msh_lexer/msh_lex_tokenize_word.c \
+	sources/msh_lexer/msh_lex_tokenize.c \
+	sources/msh_lexer/msh_lex.c \
 	sources/msh_main/msh_main.c \
-
 	sources/msh_pathfinder/msh_pathfinder_check_path_exist.c \
 	sources/msh_pathfinder/msh_pathfinder_find_cmd_abspath.c \
 	sources/msh_pathfinder/msh_pathfinder_find_env_path.c \
@@ -83,18 +76,15 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_pathfinder/msh_pathfinder_is_path.c \
 	sources/msh_pathfinder/msh_pathfinder_unset_path.c \
 	sources/msh_pathfinder/msh_pathfinder.c \
-
 	sources/msh_pipeline/msh_heredoc_malloc.c \
 	sources/msh_pipeline/msh_pipeline_add_heredoc.c \
 	sources/msh_pipeline/msh_pipeline_add_node.c \
 	sources/msh_pipeline/msh_pipeline_free_list.c \
 	sources/msh_pipeline/msh_pipeline_last.c \
 	sources/msh_pipeline/msh_pipeline_malloc.c \
-
 	sources/msh_signal/msh_handler.c \
 	sources/msh_signal/msh_set_signal.c \
 	sources/msh_signal/msh_signal_util.c \
-
 	sources/msh_token/msh_token_add_child.c \
 	sources/msh_token/msh_token_add_next.c \
 	sources/msh_token/msh_token_add_substr.c \
@@ -114,15 +104,18 @@ MANDATORY_SRCS = sources/get_next_line/get_next_line.c \
 	sources/msh_token/msh_token_print_tree.c \
 	sources/msh_token/msh_token_remove_front.c \
 	sources/msh_token/msh_token_union_val.c \
-
 	sources/msh_util/msh_is_charset.c \
 	sources/msh_util/msh_is_whitespace.c \
 	sources/msh_util/msh_itoa.c \
 	sources/msh_util/msh_remove_whitespace.c \
-	sources/msh_util/msh_split.c msh_strchr.c \
-	sources/msh_util/msh_strcmp.c msh_strcpy.c \
-	sources/msh_util/msh_strdup.c msh_strjoin.c \
-	sources/msh_util/msh_strlcpy.c msh_strlen.c \
+	sources/msh_util/msh_split.c \
+	sources/msh_util/msh_strchr.c \
+	sources/msh_util/msh_strcmp.c \
+	sources/msh_util/msh_strcpy.c \
+	sources/msh_util/msh_strdup.c \
+	sources/msh_util/msh_strjoin.c \
+	sources/msh_util/msh_strlcpy.c \
+	sources/msh_util/msh_strlen.c \
 	sources/msh_util/msh_strncpy.c \
 	sources/msh_util/msh_substr.c \
 
