@@ -1,8 +1,0 @@
-total 208$
--rw-r--r--   1 jho  2023_seoul   1350 Nov 14 15:00 Makefile$
--rw-r--r--   1 jho  2023_seoul    236 Nov 14 15:00 README.md$
-drwxr-xr-x  14 jho  2023_seoul    476 Nov 30 12:54 includes$
--rw-r--r--   1 jho  2023_seoul      0 Nov 30 13:17 infile$
--rwxr-xr-x   1 jho  2023_seoul  91512 Nov 30 13:16 minishell$
--rw-r--r--   1 jho  2023_seoul    504 Nov 30 13:16 outfile$
-drwxr-xr-x  14 jho  2023_seoul    476 Nov 25 01:18 sources$
