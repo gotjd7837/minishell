@@ -97,6 +97,8 @@ char	*msh_expand_heredoc(char *s, t_env *env)
 	t_token	*tokens;
 	char	*expanded;
 
+	if (*s == '\n')
+		return (s);
 	tokens = msh_token_malloc_val(s);
 	*(tokens->val + msh_strlen(tokens->val) - 1) = '\0';
 	if (tokens == NULL)

@@ -14,6 +14,8 @@
 
 int	msh_execute_redir_hdoc_strcmp(char *s1, char *s2)
 {
+	if (*s1 == '\n')
+		return (1);
 	while (*s1 != '\n' && *s1 != '\0')
 	{
 		if (*s1 != *s2)
