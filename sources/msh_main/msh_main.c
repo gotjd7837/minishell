@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/09 16:26:22 by jho              ###   ########.fr       */
+/*   Updated: 2023/12/09 16:58:25 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 	char		*expanded;
 
 	expanded = msh_expand(input, env);
-	if (*expanded == '\0')
+	if (expanded != NULL && *expanded == '\0')
+	{
+		if (input != NULL)
+			free(input);
 		return (NULL);
+	}
 	pipelines = msh_lex(expanded);
 	if (pipelines == NULL)
 	{
@@ -29,6 +33,16 @@ t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 	free(expanded);
 	free(input);
 	return (pipelines);
+}
+
+int	msh_check_input(char *s)
+{
+	if (*s == '\0')
+	{
+		free(s);
+		return (0);
+	}
+	return (1);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -46,7 +60,7 @@ int	main(int argc, char *argv[], char *envp[])
 		input = readline("msh$> ");
 		if (input == NULL)
 			msh_handler_ctrl_d(0);
-		if (*input == '\0')
+		if (!msh_check_input(input))
 			continue ;
 		add_history(input);
 		pipelines = msh_return_pipeline(input, env);
