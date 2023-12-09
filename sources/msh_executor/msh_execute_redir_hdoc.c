@@ -26,12 +26,18 @@ int	msh_execute_redir_hdoc_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
+void	msh_execute_redir_heredoc_child_signal(int num)
+{
+	num = 0;
+	exit(0);
+}
+
 void	msh_heredoc(char *limiter, int fd, t_env *env)
 {
 	char	*expanded;
 	char	*line;
 
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, msh_execute_redir_heredoc_child_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{

@@ -78,7 +78,7 @@ int	msh_execute(t_pipeline *pl, t_env *env)
 	if (pl->next == NULL)
 	{
 		if (!msh_execute_single(pl, fd, env))
-			return (0);
+			return (msh_execute_wait_children(pl, 0));
 	}
 	else
 	{
