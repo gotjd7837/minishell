@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/06 18:18:14 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/09 16:26:22 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 	if (pipelines == NULL)
 	{
 		write(2, "lex err\n", 8);
-		g_exit_status = 258;	
+		g_exit_status = 258;
 	}
 	free(expanded);
 	free(input);
@@ -55,7 +55,6 @@ int	main(int argc, char *argv[], char *envp[])
 		else
 			msh_execute(pipelines, env);
 		msh_pipeline_free_list(pipelines);
-		// system("leaks minishell | grep leaked");
 	}
 	return (0);
 }

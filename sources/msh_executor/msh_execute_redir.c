@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:06:43 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:34:45 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/09 15:54:23 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	msh_execute_redir_read(char *val, int *fd)
 	open_fd = open(name, O_RDONLY);
 	if (open_fd == -1)
 	{
+		g_exit_status = 1;
 		free(name);
 		perror("msh");
 		return (0);
