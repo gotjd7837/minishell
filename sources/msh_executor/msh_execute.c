@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:55:04 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:34:50 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/13 15:40:17 by jho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	msh_execute_wait_children(t_pipeline *pl, int status)
 		if (waitpid(pl->pid, &child_status, 0) == -1)
 			msh_exit(errno);
 		if (!is_signal)
-			g_exit_status = WEXITSTATUS(child_status);
+		{
+			if (WIFSIGNALED(child_status) == 0)
+				g_exit_status = WEXITSTATUS(child_status);
+		}
 		pl = pl->next;
 	}
 	return (status);
