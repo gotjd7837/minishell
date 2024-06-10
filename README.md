@@ -67,38 +67,15 @@ minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필�
 
 # 5. Features
 
-1. Readline library is not the default one, must install GNU readline.
-2. Overall flows of the shell is `Expand the environment variables from user input -> Tokenize the expanded input into the chunks -> Build AS (Abstract Syntax) Tree -> Execute`.
-3. AS Tree has been used to build the execution plan.
-4. RB Tree has been used to map the key and value from environment variables. (Pretended that searching specific node has more frequency than searching total.)
-5. Multi-Piping, Multi-Redirection is ok.
-6. If Multi-Pipings and Multi-Redirections are mixed, only pipex form is allowed.
-7. Heredoc cannot be duplicated on the input.
-8. Initial prompt is accordance with name of the binary file.
-9. $*, $#, $?, $_ is ok.
-10. If quotes, redirections, pipes of command input are not formed well, syntax error occurs. (Multi-Lininig is not supported.)
-11. Every special character like \, ; are not supported except '\\' + ' ' case for the file name.
-12. Ctrl + C , Ctrl + D , Ctrl + \ is implemented as same as Bash.
-13. Global Variables are not used on this project.
-14. Readline library has been used due to the support of vim-like editing.
-15. History management is based on the `add_histroy` function. Thus, arrow keys on the keyboard can be used.
-16. Several builtin commands have been implemented. (`echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`)
-
-Readline 라이브러리는 기본적으로 포함되지 않으므로 GNU readline을 설치해야 합니다.
-쉘의 전체 흐름은 다음과 같습니다: 사용자 입력에서 환경 변수 확장 -> 확장된 입력을 청크로 토큰화 -> 추상 구문 트리(AS 트리) 생성 -> 실행.
-실행 계획을 구축하기 위해 AS 트리를 사용합니다.
-환경 변수의 키와 값을 매핑하기 위해 RB 트리를 사용합니다. (특정 노드 검색 빈도가 전체 검색보다 더 높은 경우를 가정)
-멀티 파이핑, 멀티 리디렉션 가능.
-멀티 파이핑과 멀티 리디렉션이 혼합된 경우, 파이프 형식만 허용.
-Heredoc은 입력에서 중복될 수 없습니다.
-초기 프롬프트는 바이너리 파일의 이름에 따릅니다.
-$*, $#, $?, $_ 사용 가능.
-명령 입력의 인용부호, 리디렉션, 파이프가 제대로 형성되지 않은 경우 구문 오류 발생. (멀티 라인 입력은 지원되지 않음)
-\, ; 등의 특수 문자는 지원되지 않지만 \\ 는 파일 이름으로 사용할 수 있음.
-Ctrl + C, Ctrl + D, Ctrl + \는 Bash와 동일하게 구현.
-이 프로젝트에서는 전역 변수를 사용하지 않음.
-Readline 라이브러리를 사용하여 vim과 같은 편집 지원.
-add_history 함수를 사용한 히스토리 관리. 따라서 키보드의 화살표 키를 사용할 수 있음.
-여러 내장 명령어가 구현됨. (echo, cd, pwd, export, unset, env, exit)
+1. 쉘의 전체 흐름은 다음과 같습니다: `사용자 입력에서 환경 변수 확장 -> 확장된 입력을 청크로 토큰화 -> 실행`.
+3. 멀티 파이핑, 멀티 리디렉션 가능.
+4. Heredoc은 입력에서 중복될 수 없습니다.
+5. $? 사용 가능.
+6. 사용자 입력의 quotes 처리, 리디렉션, 파이프가 제대로 형성되지 않은 경우 구문 오류 발생.
+7. `\`, `;` 등의 특수 문자는 지원되지 않지만 `\\` 는 파일 이름으로 사용할 수 있음.
+8. Ctrl + C, Ctrl + D, Ctrl + \는 Bash와 동일하게 구현.
+9. Readline 라이브러리를 사용하여 vim과 같은 편집 지원.
+10. `add_history` 함수를 사용한 히스토리 관리. 따라서 키보드의 화살표 키를 사용할 수 있음.
+11. 여러 내장 명령어가 구현됨. (`echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`)
 
 # 7. Demo
