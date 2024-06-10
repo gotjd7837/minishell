@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: haekang <haekang@student.42.fr>            +#+  +:+       +#+         #
+#    By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/25 15:50:06 by jho               #+#    #+#              #
-#    Updated: 2023/12/09 16:58:41 by jho              ###   ########.fr        #
+#    Updated: 2024/06/10 21:17:39 by haeseong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 LDFLAGS = -lreadline -lncurses
 NAME = minishell
 HEADERS = ./includes
