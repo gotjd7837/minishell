@@ -7,6 +7,8 @@
 minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필요합니다.
 > brew install readline@8.1
 
+**arm64 아키텍쳐에서는 rl_replace_line() 함수가 제대로 동작하지 않을 수 있습니다. 해당 함수를 주석처리 하면 프로그램이 정상적으로 컴파일 됩니다.**
+
 루트에 (all, clean, fclean, re)규칙을 제공하는 `Makefile`이 있습니다. 이를 통해 소스 코드를 컴파일 하여 `minishell`프로그램을 생성합니다.
 > make all
 
