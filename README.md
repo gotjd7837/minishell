@@ -15,7 +15,6 @@ minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필�
 
 # 4. 허용 함수
 
-* For the Mandatory
 1. `open` on \<unistd.h>
 2. `close` on \<unistd.h>
 3. `read` on \<unistd.h>
