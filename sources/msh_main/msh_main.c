@@ -6,17 +6,19 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2023/12/09 16:58:25 by jho              ###   ########.fr       */
+/*   Updated: 2024/06/11 21:30:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
 
+// 입력 파싱하고 확장 및 렉싱을 수행해 파이프라인 구조를 반환
 t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 {
 	t_pipeline	*pipelines;
 	char		*expanded;
 
+	// 환경 변수 확장
 	expanded = msh_expand(input, env);
 	if (expanded != NULL && *expanded == '\0')
 	{
@@ -24,6 +26,7 @@ t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 			free(input);
 		return (NULL);
 	}
+	// 확장된 입력을 렉싱하여 파이프라인 구조 생성
 	pipelines = msh_lex(expanded);
 	if (pipelines == NULL)
 	{
@@ -53,9 +56,11 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
+	// 환경변수 리스트 초기화
 	env = msh_env_new_list(envp);
 	while (1)
 	{
+		// 쉘 시그널 핸들러 설정
 		msh_set_signal();
 		input = readline("msh$> ");
 		if (input == NULL)

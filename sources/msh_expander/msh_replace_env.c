@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:23:05 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:35:10 by haekang          ###   ########.fr       */
+/*   Updated: 2024/06/11 21:35:52 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	msh_replace_env(t_token **tokens, t_env *env)
 	{
 		if (tokens_cpy->val == NULL)
 			return (0);
+		// single quote로 감싸지지 않은 토큰만 확장 수행
 		if (*(tokens_cpy->val) != '\'')
 		{
 			if (!msh_replace_env_2(tokens_cpy, env))

@@ -6,12 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:58:12 by jho               #+#    #+#             */
-/*   Updated: 2023/12/05 19:35:06 by haekang          ###   ########.fr       */
+/*   Updated: 2024/06/11 21:33:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
 
+// 토큰 양쪽 끝 quote를 제거하는 함수
 int	msh_trim_both_end(t_token **tokens)
 {
 	t_token	*tokens_cpy;
@@ -39,14 +40,17 @@ char	*msh_expand(char *s, t_env *env)
 	t_token	*tokens;
 	char	*expanded;
 
+	// 입력 문자열을 quote 기준으로 토큰화
 	tokens = msh_vqoutes(s);
 	if (tokens == NULL)
 		return (NULL);
+	// 토큰 리스트 내의 환경 변수를 확장
 	if (!msh_replace_env(&tokens, env))
 		return (NULL);
 	expanded = msh_token_union_val(tokens);
 	if (expanded == NULL)
 		return (NULL);
 	msh_token_free_list(tokens);
+	// 확장된 문자열 반환
 	return (expanded);
 }
