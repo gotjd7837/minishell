@@ -15,6 +15,19 @@ minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필�
 * `minishell` 프롬프트 실행
 > ./minishell
 
+# 3. Features
+
+1. 쉘의 전체 흐름은 다음과 같습니다: `사용자 입력에서 환경 변수 확장 -> 확장된 입력을 청크로 토큰화 -> 실행`.
+3. 멀티 파이핑, 멀티 리디렉션 가능.
+4. Heredoc은 입력에서 중복될 수 없습니다.
+5. $? 사용 가능.
+6. 사용자 입력의 quotes 처리, 리디렉션, 파이프가 제대로 형성되지 않은 경우 구문 오류 발생.
+7. `\`, `;` 등의 특수 문자는 지원되지 않지만 `\\` 는 파일 이름으로 사용할 수 있음.
+8. Ctrl + C, Ctrl + D, Ctrl + \는 Bash와 동일하게 구현.
+9. Readline 라이브러리를 사용하여 vim과 같은 편집 지원.
+10. `add_history` 함수를 사용한 히스토리 관리. 따라서 키보드의 화살표 키를 사용할 수 있음.
+11. 여러 내장 명령어가 구현됨. (`echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`)
+
 # 4. 허용 함수
 
 1. `open` on \<unistd.h>
@@ -66,17 +79,4 @@ minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필�
 47. `rl_redisplay` on \<readline/readline.h>
 48. `add_history` on \<readlien/history.h>
 
-# 5. Features
-
-1. 쉘의 전체 흐름은 다음과 같습니다: `사용자 입력에서 환경 변수 확장 -> 확장된 입력을 청크로 토큰화 -> 실행`.
-3. 멀티 파이핑, 멀티 리디렉션 가능.
-4. Heredoc은 입력에서 중복될 수 없습니다.
-5. $? 사용 가능.
-6. 사용자 입력의 quotes 처리, 리디렉션, 파이프가 제대로 형성되지 않은 경우 구문 오류 발생.
-7. `\`, `;` 등의 특수 문자는 지원되지 않지만 `\\` 는 파일 이름으로 사용할 수 있음.
-8. Ctrl + C, Ctrl + D, Ctrl + \는 Bash와 동일하게 구현.
-9. Readline 라이브러리를 사용하여 vim과 같은 편집 지원.
-10. `add_history` 함수를 사용한 히스토리 관리. 따라서 키보드의 화살표 키를 사용할 수 있음.
-11. 여러 내장 명령어가 구현됨. (`echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`)
-
-# 7. Demo
+# 5. Demo
