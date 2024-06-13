@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_last.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:25:16 by jho               #+#    #+#             */
-/*   Updated: 2023/12/13 15:46:39 by haekang          ###   ########.fr       */
+/*   Updated: 2024/06/13 21:45:48 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	msh_execute_last(t_pipeline *pl, int *fd, t_env *env)
 	close(fd[1]);
 	local_fd[0] = fd[0];
 	local_fd[1] = 1;
-	if (msh_execute_redir(pl, local_fd, env) != 1)
+	if (msh_execute_redir(pl, local_fd, env) != 1) // 리다이렉션 실행
 		return (-1);
 	pl->pid = fork();
 	if (pl->pid == -1)
 		msh_exit(errno);
 	else if (pl->pid == 0)
 	{
-		msh_set_default_signal();
+		msh_set_default_signal(); // 시그널 회복
 		msh_execute_last_child(pl, local_fd, env);
 	}
 	msh_set_blocking_signal();

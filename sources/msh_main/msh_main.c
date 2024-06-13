@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haeseong <haeseong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:03:25 by jho               #+#    #+#             */
-/*   Updated: 2024/06/11 21:30:47 by haekang          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:52:01 by haeseong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/msh.h"
 
-// 입력 파싱하고 확장 및 렉싱을 수행해 파이프라인 구조를 반환
 t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 {
 	t_pipeline	*pipelines;
@@ -68,6 +67,7 @@ int	main(int argc, char *argv[], char *envp[])
 		if (!msh_check_input(input))
 			continue ;
 		add_history(input);
+		// 입력 파싱하고 확장 및 렉싱을 수행해 파이프라인 리스트로 반환
 		pipelines = msh_return_pipeline(input, env);
 		if (pipelines == NULL)
 			continue ;

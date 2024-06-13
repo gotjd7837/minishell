@@ -12,6 +12,7 @@
 
 #include "../../includes/msh.h"
 
+// heredoc 리미터 확인 strcmp
 int	msh_execute_redir_hdoc_strcmp(char *s1, char *s2)
 {
 	if (*s1 == '\n')
@@ -39,23 +40,24 @@ void	msh_heredoc(char *limiter, int fd, t_env *env)
 	char	*expanded;
 	char	*line;
 
+	// ctrl_c, ctrl_\\ 시그널 핸들러 설정
 	signal(SIGINT, msh_execute_redir_heredoc_child_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
+		write(1, "> ", 2); // 프롬프트 출력
+		line = get_next_line(0); // 사용자 입력 받기
 		if (line == NULL)
 		{
 			free(limiter);
 			break ;
 		}
-		if (msh_execute_redir_hdoc_strcmp(line, limiter) == 0)
+		if (msh_execute_redir_hdoc_strcmp(line, limiter) == 0) // 입력이 리미터랑 일치하면 종료
 		{
 			free(line);
 			break ;
 		}
-		expanded = msh_expand_heredoc(line, env);
+		expanded = msh_expand_heredoc(line, env); // 환경변수 확장
 		if (write(fd, expanded, msh_strlen(expanded)) == -1)
 			msh_exit(errno);
 		free(line);
@@ -68,11 +70,12 @@ int	msh_execute_redir_hdoc_input(char *limiter, int fd, t_env *env)
 	int		stat;
 	pid_t	pid;
 
+	// 자식 프로세스 생성
 	pid = fork();
 	if (pid == -1)
 		msh_exit(errno);
 	else if (pid == 0)
-		msh_heredoc(limiter, fd, env);
+		msh_heredoc(limiter, fd, env); // 자식 프로세스에서 heredoc 처리
 	if (waitpid(pid, &stat, 0) == -1)
 		msh_exit(errno);
 	if (WEXITSTATUS(stat) == 0)
@@ -92,14 +95,14 @@ int	msh_execute_redir_hdoc(t_pipeline *pl, char *lim, int *fd, t_env *env)
 	if (lim == NULL)
 		msh_exit(errno);
 	lim = msh_remove_whitespace(lim);
-	name = msh_execute_mktemp();
+	name = msh_execute_mktemp(); // 임시 파일 이름 생성
 	if (fd[0] != 0 && close(fd[0]) == -1)
 		msh_exit(errno);
-	fd[0] = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd[0] = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644); // 임시 파일 생성
 	if (fd[0] == -1)
 		msh_exit(errno);
 	msh_pipeline_add_heredoc(pl, msh_heredoc_malloc(fd[0], name));
-	stat = msh_execute_redir_hdoc_input(lim, fd[0], env);
+	stat = msh_execute_redir_hdoc_input(lim, fd[0], env); // heredoc 입력 처리
 	free(lim);
 	if (close(fd[0]) == -1)
 		return (0);
