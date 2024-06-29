@@ -2,6 +2,7 @@
 
 이 프로젝트는 Bash를 참고하여 POSIX shell을 구현합니다.
 
+
 왼쪽 : **minishell**
 
 오른쪽 : **zsh**
