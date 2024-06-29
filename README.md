@@ -2,8 +2,8 @@
 
 이 프로젝트는 Bash를 참고하여 POSIX shell을 구현합니다.
 
-**좌 : minishell** 
-**우: zsh**
+좌 : minishell 
+우: zsh
 <img width="1207" alt="스크린샷 2024-06-29 오후 5 43 23" src="https://github.com/gotjd7837/minishell/assets/111740828/456a9e5e-ffa5-427f-866b-5e6bd2fd6509">
 
 
@@ -83,5 +83,3 @@ minishell을 컴파일 하기 위해 GNU의 라이브러리인 readline이 필�
 46. `rl_replace_line` on \<readline/readline.h>
 47. `rl_redisplay` on \<readline/readline.h>
 48. `add_history` on \<readlien/history.h>
-
-# 5. Demo
