@@ -2,8 +2,9 @@
 
 이 프로젝트는 Bash를 참고하여 POSIX shell을 구현합니다.
 
-좌 : minishell 
-우: zsh
+왼쪽 : **minishell**
+오른쪽 : **zsh**
+
 <img width="1207" alt="스크린샷 2024-06-29 오후 5 43 23" src="https://github.com/gotjd7837/minishell/assets/111740828/456a9e5e-ffa5-427f-866b-5e6bd2fd6509">
 
 
