@@ -12,6 +12,8 @@
 
 #include "../../includes/msh.h"
 
+int		g_exit_status = 0;
+
 t_pipeline	*msh_return_pipeline(char *input, t_env *env)
 {
 	t_pipeline	*pipelines;

@@ -30,7 +30,7 @@
 # define UNFORKED 0
 # define FORKED 1
 
-int		g_exit_status;
+extern int		g_exit_status;
 
 typedef enum e_sym
 {

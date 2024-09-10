@@ -126,10 +126,10 @@ MANDATORY_OBJS = $(MANDATORY_SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(MANDATORY_OBJS)
-	@$(CC) $(MANDATORY_OBJS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(MANDATORY_OBJS) $(LDFLAGS) -o $(NAME)
 
 %.o : %.c $(HEADERS)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -Rf $(MANDATORY_OBJS)
