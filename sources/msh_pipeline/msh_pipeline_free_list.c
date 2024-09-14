@@ -25,7 +25,8 @@ void	msh_pipeline_free_list_heredoc(t_heredoc *heredoc)
 		free(heredoc->name);
 	}
 	free(heredoc);
-	msh_pipeline_free_list_heredoc(next);
+	if (next != NULL)
+		msh_pipeline_free_list_heredoc(next);
 }
 
 t_pipeline	*msh_pipeline_free_list(t_pipeline *pipeline)
